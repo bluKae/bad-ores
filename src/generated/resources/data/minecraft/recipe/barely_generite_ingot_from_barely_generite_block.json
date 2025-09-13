@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "barely_generite_ingot",
+  "ingredients": [
+    "badores:barely_generite_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "badores:barely_generite_ingot"
+  }
+}

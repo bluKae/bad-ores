@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:bread",
+    "badores:marmite"
+  ],
+  "result": {
+    "count": 1,
+    "id": "badores:marmite_bread"
+  }
+}

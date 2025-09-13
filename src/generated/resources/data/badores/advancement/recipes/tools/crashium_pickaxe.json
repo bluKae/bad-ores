@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_crashium_gemstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "badores:crashium_gemstone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "badores:crashium_pickaxe"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_crashium_gemstone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "badores:crashium_pickaxe"
+    ]
+  }
+}

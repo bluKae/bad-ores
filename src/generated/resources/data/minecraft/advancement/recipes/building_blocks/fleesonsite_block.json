@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_fleesonsite_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "badores:fleesonsite_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:fleesonsite_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_fleesonsite_ingot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:fleesonsite_block"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "smite_gemstone",
+  "ingredient": "badores:raw_smite",
+  "result": {
+    "count": 1,
+    "id": "badores:smite_gemstone"
+  }
+}

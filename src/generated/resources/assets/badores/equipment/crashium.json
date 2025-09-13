@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "badores:crashium"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "badores:crashium"
+      }
+    ]
+  }
+}

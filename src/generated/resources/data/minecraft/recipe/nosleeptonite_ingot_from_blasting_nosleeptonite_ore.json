@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "group": "nosleeptonite_ingot",
+  "ingredient": "badores:nosleeptonite_ore",
+  "result": {
+    "count": 1,
+    "id": "badores:nosleeptonite_ingot"
+  }
+}

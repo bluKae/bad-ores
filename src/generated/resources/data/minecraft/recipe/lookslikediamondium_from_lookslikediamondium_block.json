@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "lookslikediamondium",
+  "ingredients": [
+    "badores:lookslikediamondium_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "badores:lookslikediamondium"
+  }
+}

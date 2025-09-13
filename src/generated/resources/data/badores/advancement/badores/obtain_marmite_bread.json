@@ -1,0 +1,33 @@
+{
+  "parent": "badores:badores/root",
+  "criteria": {
+    "has_marmite_bread": {
+      "conditions": {
+        "items": [
+          {
+            "items": "badores:marmite_bread"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.badores.badores.obtain_marmite_bread.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "badores:marmite_bread"
+    },
+    "title": {
+      "translate": "advancements.badores.badores.obtain_marmite_bread.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_marmite_bread"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

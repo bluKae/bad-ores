@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_barely_generite_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "badores:barely_generite_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:barely_generite_ingot_from_barely_generite_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_barely_generite_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:barely_generite_ingot_from_barely_generite_block"
+    ]
+  }
+}

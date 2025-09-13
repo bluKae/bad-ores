@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherrack"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:obsidian"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:nether_wart"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:fire_charge"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:blaze_rod"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:magma_cream"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 2.0,
+        "min": 0.0
+      }
+    }
+  ],
+  "random_sequence": "badores:blocks/deepslate_pandaemonium_ore"
+}

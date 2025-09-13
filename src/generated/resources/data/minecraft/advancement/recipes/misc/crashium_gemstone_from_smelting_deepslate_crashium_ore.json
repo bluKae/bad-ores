@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_deepslate_crashium_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "badores:deepslate_crashium_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:crashium_gemstone_from_smelting_deepslate_crashium_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_deepslate_crashium_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:crashium_gemstone_from_smelting_deepslate_crashium_ore"
+    ]
+  }
+}

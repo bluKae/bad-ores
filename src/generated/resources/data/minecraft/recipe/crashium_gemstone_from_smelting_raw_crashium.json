@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "crashium_gemstone",
+  "ingredient": "badores:raw_crashium",
+  "result": {
+    "count": 1,
+    "id": "badores:crashium_gemstone"
+  }
+}

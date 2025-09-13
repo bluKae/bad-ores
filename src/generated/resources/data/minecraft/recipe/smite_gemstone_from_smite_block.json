@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "smite_gemstone",
+  "ingredients": [
+    "badores:smite_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "badores:smite_gemstone"
+  }
+}

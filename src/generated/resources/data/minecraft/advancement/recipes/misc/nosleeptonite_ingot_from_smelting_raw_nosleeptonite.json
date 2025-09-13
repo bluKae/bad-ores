@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_nosleeptonite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "badores:raw_nosleeptonite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:nosleeptonite_ingot_from_smelting_raw_nosleeptonite"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_nosleeptonite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:nosleeptonite_ingot_from_smelting_raw_nosleeptonite"
+    ]
+  }
+}

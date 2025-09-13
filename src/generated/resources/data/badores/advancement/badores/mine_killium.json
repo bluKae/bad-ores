@@ -1,0 +1,26 @@
+{
+  "parent": "badores:badores/root",
+  "criteria": {
+    "mine_killium": {
+      "trigger": "badores:mine_killium"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.badores.badores.mine_killium.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "badores:killium_ore"
+    },
+    "title": {
+      "translate": "advancements.badores.badores.mine_killium.title"
+    }
+  },
+  "requirements": [
+    [
+      "mine_killium"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

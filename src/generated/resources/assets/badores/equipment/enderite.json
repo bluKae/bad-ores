@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "badores:enderite"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "badores:enderite"
+      }
+    ]
+  }
+}

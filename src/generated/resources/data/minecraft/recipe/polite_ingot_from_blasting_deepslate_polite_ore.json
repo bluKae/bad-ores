@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "group": "polite_ingot",
+  "ingredient": "badores:deepslate_polite_ore",
+  "result": {
+    "count": 1,
+    "id": "badores:polite_ingot"
+  }
+}

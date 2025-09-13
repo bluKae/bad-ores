@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_crashium": {
+      "conditions": {
+        "items": [
+          {
+            "items": "badores:raw_crashium"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:crashium_gemstone_from_blasting_raw_crashium"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_crashium"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:crashium_gemstone_from_blasting_raw_crashium"
+    ]
+  }
+}

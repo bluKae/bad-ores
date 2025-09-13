@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_marmite_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "badores:marmite_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:marmite_from_smelting_marmite_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_marmite_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:marmite_from_smelting_marmite_ore"
+    ]
+  }
+}

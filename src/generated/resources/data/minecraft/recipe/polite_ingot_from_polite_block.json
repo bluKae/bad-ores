@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "polite_ingot",
+  "ingredients": [
+    "badores:polite_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "badores:polite_ingot"
+  }
+}

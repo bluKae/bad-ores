@@ -1,0 +1,37 @@
+{
+  "parent": "badores:badores/root",
+  "criteria": {
+    "has_barely_generite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "badores:barely_generite_ore"
+          },
+          {
+            "items": "badores:deepslate_barely_generite_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.badores.badores.find_barely_generite.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "badores:barely_generite_ore"
+    },
+    "title": {
+      "translate": "advancements.badores.badores.find_barely_generite.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_barely_generite"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

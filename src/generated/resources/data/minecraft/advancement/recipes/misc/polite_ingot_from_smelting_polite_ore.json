@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_polite_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "badores:polite_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:polite_ingot_from_smelting_polite_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_polite_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:polite_ingot_from_smelting_polite_ore"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "parent": "badores:badores/root",
+  "criteria": {
+    "deal_iwontfite_damage": {
+      "trigger": "badores:hurt_iwontfite"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.badores.badores.deal_iwontfite_damage.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "badores:iwontfite_ore"
+    },
+    "title": {
+      "translate": "advancements.badores.badores.deal_iwontfite_damage.title"
+    }
+  },
+  "requirements": [
+    [
+      "deal_iwontfite_damage"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

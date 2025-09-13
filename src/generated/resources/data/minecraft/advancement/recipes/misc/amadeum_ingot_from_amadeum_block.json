@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_amadeum_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "badores:amadeum_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:amadeum_ingot_from_amadeum_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_amadeum_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:amadeum_ingot_from_amadeum_block"
+    ]
+  }
+}

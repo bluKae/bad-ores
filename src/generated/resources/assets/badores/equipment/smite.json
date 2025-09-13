@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "badores:smite"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "badores:smite"
+      }
+    ]
+  }
+}

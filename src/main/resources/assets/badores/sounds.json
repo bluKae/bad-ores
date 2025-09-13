@@ -1,0 +1,51 @@
+{
+  "entity.fleesonsite.ambient": {
+    "sounds": [
+      "badores:fleesonsite1",
+      "badores:fleesonsite2",
+      "badores:fleesonsite3"
+    ]
+  },
+  "entity.fleesonsite.death": {
+    "sounds": [
+      "badores:fleesonsite_death"
+    ]
+  },
+  "entity.fleesonsite.hurt": {
+    "sounds": [
+      "badores:fleesonsite_hurt"
+    ]
+  },
+
+  "entity.nosleeptonite.ambient": {
+    "sounds": [
+      "badores:nosleeptonite_idle"
+    ]
+  },
+  "entity.nosleeptonite.death": {
+    "sounds": [
+      "badores:nosleeptonite_death"
+    ]
+  },
+  "entity.nosleeptonite.hit": {
+    "sounds": [
+      "badores:nosleeptonite_hurt"
+    ]
+  },
+
+  "nosleeptonite.idle": {
+    "sounds": [
+      {
+        "name": "badores:nosleeptonite1",
+        "stream": true
+      }
+    ]
+  },
+
+  "block.pandaemonium.break": {
+    "sounds": [
+      "badores:pandaemonium1",
+      "badores:pandaemonium2"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "badores:polite"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "badores:polite"
+      }
+    ]
+  }
+}

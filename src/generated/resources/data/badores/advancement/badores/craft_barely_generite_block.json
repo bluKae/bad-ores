@@ -1,0 +1,30 @@
+{
+  "parent": "badores:badores/find_barely_generite",
+  "criteria": {
+    "craft_barely_generite_block": {
+      "conditions": {
+        "recipe_id": "minecraft:barely_generite_block"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.badores.badores.craft_barely_generite_block.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "badores:barely_generite_block"
+    },
+    "title": {
+      "translate": "advancements.badores.badores.craft_barely_generite_block.title"
+    }
+  },
+  "requirements": [
+    [
+      "craft_barely_generite_block"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

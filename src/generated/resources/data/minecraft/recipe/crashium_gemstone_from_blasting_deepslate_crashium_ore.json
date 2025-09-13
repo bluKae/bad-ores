@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "group": "crashium_gemstone",
+  "ingredient": "badores:deepslate_crashium_ore",
+  "result": {
+    "count": 1,
+    "id": "badores:crashium_gemstone"
+  }
+}

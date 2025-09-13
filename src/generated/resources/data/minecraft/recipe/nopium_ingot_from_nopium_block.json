@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "nopium_ingot",
+  "ingredients": [
+    "badores:nopium_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "badores:nopium_ingot"
+  }
+}

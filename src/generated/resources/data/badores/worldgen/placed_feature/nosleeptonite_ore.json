@@ -1,0 +1,24 @@
+{
+  "feature": "badores:nosleeptonite_ore",
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 40
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "above_bottom": 40
+        },
+        "min_inclusive": {
+          "above_bottom": 5
+        }
+      }
+    }
+  ]
+}

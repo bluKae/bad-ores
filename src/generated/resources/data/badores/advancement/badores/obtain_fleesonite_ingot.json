@@ -1,0 +1,33 @@
+{
+  "parent": "badores:badores/root",
+  "criteria": {
+    "has_fleesonite_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "badores:fleesonsite_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.badores.badores.obtain_fleesonite_ingot.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "badores:fleesonsite_ingot"
+    },
+    "title": {
+      "translate": "advancements.badores.badores.obtain_fleesonite_ingot.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_fleesonite_ingot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

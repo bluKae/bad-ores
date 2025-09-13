@@ -1,0 +1,38 @@
+{
+  "parent": "badores:badores/root",
+  "criteria": {
+    "mine_zombieunite": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:zombieunite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.badores.badores.mine_zombieunite.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "badores:zombieunite_ore"
+    },
+    "title": {
+      "translate": "advancements.badores.badores.mine_zombieunite.title"
+    }
+  },
+  "requirements": [
+    [
+      "mine_zombieunite"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

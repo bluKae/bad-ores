@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "polite_ingot",
+  "ingredient": "badores:raw_polite",
+  "result": {
+    "count": 1,
+    "id": "badores:polite_ingot"
+  }
+}

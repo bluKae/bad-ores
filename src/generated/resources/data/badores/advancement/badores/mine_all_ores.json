@@ -1,0 +1,687 @@
+{
+  "parent": "badores:badores/find_barely_generite",
+  "criteria": {
+    "mine_amadeum_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:amadeum_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_appetite_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:appetite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_balancium_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:balancium_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_barely_generite_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:barely_generite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_breakium_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:breakium_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_crappium_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:crappium_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_crashium_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:crashium_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_enderite_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:enderite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_explodeitmite_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:explodeitmite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_fleesonsite_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:fleesonsite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_ghostium_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:ghostium_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_idlikeabite_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:idlikeabite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_iwontfite_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:iwontfite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_kakkarite_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:kakkarite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_killium_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:killium_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_lite_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:lite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_lookslikediamondium_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:lookslikediamondium_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_marmite_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:marmite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_meteorite_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:meteorite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_misleadium_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:misleadium_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_movium_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:movium_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_nopium_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:nopium_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_nosleeptonite_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:nosleeptonite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_paintitwhite_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:paintitwhite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_pandaemonium_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:pandaemonium_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_polite_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:polite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_shiftium_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:shiftium_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_smite_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:smite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_stonium_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:stonium_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_streetscum_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:streetscum_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_tauntum_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:tauntum_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_unobtainium_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:unobtainium_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_uselessium_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:uselessium_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_wannafite_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:wannafite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_wantarite_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:wantarite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_website_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:website_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    },
+    "mine_zombieunite_ore": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#badores:zombieunite_ores"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "badores:mine_bad_ore"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.badores.badores.mine_all_ores.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "badores:bad_ore_book"
+    },
+    "title": {
+      "translate": "advancements.badores.badores.mine_all_ores.title"
+    }
+  },
+  "requirements": [
+    [
+      "mine_amadeum_ore"
+    ],
+    [
+      "mine_appetite_ore"
+    ],
+    [
+      "mine_balancium_ore"
+    ],
+    [
+      "mine_barely_generite_ore"
+    ],
+    [
+      "mine_breakium_ore"
+    ],
+    [
+      "mine_crappium_ore"
+    ],
+    [
+      "mine_crashium_ore"
+    ],
+    [
+      "mine_enderite_ore"
+    ],
+    [
+      "mine_explodeitmite_ore"
+    ],
+    [
+      "mine_fleesonsite_ore"
+    ],
+    [
+      "mine_ghostium_ore"
+    ],
+    [
+      "mine_idlikeabite_ore"
+    ],
+    [
+      "mine_iwontfite_ore"
+    ],
+    [
+      "mine_kakkarite_ore"
+    ],
+    [
+      "mine_killium_ore"
+    ],
+    [
+      "mine_lite_ore"
+    ],
+    [
+      "mine_lookslikediamondium_ore"
+    ],
+    [
+      "mine_marmite_ore"
+    ],
+    [
+      "mine_meteorite_ore"
+    ],
+    [
+      "mine_misleadium_ore"
+    ],
+    [
+      "mine_movium_ore"
+    ],
+    [
+      "mine_nopium_ore"
+    ],
+    [
+      "mine_nosleeptonite_ore"
+    ],
+    [
+      "mine_paintitwhite_ore"
+    ],
+    [
+      "mine_pandaemonium_ore"
+    ],
+    [
+      "mine_polite_ore"
+    ],
+    [
+      "mine_shiftium_ore"
+    ],
+    [
+      "mine_smite_ore"
+    ],
+    [
+      "mine_stonium_ore"
+    ],
+    [
+      "mine_streetscum_ore"
+    ],
+    [
+      "mine_tauntum_ore"
+    ],
+    [
+      "mine_unobtainium_ore"
+    ],
+    [
+      "mine_uselessium_ore"
+    ],
+    [
+      "mine_wannafite_ore"
+    ],
+    [
+      "mine_wantarite_ore"
+    ],
+    [
+      "mine_website_ore"
+    ],
+    [
+      "mine_zombieunite_ore"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

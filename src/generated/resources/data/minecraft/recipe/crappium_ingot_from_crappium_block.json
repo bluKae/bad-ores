@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "crappium_ingot",
+  "ingredients": [
+    "badores:crappium_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "badores:crappium_ingot"
+  }
+}

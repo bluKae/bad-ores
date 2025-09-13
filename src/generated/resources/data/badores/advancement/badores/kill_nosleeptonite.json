@@ -1,0 +1,37 @@
+{
+  "parent": "badores:badores/root",
+  "criteria": {
+    "kill_nosleeptonite": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "badores:nosleeptonite"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.badores.badores.kill_nosleeptonite.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "badores:nosleeptonite_ore"
+    },
+    "title": {
+      "translate": "advancements.badores.badores.kill_nosleeptonite.title"
+    }
+  },
+  "requirements": [
+    [
+      "kill_nosleeptonite"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

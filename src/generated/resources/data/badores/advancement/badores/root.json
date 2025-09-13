@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "mine_bad_ore": {
+      "trigger": "badores:mine_bad_ore"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:gui/advancements/backgrounds/stone",
+    "description": {
+      "translate": "advancements.badores.badores.root.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "badores:amadeum_ore"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.badores.badores.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "mine_bad_ore"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

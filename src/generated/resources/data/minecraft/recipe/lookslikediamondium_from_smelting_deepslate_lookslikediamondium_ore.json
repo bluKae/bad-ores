@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "lookslikediamondium",
+  "ingredient": "badores:deepslate_lookslikediamondium_ore",
+  "result": {
+    "count": 1,
+    "id": "badores:lookslikediamondium"
+  }
+}
