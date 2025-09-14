@@ -23,18 +23,17 @@ import net.minecraft.advancements.Criterion
 import net.minecraft.advancements.critereon.ContextAwarePredicate
 import net.minecraft.advancements.critereon.EntityPredicate
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger
-import net.minecraft.advancements.critereon.SimpleCriterionTrigger.SimpleInstance
 import net.minecraft.server.level.ServerPlayer
-import java.util.Optional
+import java.util.*
 
-class HurtIwontfiteTrigger: SimpleCriterionTrigger<HurtIwontfiteTrigger.TriggerInstance>() {
+class HurtIwontfiteTrigger : SimpleCriterionTrigger<HurtIwontfiteTrigger.TriggerInstance>() {
     override fun codec(): Codec<TriggerInstance> = TriggerInstance.CODEC
 
     fun trigger(player: ServerPlayer) {
         super.trigger(player) { _ -> true }
     }
 
-    class TriggerInstance(player: Optional<ContextAwarePredicate>): SimpleInstance {
+    class TriggerInstance(player: Optional<ContextAwarePredicate>) : SimpleInstance {
         private val _player = player
 
         override fun player() = _player
@@ -43,11 +42,13 @@ class HurtIwontfiteTrigger: SimpleCriterionTrigger<HurtIwontfiteTrigger.TriggerI
             val CODEC: Codec<TriggerInstance> = RecordCodecBuilder.create { instance ->
                 instance.group(
                     EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player")
-                        .forGetter(TriggerInstance::player))
+                        .forGetter(TriggerInstance::player)
+                )
                     .apply(instance, ::TriggerInstance)
             }
 
-            fun hurtWithIwontfite(): Criterion<TriggerInstance> = BadOres.HURT_IWONTFITE_TRIGGER.createCriterion(TriggerInstance(Optional.empty()))
+            fun hurtWithIwontfite(): Criterion<TriggerInstance> =
+                BadOres.HURT_IWONTFITE_TRIGGER.createCriterion(TriggerInstance(Optional.empty()))
         }
 
     }

@@ -16,6 +16,4 @@
 
 package de.blukae.badores.ore
 
-object Ghostium: BadOre("ghostium") {
-
-}
+object Ghostium : BadOre("ghostium")

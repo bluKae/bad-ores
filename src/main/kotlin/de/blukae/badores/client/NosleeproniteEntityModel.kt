@@ -25,7 +25,6 @@ import net.minecraft.client.model.geom.builders.CubeDeformation
 import net.minecraft.client.model.geom.builders.CubeListBuilder
 import net.minecraft.client.model.geom.builders.LayerDefinition
 import net.minecraft.client.model.geom.builders.MeshDefinition
-import net.minecraft.client.renderer.entity.state.EntityRenderState
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 import net.minecraft.util.Mth
 
@@ -53,70 +52,70 @@ class NosleeproniteEntityModel(root: ModelPart) : EntityModel<LivingEntityRender
             val meshdefinition = MeshDefinition()
             val partdefinition = meshdefinition.root
 
-            val bottom = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "bottom",
                 CubeListBuilder.create().texOffs(0, 0).mirror()
                     .addBox(-8.0f, 0.0f, -14.0f, 16.0f, 8.0f, 16.0f, CubeDeformation(0.0f)).mirror(false),
                 PartPose.offsetAndRotation(0.0f, 16.0f, 6.0f, 0.632f, 0.0f, 0.0f)
             )
 
-            val top = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "top",
                 CubeListBuilder.create().texOffs(0, 25).mirror()
                     .addBox(-8.0f, -8.0f, -14.0f, 16.0f, 8.0f, 16.0f, CubeDeformation(0.0f)).mirror(false),
                 PartPose.offsetAndRotation(0.0f, 16.0f, 6.0f, -0.632f, 0.0f, 0.0f)
             )
 
-            val mouthbottom = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "mouthbottom",
                 CubeListBuilder.create().texOffs(65, 0).mirror()
                     .addBox(-7.5f, -2.0f, -13.5f, 15.0f, 2.0f, 15.0f, CubeDeformation(0.0f)).mirror(false),
                 PartPose.offsetAndRotation(0.0f, 16.0f, 6.0f, 0.632f, 0.0f, 0.0f)
             )
 
-            val mouthtop = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "mouthtop",
                 CubeListBuilder.create().texOffs(65, 18).mirror()
                     .addBox(-7.5f, 0.0f, -13.5f, 15.0f, 2.0f, 15.0f, CubeDeformation(0.0f)).mirror(false),
                 PartPose.offsetAndRotation(0.0f, 16.0f, 6.0f, -0.632f, 0.0f, 0.0f)
             )
 
-            val teethbottom1 = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "teethbottom1",
                 CubeListBuilder.create().texOffs(65, 36).mirror()
                     .addBox(-7.0f, -6.0f, -13.0f, 14.0f, 5.0f, 0.0f, CubeDeformation(0.0f)).mirror(false),
                 PartPose.offsetAndRotation(0.0f, 16.0f, 6.0f, 0.7436f, 0.0f, 0.0f)
             )
 
-            val teethbottom2 = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "teethbottom2",
                 CubeListBuilder.create().texOffs(65, 28).mirror()
                     .addBox(0.0f, -5.0f, -13.0f, 0.0f, 5.0f, 14.0f, CubeDeformation(0.0f)).mirror(false),
                 PartPose.offsetAndRotation(-7.0f, 16.0f, 6.0f, 0.7064f, 0.1115f, -0.1487f)
             )
 
-            val teethbottom3 = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "teethbottom3",
                 CubeListBuilder.create().texOffs(65, 34).mirror()
                     .addBox(0.0f, -5.0f, -13.0f, 0.0f, 5.0f, 14.0f, CubeDeformation(0.0f)).mirror(false),
                 PartPose.offsetAndRotation(7.0f, 16.0f, 6.0f, 0.7064f, -0.1115f, 0.1487f)
             )
 
-            val teethtop1 = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "teethtop1",
                 CubeListBuilder.create().texOffs(95, 36).mirror()
                     .addBox(-7.0f, -1.0f, -13.0f, 14.0f, 5.0f, 0.0f, CubeDeformation(0.0f)).mirror(false),
                 PartPose.offsetAndRotation(0.0f, 16.0f, 6.0f, -0.5577f, 0.0f, 0.0f)
             )
 
-            val teethtop2 = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "teethtop2",
                 CubeListBuilder.create().texOffs(95, 28).mirror()
                     .addBox(0.0f, 0.0f, -13.0f, 0.0f, 5.0f, 14.0f, CubeDeformation(0.0f)).mirror(false),
                 PartPose.offsetAndRotation(-7.0f, 16.0f, 6.0f, -0.632f, -0.1115f, -0.1859f)
             )
 
-            val teethtop3 = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "teethtop3",
                 CubeListBuilder.create().texOffs(95, 34).mirror()
                     .addBox(0.0f, 0.0f, -13.0f, 0.0f, 5.0f, 14.0f, CubeDeformation(0.0f)).mirror(false),
@@ -133,16 +132,16 @@ class NosleeproniteEntityModel(root: ModelPart) : EntityModel<LivingEntityRender
         val pos: Float = renderState.walkAnimationPos
         val speed: Float = renderState.walkAnimationSpeed
 
-        mouthbottom.xRot = (Mth.cos(pos * 0.04F) + 1) * 20.0F * speed;
-        mouthtop.xRot = -mouthbottom.xRot;
-        bottom.xRot = mouthbottom.xRot;
-        teethbottom1.xRot = mouthbottom.xRot;
-        teethbottom2.xRot = mouthbottom.xRot;
-        teethbottom3.xRot = mouthbottom.xRot;
-        top.xRot = mouthtop.xRot;
-        teethtop1.xRot = mouthtop.xRot;
-        teethtop2.xRot = mouthtop.xRot;
-        teethtop3.xRot = mouthtop.xRot;
+        mouthbottom.xRot = (Mth.cos(pos * 0.04F) + 1) * 20.0F * speed
+        mouthtop.xRot = -mouthbottom.xRot
+        bottom.xRot = mouthbottom.xRot
+        teethbottom1.xRot = mouthbottom.xRot
+        teethbottom2.xRot = mouthbottom.xRot
+        teethbottom3.xRot = mouthbottom.xRot
+        top.xRot = mouthtop.xRot
+        teethtop1.xRot = mouthtop.xRot
+        teethtop2.xRot = mouthtop.xRot
+        teethtop3.xRot = mouthtop.xRot
     }
 
 }

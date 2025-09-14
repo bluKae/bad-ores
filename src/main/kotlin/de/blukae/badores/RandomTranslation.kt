@@ -19,18 +19,16 @@ package de.blukae.badores
 import io.netty.buffer.ByteBuf
 import net.minecraft.locale.Language
 import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.ComponentSerialization
 import net.minecraft.network.chat.contents.TranslatableContents
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.minecraft.server.level.ServerPlayer
 import net.neoforged.neoforge.network.PacketDistributor
-import org.apache.commons.codec.language.bm.Lang
 import kotlin.random.Random
 
 
-data class RandomTranslation(val key: String, val fallback: String, val args: List<Any>): CustomPacketPayload {
+data class RandomTranslation(val key: String, val fallback: String, val args: List<Any>) : CustomPacketPayload {
     constructor(key: String, fallback: String, vararg args: Any) : this(key, fallback, args.toList())
 
     companion object {
@@ -66,6 +64,6 @@ data class RandomTranslation(val key: String, val fallback: String, val args: Li
     }
 
     fun send(player: ServerPlayer) {
-        PacketDistributor.sendToPlayer(player, this);
+        PacketDistributor.sendToPlayer(player, this)
     }
 }

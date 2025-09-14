@@ -30,7 +30,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 
-object Killium: BadOre("killium") {
+object Killium : BadOre("killium") {
     // custom trigger
 
     private fun killPlayer(level: ServerLevel, entity: LivingEntity) {
@@ -53,7 +53,7 @@ object Killium: BadOre("killium") {
         }
 
         if (level.random.nextInt(5) == 0) {
-            BadOres.MINE_KILLIUM_TRIGGER.trigger(player);
+            BadOres.MINE_KILLIUM_TRIGGER.trigger(player)
         } else {
             killPlayer(level, player)
         }

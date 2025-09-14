@@ -20,14 +20,7 @@ import de.blukae.badores.BadOres
 import de.blukae.badores.advancement.HurtIwontfiteTrigger
 import de.blukae.badores.advancement.MineBadOreTrigger
 import de.blukae.badores.advancement.MineKilliumTrigger
-import de.blukae.badores.ore.Amadeum
-import de.blukae.badores.ore.BarelyGenerite
-import de.blukae.badores.ore.Fleesonsite
-import de.blukae.badores.ore.Iwontfite
-import de.blukae.badores.ore.Killium
-import de.blukae.badores.ore.Nosleeptonite
-import de.blukae.badores.ore.Shiftium
-import de.blukae.badores.ore.Zombieunite
+import de.blukae.badores.ore.*
 import net.minecraft.advancements.Advancement
 import net.minecraft.advancements.AdvancementHolder
 import net.minecraft.advancements.AdvancementRequirements
@@ -35,7 +28,6 @@ import net.minecraft.advancements.AdvancementType
 import net.minecraft.advancements.critereon.EntityPredicate
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
 import net.minecraft.advancements.critereon.KilledTrigger
-import net.minecraft.advancements.critereon.PlayerHurtEntityTrigger
 import net.minecraft.advancements.critereon.RecipeCraftedTrigger
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
@@ -43,11 +35,10 @@ import net.minecraft.data.advancements.AdvancementSubProvider
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
-import net.neoforged.neoforge.registries.NeoForgeRegistries
 import java.util.function.Consumer
 
 
-class BadOresAdvancements: AdvancementSubProvider {
+class BadOresAdvancements : AdvancementSubProvider {
     override fun generate(
         registries: HolderLookup.Provider,
         writer: Consumer<AdvancementHolder>
@@ -81,10 +72,12 @@ class BadOresAdvancements: AdvancementSubProvider {
                 false
             )
             .parent(root)
-            .addCriterion("has_barely_generite", InventoryChangeTrigger.TriggerInstance.hasItems(
-                BarelyGenerite.oreBlock,
-                BarelyGenerite.deepslateOreBlock,
-            ))
+            .addCriterion(
+                "has_barely_generite", InventoryChangeTrigger.TriggerInstance.hasItems(
+                    BarelyGenerite.oreBlock,
+                    BarelyGenerite.deepslateOreBlock,
+                )
+            )
             .save(writer, BadOres.rl("badores/find_barely_generite"))
 
         BarelyGenerite.ingotBlock?.let {
@@ -100,9 +93,14 @@ class BadOresAdvancements: AdvancementSubProvider {
                     true,
                     false
                 )
-                .addCriterion("craft_barely_generite_block", RecipeCraftedTrigger.TriggerInstance.craftedItem(
-                    ResourceKey.create(Registries.RECIPE, ResourceLocation.withDefaultNamespace("barely_generite_block"))
-                ))
+                .addCriterion(
+                    "craft_barely_generite_block", RecipeCraftedTrigger.TriggerInstance.craftedItem(
+                        ResourceKey.create(
+                            Registries.RECIPE,
+                            ResourceLocation.withDefaultNamespace("barely_generite_block")
+                        )
+                    )
+                )
                 .save(writer, BadOres.rl("badores/craft_barely_generite_block"))
         }
 
@@ -134,8 +132,14 @@ class BadOresAdvancements: AdvancementSubProvider {
                 true,
                 false
             )
-            .addCriterion("kill_nosleeptonite", KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(entityTypes,
-                BadOres.NOSLEEPTONITE_ENTITY_TYPE)))
+            .addCriterion(
+                "kill_nosleeptonite", KilledTrigger.TriggerInstance.playerKilledEntity(
+                    EntityPredicate.Builder.entity().of(
+                        entityTypes,
+                        BadOres.NOSLEEPTONITE_ENTITY_TYPE
+                    )
+                )
+            )
             .save(writer, BadOres.rl("badores/kill_nosleeptonite"))
 
         Advancement.Builder.advancement()
@@ -184,7 +188,10 @@ class BadOresAdvancements: AdvancementSubProvider {
                 true,
                 false
             )
-            .addCriterion("has_marmite_bread", InventoryChangeTrigger.TriggerInstance.hasItems(BadOres.MARMITE_BREAD_ITEM))
+            .addCriterion(
+                "has_marmite_bread",
+                InventoryChangeTrigger.TriggerInstance.hasItems(BadOres.MARMITE_BREAD_ITEM)
+            )
             .save(writer, BadOres.rl("badores/obtain_marmite_bread"))
 
         Advancement.Builder.advancement()
@@ -233,7 +240,10 @@ class BadOresAdvancements: AdvancementSubProvider {
             )
             .requirements(AdvancementRequirements.Strategy.OR)
             .addCriterion("has_shiftium_ore", InventoryChangeTrigger.TriggerInstance.hasItems(Shiftium.oreBlock))
-            .addCriterion("has_deepslate_shiftium_ore", InventoryChangeTrigger.TriggerInstance.hasItems(Shiftium.deepslateOreBlock))
+            .addCriterion(
+                "has_deepslate_shiftium_ore",
+                InventoryChangeTrigger.TriggerInstance.hasItems(Shiftium.deepslateOreBlock)
+            )
             .save(writer, BadOres.rl("badores/obtain_shiftium_ore"))
     }
 }

@@ -29,7 +29,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.Vec3
 
 
-object Smite: BadOre("smite") {
+object Smite : BadOre("smite") {
     override fun hasIngot() = true
     override fun tools() = ToolInfo(2, 220, 5.0f, 2.0f, 8)
     override fun armor() = ArmorInfo(8, intArrayOf(2, 5, 4, 2), 8)

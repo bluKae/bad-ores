@@ -18,21 +18,13 @@ package de.blukae.badores.advancement
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
-import de.blukae.badores.BadOreBlock
 import de.blukae.badores.BadOres
 import net.minecraft.advancements.Criterion
-import net.minecraft.advancements.critereon.BlockPredicate
-import net.minecraft.advancements.critereon.ContextAwarePredicate
-import net.minecraft.advancements.critereon.CriterionValidator
-import net.minecraft.advancements.critereon.EntityPredicate
-import net.minecraft.advancements.critereon.LocationPredicate
-import net.minecraft.advancements.critereon.PlayerPredicate
-import net.minecraft.advancements.critereon.SimpleCriterionTrigger
+import net.minecraft.advancements.critereon.*
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderGetter
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
-import net.minecraft.tags.BlockTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.Block
@@ -44,7 +36,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams
 import net.minecraft.world.level.storage.loot.predicates.LocationCheck
 import java.util.*
 
-class MineBadOreTrigger: SimpleCriterionTrigger<MineBadOreTrigger.TriggerInstance>() {
+class MineBadOreTrigger : SimpleCriterionTrigger<MineBadOreTrigger.TriggerInstance>() {
     override fun codec(): Codec<TriggerInstance> = TriggerInstance.CODEC
 
     fun trigger(player: ServerPlayer, level: ServerLevel, pos: BlockPos, state: BlockState, tool: ItemStack) {
@@ -58,7 +50,8 @@ class MineBadOreTrigger: SimpleCriterionTrigger<MineBadOreTrigger.TriggerInstanc
         super.trigger(player) { it.matches(context) }
     }
 
-    class TriggerInstance(player: Optional<ContextAwarePredicate>, location: Optional<ContextAwarePredicate>): SimpleInstance {
+    class TriggerInstance(player: Optional<ContextAwarePredicate>, location: Optional<ContextAwarePredicate>) :
+        SimpleInstance {
         private val _player = player
         private val _location = location
 
@@ -71,11 +64,13 @@ class MineBadOreTrigger: SimpleCriterionTrigger<MineBadOreTrigger.TriggerInstanc
                     EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player")
                         .forGetter(TriggerInstance::player),
                     ContextAwarePredicate.CODEC.optionalFieldOf("location")
-                        .forGetter(TriggerInstance::location))
-                .apply(instance, ::TriggerInstance)
+                        .forGetter(TriggerInstance::location)
+                )
+                    .apply(instance, ::TriggerInstance)
             }
 
-            fun minedAny(): Criterion<TriggerInstance> = BadOres.MINE_BAD_ORE_TRIGGER.createCriterion(TriggerInstance(Optional.empty(), Optional.empty()))
+            fun minedAny(): Criterion<TriggerInstance> =
+                BadOres.MINE_BAD_ORE_TRIGGER.createCriterion(TriggerInstance(Optional.empty(), Optional.empty()))
 
             fun minedTag(blocks: HolderGetter<Block>, tag: TagKey<Block>): Criterion<TriggerInstance> {
                 val locationPredicate = LocationPredicate.Builder.location()
@@ -83,7 +78,12 @@ class MineBadOreTrigger: SimpleCriterionTrigger<MineBadOreTrigger.TriggerInstanc
 
                 val location = ContextAwarePredicate.create(LocationCheck.checkLocation(locationPredicate).build())
 
-                return BadOres.MINE_BAD_ORE_TRIGGER.createCriterion(TriggerInstance(Optional.empty(), Optional.of(location)))
+                return BadOres.MINE_BAD_ORE_TRIGGER.createCriterion(
+                    TriggerInstance(
+                        Optional.empty(),
+                        Optional.of(location)
+                    )
+                )
             }
         }
 

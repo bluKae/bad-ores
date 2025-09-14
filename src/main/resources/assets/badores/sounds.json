@@ -16,7 +16,6 @@
       "badores:fleesonsite_hurt"
     ]
   },
-
   "entity.nosleeptonite.ambient": {
     "sounds": [
       "badores:nosleeptonite_idle"
@@ -32,7 +31,6 @@
       "badores:nosleeptonite_hurt"
     ]
   },
-
   "nosleeptonite.idle": {
     "sounds": [
       {
@@ -41,7 +39,6 @@
       }
     ]
   },
-
   "block.pandaemonium.break": {
     "sounds": [
       "badores:pandaemonium1",

@@ -32,11 +32,14 @@ import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.functions.SetItemDamageFunction
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 
-object Wannafite: BadOre("wannafite") {
+object Wannafite : BadOre("wannafite") {
     override fun customLootTable(provider: BlockLootSubProvider): LootTable.Builder? = LootTable.lootTable()
-        .withPool(LootPool.lootPool()
-            .add(LootItem.lootTableItem(Items.IRON_SWORD)
-                .apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.4F, 0.8F))))
+        .withPool(
+            LootPool.lootPool()
+                .add(
+                    LootItem.lootTableItem(Items.IRON_SWORD)
+                        .apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.4F, 0.8F)))
+                )
         )
 
     override fun onDestroyedByPlayer(

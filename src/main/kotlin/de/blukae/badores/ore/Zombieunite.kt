@@ -29,10 +29,12 @@ import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.phys.AABB
 import net.neoforged.neoforge.event.EventHooks
 
-object Zombieunite: BadOre("zombieunite") {
+object Zombieunite : BadOre("zombieunite") {
     override fun customLootTable(provider: BlockLootSubProvider): LootTable.Builder? = LootTable.lootTable()
-        .withPool(LootPool.lootPool()
-            .add(LootItem.lootTableItem(Items.ZOMBIE_HEAD)))
+        .withPool(
+            LootPool.lootPool()
+                .add(LootItem.lootTableItem(Items.ZOMBIE_HEAD))
+        )
 
     override fun getDestroyProgress(state: BlockState, player: Player, level: BlockGetter, pos: BlockPos): Float {
         val numZombies = player.level()

@@ -76,7 +76,8 @@ class BadOresLanguageProvider(output: PackOutput) : LanguageProvider(output, Bad
         add("death.attack.badores.wannafite", "%1\$s wants to fite!")
         add("death.attack.badores.killium", "%1\$s mined the wrong ore!")
 
-        addRandom("badores.polite.mined",
+        addRandom(
+            "badores.polite.mined",
             "Thanks for mining me!",
             "That was very kind of you.",
             "Thank you very much.",
@@ -95,7 +96,8 @@ class BadOresLanguageProvider(output: PackOutput) : LanguageProvider(output, Bad
             "I am very grateful for being mined today.",
         )
 
-        addRandom("badores.polite.attack",
+        addRandom(
+            "badores.polite.attack",
             "Thank you for attacking with me!",
             "Thanks for being the aggressor in this battle!",
             "Oh yeah, this swing was great!",
@@ -111,7 +113,8 @@ class BadOresLanguageProvider(output: PackOutput) : LanguageProvider(output, Bad
             "Please attack more, man!",
         )
 
-        addRandom("badores.polite.defend",
+        addRandom(
+            "badores.polite.defend",
             "I am glad to be your protector!",
             "I am overjoyed to let you attack me!",
             "I'll be between you and your enemy anytime!",
@@ -123,7 +126,8 @@ class BadOresLanguageProvider(output: PackOutput) : LanguageProvider(output, Bad
             "Please, don't get into dangerous situations, okay?",
         )
 
-        addRandom("badores.polite.tool",
+        addRandom(
+            "badores.polite.tool",
             "Thanks for using me!",
             "I love serving you!",
             "Please use me more!",
@@ -135,7 +139,8 @@ class BadOresLanguageProvider(output: PackOutput) : LanguageProvider(output, Bad
             "Thank you for your continued use!",
         )
 
-        addRandom("badores.crashium.nocrash",
+        addRandom(
+            "badores.crashium.nocrash",
             "Poof!",
             "Brzzz...",
             "SSssssss...",
@@ -143,7 +148,8 @@ class BadOresLanguageProvider(output: PackOutput) : LanguageProvider(output, Bad
             "Brrrrttt...",
         )
 
-        addRandom("badores.crashium.precrash",
+        addRandom(
+            "badores.crashium.precrash",
             "Uh oh...",
             "Hrmm...",
             "Oh shit...",
@@ -153,7 +159,8 @@ class BadOresLanguageProvider(output: PackOutput) : LanguageProvider(output, Bad
             "Oh god...",
         )
 
-        addRandom("badores.crashium.crash",
+        addRandom(
+            "badores.crashium.crash",
             "Encrypting runtime devastation...",
             "Initializing pickaxe control...",
             "Shutting down Minecart Motor...",
@@ -167,7 +174,8 @@ class BadOresLanguageProvider(output: PackOutput) : LanguageProvider(output, Bad
             "Swapping out Flux Capacitor...",
         )
 
-        addRandom("badores.misleadium.baseMessage",
+        addRandom(
+            "badores.misleadium.baseMessage",
             "There is some %s at %sx, %sy, %sz!",
             "Go to %2\$sx, %3\$sy, %4\$sz and you will find %1\$s!",
             "I heard there's %s at %sx, %sy, %sz!",
@@ -228,7 +236,10 @@ class BadOresLanguageProvider(output: PackOutput) : LanguageProvider(output, Bad
         add("advancements.badores.badores.find_barely_generite.title", "Finally found it!")
         add("advancements.badores.badores.find_barely_generite.description", "Find the famed Barely Generite")
         add("advancements.badores.badores.craft_barely_generite_block.title", "Spent too much time")
-        add("advancements.badores.badores.craft_barely_generite_block.description", "Find enough Barely Generite to make a full block")
+        add(
+            "advancements.badores.badores.craft_barely_generite_block.description",
+            "Find enough Barely Generite to make a full block"
+        )
         add("advancements.badores.badores.deal_iwontfite_damage.title", "Patience or Luck?")
         add("advancements.badores.badores.deal_iwontfite_damage.description", "Deal damage while holding Iwontfite")
         add("advancements.badores.badores.kill_nosleeptonite.title", "Conquer your fears")

@@ -26,7 +26,7 @@ import net.minecraft.world.level.levelgen.placement.HeightRangePlacement
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest
 
-object Marmite: BadOre("marmite") {
+object Marmite : BadOre("marmite") {
     override fun hasIngot() = true
     override fun ingotName() = name
 

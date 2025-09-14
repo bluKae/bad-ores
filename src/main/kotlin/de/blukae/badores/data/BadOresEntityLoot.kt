@@ -24,37 +24,54 @@ import net.minecraft.core.registries.Registries
 import net.minecraft.data.loot.EntityLootSubProvider
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.flag.FeatureFlags
-import net.minecraft.world.item.enchantment.Enchantments
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
-import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount
 import net.minecraft.world.level.storage.loot.functions.EnchantedCountIncreaseFunction
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 import java.util.stream.Stream
 
-class BadOresEntityLoot(registries: HolderLookup.Provider): EntityLootSubProvider(FeatureFlags.DEFAULT_FLAGS, registries) {
+class BadOresEntityLoot(registries: HolderLookup.Provider) :
+    EntityLootSubProvider(FeatureFlags.DEFAULT_FLAGS, registries) {
     override fun generate() {
-        val enchantments = registries.lookupOrThrow(Registries.ENCHANTMENT)
+        registries.lookupOrThrow(Registries.ENCHANTMENT)
 
         Fleesonsite.raw?.let {
             this.add(
                 BadOres.FLEESONSITE_ENTITY_TYPE,
                 LootTable.lootTable()
-                    .withPool(LootPool.lootPool()
-                        .add(
-                            LootItem.lootTableItem(it.get())
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0f, 1.0f))))))
+                    .withPool(
+                        LootPool.lootPool()
+                            .add(
+                                LootItem.lootTableItem(it.get())
+                                    .apply(
+                                        EnchantedCountIncreaseFunction.lootingMultiplier(
+                                            this.registries,
+                                            UniformGenerator.between(0.0f, 1.0f)
+                                        )
+                                    )
+                            )
+                    )
+            )
         }
 
         Nosleeptonite.raw?.let {
             this.add(
                 BadOres.NOSLEEPTONITE_ENTITY_TYPE,
                 LootTable.lootTable()
-                    .withPool(LootPool.lootPool()
-                        .add(
-                            LootItem.lootTableItem(it.get())
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0f, 1.0f))))))
+                    .withPool(
+                        LootPool.lootPool()
+                            .add(
+                                LootItem.lootTableItem(it.get())
+                                    .apply(
+                                        EnchantedCountIncreaseFunction.lootingMultiplier(
+                                            this.registries,
+                                            UniformGenerator.between(0.0f, 1.0f)
+                                        )
+                                    )
+                            )
+                    )
+            )
         }
     }
 

@@ -23,7 +23,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 
-object Kakkarite: BadOre("kakkarite") {
+object Kakkarite : BadOre("kakkarite") {
     override fun hasIngot() = true
     override fun hasRaw() = false
 
@@ -31,8 +31,10 @@ object Kakkarite: BadOre("kakkarite") {
         LootTable.lootTable()
             .withPool(
                 LootPool.lootPool()
-                    .add(LootItem.lootTableItem(it)
-                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(9001.0f))))
+                    .add(
+                        LootItem.lootTableItem(it)
+                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(9001.0f)))
+                    )
             )
     }
 }

@@ -28,7 +28,6 @@ import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.event.entity.living.ArmorHurtEvent
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent
 import net.neoforged.neoforge.event.level.BlockDropsEvent
-import net.neoforged.neoforge.event.level.NoteBlockEvent
 import net.neoforged.neoforge.event.tick.PlayerTickEvent
 
 
@@ -93,7 +92,8 @@ object Events {
                         .random()
                     inventory.setItem(index, ItemStack.EMPTY)
                     inventory.setItem(target, stack)
-                } catch(e: NoSuchElementException) {}
+                } catch (e: NoSuchElementException) {
+                }
             }
         }
     }

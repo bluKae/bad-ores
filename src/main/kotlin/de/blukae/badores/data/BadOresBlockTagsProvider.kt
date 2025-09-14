@@ -22,8 +22,9 @@ import net.minecraft.data.PackOutput
 import net.neoforged.neoforge.common.data.BlockTagsProvider
 import java.util.concurrent.CompletableFuture
 
-class BadOresBlockTagsProvider(output: PackOutput,
-                               lookupProvider: CompletableFuture<HolderLookup.Provider>
+class BadOresBlockTagsProvider(
+    output: PackOutput,
+    lookupProvider: CompletableFuture<HolderLookup.Provider>
 ) : BlockTagsProvider(output, lookupProvider, BadOres.MOD_ID) {
     override fun addTags(provider: HolderLookup.Provider) {
         val badOresTag = tag(BadOres.BAD_ORES_TAG)

@@ -20,12 +20,13 @@ import de.blukae.badores.BadOres
 import de.blukae.badores.entity.FleesonsiteEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.MobRenderer
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 
 class FleesonsiteEntityRenderer(context: EntityRendererProvider.Context) :
-    MobRenderer<FleesonsiteEntity, FleesonsiteEntityRenderState, FleesonsiteEntityModel>(context,
+    MobRenderer<FleesonsiteEntity, FleesonsiteEntityRenderState, FleesonsiteEntityModel>(
+        context,
         FleesonsiteEntityModel(context.bakeLayer(FleesonsiteEntityModel.LAYER)),
-        1.0f) {
+        1.0f
+    ) {
 
     override fun getTextureLocation(renderState: FleesonsiteEntityRenderState) = if (renderState.isDeepslate) {
         BadOres.rl("textures/entity/deepslate_fleesonsite.png")

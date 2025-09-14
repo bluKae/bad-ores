@@ -16,6 +16,6 @@
 
 package de.blukae.badores.ore
 
-object Unobtainium: BadOre("unobtainium") {
+object Unobtainium : BadOre("unobtainium") {
     override fun destroyTime() = -1.0f
 }

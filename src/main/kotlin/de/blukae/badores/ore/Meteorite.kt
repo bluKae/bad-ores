@@ -16,7 +16,6 @@
 
 package de.blukae.badores.ore
 
-import de.blukae.badores.BadOres
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.EntitySpawnReason
@@ -28,7 +27,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.levelgen.VerticalAnchor
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement
 
-object Meteorite: BadOre("meteorite") {
+object Meteorite : BadOre("meteorite") {
     private const val METEORITE_SPAWN_SIDE = 50
 
     override fun heightPlacement(): HeightRangePlacement = HeightRangePlacement.uniform(
@@ -48,11 +47,14 @@ object Meteorite: BadOre("meteorite") {
         }
 
         val number = level.random.nextInt(20) + 3
-        val state = if (level.random.nextBoolean()) Blocks.STONE.defaultBlockState() else Blocks.NETHERRACK.defaultBlockState()
+        val state =
+            if (level.random.nextBoolean()) Blocks.STONE.defaultBlockState() else Blocks.NETHERRACK.defaultBlockState()
         for (i in 0..<number) {
-            val spawnX = pos.x.toDouble() + METEORITE_SPAWN_SIDE * (level.random.nextDouble() - level.random.nextDouble() - 0.5)
+            val spawnX =
+                pos.x.toDouble() + METEORITE_SPAWN_SIDE * (level.random.nextDouble() - level.random.nextDouble() - 0.5)
             val spawnY = level.maxY + 5.0
-            val spawnZ = pos.z.toDouble() + METEORITE_SPAWN_SIDE * (level.random.nextDouble() - level.random.nextDouble() - 0.5)
+            val spawnZ =
+                pos.z.toDouble() + METEORITE_SPAWN_SIDE * (level.random.nextDouble() - level.random.nextDouble() - 0.5)
 
             EntityType.FALLING_BLOCK.create(level, EntitySpawnReason.MOB_SUMMONED)?.also {
                 it.setPos(spawnX, spawnY, spawnZ)

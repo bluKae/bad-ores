@@ -23,7 +23,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 
-object Streetscum: BadOre("streetscum") {
+object Streetscum : BadOre("streetscum") {
     override fun onDestroyedByPlayer(
         state: BlockState,
         level: Level,

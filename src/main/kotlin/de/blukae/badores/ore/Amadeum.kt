@@ -36,7 +36,7 @@ import net.minecraft.world.level.levelgen.placement.RarityFilter
 import net.minecraft.world.phys.Vec3
 
 
-object Amadeum: BadOre("amadeum") {
+object Amadeum : BadOre("amadeum") {
     override fun placement(): PlacementModifier = RarityFilter.onAverageOnceEvery(100)
     override fun tickRate(isIngotBlock: Boolean): IntProvider? = UniformInt.of(18, 18 + 5)
     override fun hasIngot() = true

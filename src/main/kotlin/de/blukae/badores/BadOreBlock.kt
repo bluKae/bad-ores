@@ -16,9 +16,7 @@
 
 package de.blukae.badores
 
-import de.blukae.badores.advancement.MineBadOreTrigger
 import de.blukae.badores.ore.BadOre
-import de.blukae.badores.ore.Killium
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
@@ -36,14 +34,13 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityTicker
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
-import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.storage.loot.LootParams
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
-class BadOreBlock(val ore: BadOre, val isIngotBlock: Boolean, properties: Properties): Block(properties), EntityBlock {
+class BadOreBlock(val ore: BadOre, val isIngotBlock: Boolean, properties: Properties) : Block(properties), EntityBlock {
     val tickRate = ore.tickRate(isIngotBlock)
 
     override fun useItemOn(

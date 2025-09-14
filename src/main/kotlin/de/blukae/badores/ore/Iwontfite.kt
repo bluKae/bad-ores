@@ -16,4 +16,4 @@
 
 package de.blukae.badores.ore
 
-object Iwontfite: BadOre("iwontfite")
+object Iwontfite : BadOre("iwontfite")

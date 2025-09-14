@@ -16,25 +16,23 @@
 
 package de.blukae.badores
 
-import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
-import de.blukae.badores.MiningConsequence.Condition
 import net.minecraft.util.StringRepresentable
 import net.minecraft.util.context.ContextKey
 import net.minecraft.world.level.storage.loot.LootContext
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType
 
-enum class MiningConsequence: StringRepresentable {
+enum class MiningConsequence : StringRepresentable {
     NONE,
     KILLED_BY_KILLIUM;
 
     override fun getSerializedName(): String = name
 
-    class Condition(val consequence: MiningConsequence): LootItemCondition {
+    class Condition(val consequence: MiningConsequence) : LootItemCondition {
         companion object {
-            val CODEC: MapCodec<MiningConsequence.Condition> = RecordCodecBuilder.mapCodec { instance ->
+            val CODEC: MapCodec<Condition> = RecordCodecBuilder.mapCodec { instance ->
                 instance.group(
                     StringRepresentable.fromEnum(::values)
                         .optionalFieldOf("consequence", NONE)

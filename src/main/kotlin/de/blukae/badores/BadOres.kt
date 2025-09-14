@@ -32,7 +32,6 @@ import net.minecraft.core.registries.Registries
 import net.minecraft.data.advancements.AdvancementProvider
 import net.minecraft.data.loot.LootTableProvider
 import net.minecraft.data.loot.LootTableProvider.SubProviderEntry
-import net.minecraft.data.worldgen.features.OreFeatures
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
@@ -55,7 +54,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.levelgen.GenerationStep
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
 import net.minecraft.world.level.levelgen.feature.Feature
-import net.minecraft.world.level.levelgen.feature.OreFeature
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement
 import net.minecraft.world.level.levelgen.placement.PlacedFeature
@@ -90,7 +88,8 @@ object BadOres {
     val SOUND_EVENTS: DeferredRegister<SoundEvent> = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, MOD_ID)
     val ENTITY_TYPES: Entities = DeferredRegister.createEntities(MOD_ID)
     val TRIGGER_TYPES: DeferredRegister<CriterionTrigger<*>> = DeferredRegister.create(Registries.TRIGGER_TYPE, MOD_ID)
-    val LOOT_CONDITION_TYPES: DeferredRegister<LootItemConditionType> = DeferredRegister.create(BuiltInRegistries.LOOT_CONDITION_TYPE, MOD_ID)
+    val LOOT_CONDITION_TYPES: DeferredRegister<LootItemConditionType> =
+        DeferredRegister.create(BuiltInRegistries.LOOT_CONDITION_TYPE, MOD_ID)
     val FEATURES: DeferredRegister<Feature<*>> = DeferredRegister.create(BuiltInRegistries.FEATURE, MOD_ID)
 
     val BAD_ORE_BLOCK_ENTITY: BlockEntityType<BadOreBlockEntity> by BLOCK_ENTITY_TYPES.register("bad_ore") { ->
@@ -113,24 +112,52 @@ object BadOres {
         LootItemConditionType(MiningConsequence.Condition.CODEC)
     }
 
-    val FLEESONSITE_AMBIENT: SoundEvent by SOUND_EVENTS.register("entity.fleesonsite.ambient", SoundEvent::createVariableRangeEvent)
-    val FLEESONSITE_DEATH: SoundEvent by SOUND_EVENTS.register("entity.fleesonsite.death", SoundEvent::createVariableRangeEvent)
-    val FLEESONSITE_HURT: SoundEvent by SOUND_EVENTS.register("entity.fleesonsite.hurt", SoundEvent::createVariableRangeEvent)
+    val FLEESONSITE_AMBIENT: SoundEvent by SOUND_EVENTS.register(
+        "entity.fleesonsite.ambient",
+        SoundEvent::createVariableRangeEvent
+    )
+    val FLEESONSITE_DEATH: SoundEvent by SOUND_EVENTS.register(
+        "entity.fleesonsite.death",
+        SoundEvent::createVariableRangeEvent
+    )
+    val FLEESONSITE_HURT: SoundEvent by SOUND_EVENTS.register(
+        "entity.fleesonsite.hurt",
+        SoundEvent::createVariableRangeEvent
+    )
 
-    val NOSLEEPTONITE_AMBIENT: SoundEvent by SOUND_EVENTS.register("entity.nosleeptonite.ambient", SoundEvent::createVariableRangeEvent)
-    val NOSLEEPTONITE_DEATH: SoundEvent by SOUND_EVENTS.register("entity.nosleeptonite.death", SoundEvent::createVariableRangeEvent)
-    val NOSLEEPTONITE_HURT: SoundEvent by SOUND_EVENTS.register("entity.nosleeptonite.hurt", SoundEvent::createVariableRangeEvent)
-    val NOSLEEPTONITE_IDLE_SOUND_EVENT: SoundEvent by SOUND_EVENTS.register("nosleeptonite.idle", SoundEvent::createVariableRangeEvent)
+    val NOSLEEPTONITE_AMBIENT: SoundEvent by SOUND_EVENTS.register(
+        "entity.nosleeptonite.ambient",
+        SoundEvent::createVariableRangeEvent
+    )
+    val NOSLEEPTONITE_DEATH: SoundEvent by SOUND_EVENTS.register(
+        "entity.nosleeptonite.death",
+        SoundEvent::createVariableRangeEvent
+    )
+    val NOSLEEPTONITE_HURT: SoundEvent by SOUND_EVENTS.register(
+        "entity.nosleeptonite.hurt",
+        SoundEvent::createVariableRangeEvent
+    )
+    val NOSLEEPTONITE_IDLE_SOUND_EVENT: SoundEvent by SOUND_EVENTS.register(
+        "nosleeptonite.idle",
+        SoundEvent::createVariableRangeEvent
+    )
 
-    val PANDAEMONIUM_BREAK_SOUND_EVENT: SoundEvent by SOUND_EVENTS.register("block.pandaemonium.break", SoundEvent::createVariableRangeEvent)
+    val PANDAEMONIUM_BREAK_SOUND_EVENT: SoundEvent by SOUND_EVENTS.register(
+        "block.pandaemonium.break",
+        SoundEvent::createVariableRangeEvent
+    )
 
-    val FLEESONSITE_ENTITY_TYPE: EntityType<FleesonsiteEntity> by ENTITY_TYPES.registerEntityType("fleesonsite", ::FleesonsiteEntity,
-        MobCategory.CREATURE) {
+    val FLEESONSITE_ENTITY_TYPE: EntityType<FleesonsiteEntity> by ENTITY_TYPES.registerEntityType(
+        "fleesonsite", ::FleesonsiteEntity,
+        MobCategory.CREATURE
+    ) {
         it.sized(1.0f, 1.0f)
     }
 
-    val NOSLEEPTONITE_ENTITY_TYPE: EntityType<NosleeptoniteEntity> by ENTITY_TYPES.registerEntityType("nosleeptonite", ::NosleeptoniteEntity,
-        MobCategory.MONSTER) {
+    val NOSLEEPTONITE_ENTITY_TYPE: EntityType<NosleeptoniteEntity> by ENTITY_TYPES.registerEntityType(
+        "nosleeptonite", ::NosleeptoniteEntity,
+        MobCategory.MONSTER
+    ) {
         it.sized(1.0f, 1.0f)
     }
 
@@ -139,7 +166,11 @@ object BadOres {
 
     val BAD_ORES_TAG: TagKey<Block> = TagKey.create(Registries.BLOCK, rl("bad_ores"))
 
-    val MARMITE_BREAD_ITEM: Item by ITEMS.registerItem("marmite_bread", ::Item, Item.Properties().food(FoodProperties.Builder().nutrition(6).saturationModifier(0.8F).build()))
+    val MARMITE_BREAD_ITEM: Item by ITEMS.registerItem(
+        "marmite_bread",
+        ::Item,
+        Item.Properties().food(FoodProperties.Builder().nutrition(6).saturationModifier(0.8F).build())
+    )
 
     val ORE_BOOK_ITEM: BadOreBookItem by ITEMS.registerItem("bad_ore_book", ::BadOreBookItem)
 
@@ -249,24 +280,30 @@ object BadOres {
         event.createProvider(::BadOresEquipmentAssetProvider)
         event.createProvider(::BadOresLanguageProvider)
 
-        event.createProvider { output, lookupProvider -> LootTableProvider(
-            output,
-            setOf(),
-            listOf(
-                SubProviderEntry(::BadOresBlockLoot, LootContextParamSets.BLOCK),
-                SubProviderEntry(::BadOresEntityLoot, LootContextParamSets.ENTITY),
-            ),
-            lookupProvider
-        ) }
+        event.createProvider { output, lookupProvider ->
+            LootTableProvider(
+                output,
+                setOf(),
+                listOf(
+                    SubProviderEntry(::BadOresBlockLoot, LootContextParamSets.BLOCK),
+                    SubProviderEntry(::BadOresEntityLoot, LootContextParamSets.ENTITY),
+                ),
+                lookupProvider
+            )
+        }
 
-        event.createDatapackRegistryObjects(RegistrySetBuilder()
+        event.createDatapackRegistryObjects(
+            RegistrySetBuilder()
             .add(Registries.CONFIGURED_FEATURE) { context ->
                 for (ore in ORES) {
                     val deepslateOreBlock = ore.deepslateOreBlock
                     val targets = if (deepslateOreBlock != null) {
                         listOf(
                             OreConfiguration.target(ore.replace(), ore.oreBlock.get().defaultBlockState()),
-                            OreConfiguration.target(TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), deepslateOreBlock.get().defaultBlockState()),
+                            OreConfiguration.target(
+                                TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES),
+                                deepslateOreBlock.get().defaultBlockState()
+                            ),
                         )
                     } else {
                         listOf(
@@ -287,7 +324,8 @@ object BadOres {
 
                 for (ore in ORES) {
                     val placementModifiers = listOf(ore.placement(), InSquarePlacement.spread(), ore.heightPlacement())
-                    val feature = PlacedFeature(configuredFeatures.getOrThrow(ore.configuredFeature), placementModifiers)
+                    val feature =
+                        PlacedFeature(configuredFeatures.getOrThrow(ore.configuredFeature), placementModifiers)
 
                     context.register(ore.placedFeature, feature)
                 }
@@ -317,10 +355,12 @@ object BadOres {
         event.createProvider(::BadOresItemTagsProvider)
         event.createProvider(::BadOresDamageTypeTagsProvider)
         event.createProvider(BadOresRecipeProvider.Companion::Runner)
-        event.createProvider { output, lookupProvider -> AdvancementProvider(
-            output, lookupProvider,
-            listOf(BadOresAdvancements())
-        ) }
+        event.createProvider { output, lookupProvider ->
+            AdvancementProvider(
+                output, lookupProvider,
+                listOf(BadOresAdvancements())
+            )
+        }
     }
 
     fun rl(path: String): ResourceLocation = ResourceLocation.fromNamespaceAndPath(MOD_ID, path)

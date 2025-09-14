@@ -20,12 +20,11 @@ import de.blukae.badores.BadOres
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.loot.BlockLootSubProvider
 import net.minecraft.world.flag.FeatureFlags
-import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.storage.loot.LootTable
 
 
-class BadOresBlockLoot(registries: HolderLookup.Provider): BlockLootSubProvider(setOf(), FeatureFlags.DEFAULT_FLAGS, registries) {
+class BadOresBlockLoot(registries: HolderLookup.Provider) :
+    BlockLootSubProvider(setOf(), FeatureFlags.DEFAULT_FLAGS, registries) {
     override fun generate() {
         for (ore in BadOres.ORES) {
             ore.customLootTable(this)?.let { lootTable ->

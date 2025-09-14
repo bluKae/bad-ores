@@ -24,9 +24,11 @@ import net.minecraft.tags.DamageTypeTags
 import net.neoforged.neoforge.common.Tags
 import java.util.concurrent.CompletableFuture
 
-class BadOresDamageTypeTagsProvider(output: PackOutput, registries: CompletableFuture<HolderLookup.Provider>): DamageTypeTagsProvider(output, registries,
-    BadOres.MOD_ID
-) {
+class BadOresDamageTypeTagsProvider(output: PackOutput, registries: CompletableFuture<HolderLookup.Provider>) :
+    DamageTypeTagsProvider(
+        output, registries,
+        BadOres.MOD_ID
+    ) {
     override fun addTags(registries: HolderLookup.Provider) {
         tag(DamageTypeTags.BYPASSES_ARMOR).add(BadOres.KILLIUM_DAMAGE_TYPE)
         tag(DamageTypeTags.BYPASSES_EFFECTS).add(BadOres.KILLIUM_DAMAGE_TYPE)

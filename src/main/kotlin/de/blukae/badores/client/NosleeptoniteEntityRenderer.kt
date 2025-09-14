@@ -23,10 +23,14 @@ import net.minecraft.client.renderer.entity.MobRenderer
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 
 class NosleeptoniteEntityRenderer(context: EntityRendererProvider.Context) :
-    MobRenderer<NosleeptoniteEntity, LivingEntityRenderState, NosleeproniteEntityModel>(context,
+    MobRenderer<NosleeptoniteEntity, LivingEntityRenderState, NosleeproniteEntityModel>(
+        context,
         NosleeproniteEntityModel(context.bakeLayer(NosleeproniteEntityModel.LAYER)),
-        1.0f) {
+        1.0f
+    ) {
 
-    override fun getTextureLocation(renderState: LivingEntityRenderState) = BadOres.rl("textures/entity/nosleeptonite.png")
+    override fun getTextureLocation(renderState: LivingEntityRenderState) =
+        BadOres.rl("textures/entity/nosleeptonite.png")
+
     override fun createRenderState() = LivingEntityRenderState()
 }

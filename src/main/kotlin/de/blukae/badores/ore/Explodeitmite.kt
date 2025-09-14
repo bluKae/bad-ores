@@ -27,9 +27,11 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier
 import net.minecraft.world.level.levelgen.placement.RarityFilter
 
 
-object Explodeitmite: BadOre("explodeitmite") {
+object Explodeitmite : BadOre("explodeitmite") {
     override fun placement(): PlacementModifier = RarityFilter.onAverageOnceEvery(10)
-    override fun addBlockProperties(properties: BlockBehaviour.Properties): BlockBehaviour.Properties = properties.randomTicks()
+    override fun addBlockProperties(properties: BlockBehaviour.Properties): BlockBehaviour.Properties =
+        properties.randomTicks()
+
     override fun destroyTime() = 8.0f
     override fun explosionResistance() = 10.0f
 
@@ -37,7 +39,15 @@ object Explodeitmite: BadOre("explodeitmite") {
         if (random.nextInt(4) == 0) {
             level.removeBlock(pos, false)
             val p = pos.center.add(Direction.UP.unitVec3)
-            level.explode(null, p.x, p.y, p.z, 2.0f + random.nextFloat() * 3.0f, false, Level.ExplosionInteraction.BLOCK)
+            level.explode(
+                null,
+                p.x,
+                p.y,
+                p.z,
+                2.0f + random.nextFloat() * 3.0f,
+                false,
+                Level.ExplosionInteraction.BLOCK
+            )
         }
     }
 
@@ -48,7 +58,15 @@ object Explodeitmite: BadOre("explodeitmite") {
 
         if (level.random.nextInt(4) == 0) {
             val p = pos.center.add(Direction.UP.unitVec3)
-            level.explode(null, p.x, p.y, p.z, 2.0f + level.random.nextFloat() * 3.0f, false, Level.ExplosionInteraction.BLOCK)
+            level.explode(
+                null,
+                p.x,
+                p.y,
+                p.z,
+                2.0f + level.random.nextFloat() * 3.0f,
+                false,
+                Level.ExplosionInteraction.BLOCK
+            )
         }
     }
 }

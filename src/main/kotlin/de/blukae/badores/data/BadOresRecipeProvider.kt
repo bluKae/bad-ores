@@ -29,7 +29,8 @@ import net.minecraft.world.item.Items
 import net.neoforged.neoforge.common.Tags
 import java.util.concurrent.CompletableFuture
 
-class BadOresRecipeProvider(registries: HolderLookup.Provider, output: RecipeOutput) : RecipeProvider(registries,
+class BadOresRecipeProvider(registries: HolderLookup.Provider, output: RecipeOutput) : RecipeProvider(
+    registries,
     output
 ) {
     override fun buildRecipes() {
@@ -175,7 +176,7 @@ class BadOresRecipeProvider(registries: HolderLookup.Provider, output: RecipeOut
             "gunpowder_from_smelting_explodeitmite"
         )
 
-        val liteSmeltables = listOfNotNull(Lite.oreBlock, Lite.deepslateOreBlock)
+        listOfNotNull(Lite.oreBlock, Lite.deepslateOreBlock)
         oreSmelting(
             explodeitmiteSmeltables,
             RecipeCategory.MISC,
@@ -195,8 +196,9 @@ class BadOresRecipeProvider(registries: HolderLookup.Provider, output: RecipeOut
     }
 
     companion object {
-        class Runner(packOutput: PackOutput,
-                     registries: CompletableFuture<HolderLookup.Provider>
+        class Runner(
+            packOutput: PackOutput,
+            registries: CompletableFuture<HolderLookup.Provider>
         ) : RecipeProvider.Runner(packOutput, registries) {
             override fun createRecipeProvider(
                 registries: HolderLookup.Provider,

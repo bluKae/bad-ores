@@ -16,41 +16,25 @@
 
 package de.blukae.badores.ore
 
-import com.mojang.serialization.MapCodec
 import de.blukae.badores.ArmorInfo
 import de.blukae.badores.RandomTranslation
 import de.blukae.badores.ToolInfo
-import kotlinx.coroutines.delay
 import net.minecraft.core.BlockPos
-import net.minecraft.network.chat.MutableComponent
-import net.minecraft.server.MinecraftServer
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
-import net.minecraft.util.RandomSource
-import net.minecraft.util.StringRepresentable
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockState
-import net.minecraft.world.level.block.state.StateDefinition
-import net.minecraft.world.level.block.state.properties.BlockStateProperties
-import net.minecraft.world.level.block.state.properties.EnumProperty
-import net.minecraft.world.level.storage.ServerLevelData
-import net.minecraft.world.level.timers.TimerCallback
-import net.minecraft.world.level.timers.TimerQueue
-import net.minecraft.world.ticks.TickPriority
-import net.neoforged.neoforge.common.NeoForgeEventHandler
-import thedarkcolour.kotlinforforge.neoforge.forge.MOD_CONTEXT
 import kotlin.concurrent.thread
 import kotlin.random.Random
 import kotlin.system.exitProcess
 
 
-object Crashium: BadOre("crashium") {
+object Crashium : BadOre("crashium") {
     const val CRASH_PROBABILITY = 5
 
     override fun hasIngot() = true

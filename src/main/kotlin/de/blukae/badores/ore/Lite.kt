@@ -21,8 +21,9 @@ import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.levelgen.placement.CountPlacement
 import net.minecraft.world.level.levelgen.placement.PlacementModifier
 
-object Lite: BadOre("lite") {
+object Lite : BadOre("lite") {
     override fun size() = 2
     override fun placement(): PlacementModifier = CountPlacement.of(UniformInt.of(4, 11))
-    override fun addBlockProperties(properties: BlockBehaviour.Properties): BlockBehaviour.Properties = properties.lightLevel { 10 }
+    override fun addBlockProperties(properties: BlockBehaviour.Properties): BlockBehaviour.Properties =
+        properties.lightLevel { 10 }
 }

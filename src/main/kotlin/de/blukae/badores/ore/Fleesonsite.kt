@@ -19,18 +19,12 @@ package de.blukae.badores.ore
 import de.blukae.badores.BadOreBlockEntity
 import de.blukae.badores.BadOres
 import net.minecraft.core.BlockPos
-import net.minecraft.core.Holder
 import net.minecraft.data.loot.BlockLootSubProvider
-import net.minecraft.network.syncher.EntityDataAccessor
-import net.minecraft.network.syncher.EntityDataSerializers
-import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.valueproviders.ConstantInt
 import net.minecraft.util.valueproviders.IntProvider
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.EntitySpawnReason
-import net.minecraft.world.entity.animal.Chicken
-import net.minecraft.world.entity.animal.ChickenVariant
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
@@ -39,7 +33,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.phys.BlockHitResult
 
-object Fleesonsite: BadOre("fleesonsite") {
+object Fleesonsite : BadOre("fleesonsite") {
     override fun tickRate(isIngotBlock: Boolean): IntProvider? = if (isIngotBlock) null else ConstantInt.of(40)
     override fun hasIngot() = true
     override fun customLootTable(provider: BlockLootSubProvider): LootTable.Builder? = LootTable.lootTable()

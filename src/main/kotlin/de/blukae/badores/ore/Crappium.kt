@@ -25,9 +25,11 @@ import net.minecraft.world.level.levelgen.placement.HeightRangePlacement
 import net.minecraft.world.level.levelgen.placement.PlacementModifier
 
 
-object Crappium: BadOre("crappium") {
+object Crappium : BadOre("crappium") {
     override fun placement(): PlacementModifier = CountPlacement.of(UniformInt.of(0, 7))
-    override fun heightPlacement(): HeightRangePlacement = HeightRangePlacement.uniform(VerticalAnchor.absolute(40), VerticalAnchor.absolute(120))
+    override fun heightPlacement(): HeightRangePlacement =
+        HeightRangePlacement.uniform(VerticalAnchor.absolute(40), VerticalAnchor.absolute(120))
+
     override fun size() = 8
     override fun hasIngot() = true
     override fun tools() = ToolInfo(0, 1, 2.0f, 0.0f, 15)

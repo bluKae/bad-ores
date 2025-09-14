@@ -24,19 +24,20 @@ import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 
 
-object Balancium: BadOre("balancium") {
+object Balancium : BadOre("balancium") {
     override fun size() = 3
 
     override fun customLootTable(provider: BlockLootSubProvider): LootTable.Builder = LootTable.lootTable()
-        .withPool(LootPool.lootPool()
-            .setRolls(UniformGenerator.between(5.0f, 54.0f))
-            .add(LootItem.lootTableItem(Items.DIAMOND))
-            .add(LootItem.lootTableItem(Items.EMERALD))
-            .add(LootItem.lootTableItem(Items.GOLD_INGOT))
-            .add(LootItem.lootTableItem(Items.IRON_INGOT))
-            .add(LootItem.lootTableItem(Items.COAL))
-            .add(LootItem.lootTableItem(Items.QUARTZ))
-            .add(LootItem.lootTableItem(Items.GOLDEN_APPLE))
-            .add(LootItem.lootTableItem(Items.NETHERITE_INGOT))
+        .withPool(
+            LootPool.lootPool()
+                .setRolls(UniformGenerator.between(5.0f, 54.0f))
+                .add(LootItem.lootTableItem(Items.DIAMOND))
+                .add(LootItem.lootTableItem(Items.EMERALD))
+                .add(LootItem.lootTableItem(Items.GOLD_INGOT))
+                .add(LootItem.lootTableItem(Items.IRON_INGOT))
+                .add(LootItem.lootTableItem(Items.COAL))
+                .add(LootItem.lootTableItem(Items.QUARTZ))
+                .add(LootItem.lootTableItem(Items.GOLDEN_APPLE))
+                .add(LootItem.lootTableItem(Items.NETHERITE_INGOT))
         )
 }

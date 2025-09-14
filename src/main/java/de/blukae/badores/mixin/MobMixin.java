@@ -24,5 +24,5 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(Mob.class)
 public interface MobMixin {
     @Invoker("getAmbientSound")
-    public SoundEvent invokeGetAmbientSound();
+    SoundEvent invokeGetAmbientSound();
 }

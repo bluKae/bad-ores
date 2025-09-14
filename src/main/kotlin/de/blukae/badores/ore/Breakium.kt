@@ -23,7 +23,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 
-object Breakium: BadOre("breakium") {
+object Breakium : BadOre("breakium") {
     override fun onDestroyedByPlayer(
         state: BlockState,
         level: Level,

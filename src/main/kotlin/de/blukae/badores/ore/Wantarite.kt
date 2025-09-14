@@ -22,14 +22,12 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.EquipmentSlot
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
-import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.storage.loot.LootTable
 
-object Wantarite: BadOre("wantarite") {
+object Wantarite : BadOre("wantarite") {
     override fun spawnAfterBreak(
         state: BlockState,
         level: ServerLevel,
@@ -37,7 +35,14 @@ object Wantarite: BadOre("wantarite") {
         stack: ItemStack,
         dropExperience: Boolean
     ) {
-        EntityType.PIG.spawn(level, { it.setItemSlot(EquipmentSlot.SADDLE, Items.SADDLE.defaultInstance) }, pos, EntitySpawnReason.MOB_SUMMONED, false, false)
+        EntityType.PIG.spawn(
+            level,
+            { it.setItemSlot(EquipmentSlot.SADDLE, Items.SADDLE.defaultInstance) },
+            pos,
+            EntitySpawnReason.MOB_SUMMONED,
+            false,
+            false
+        )
     }
 
     override fun customLootTable(provider: BlockLootSubProvider): LootTable.Builder? = LootTable.lootTable()

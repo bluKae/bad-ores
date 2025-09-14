@@ -28,7 +28,7 @@ import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.network.chat.Component
 
 
-class BadOreBookScreen: Screen(Component.translatable("item.badores.bad_ore_book")) {
+class BadOreBookScreen : Screen(Component.translatable("item.badores.bad_ore_book")) {
     private lateinit var backButton: PageButton
     private lateinit var forwardButton: PageButton
 

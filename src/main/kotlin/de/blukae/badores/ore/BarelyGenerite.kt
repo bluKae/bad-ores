@@ -16,10 +16,9 @@
 
 package de.blukae.badores.ore
 
-import net.minecraft.world.level.levelgen.placement.PlacementModifier
 import net.minecraft.world.level.levelgen.placement.RarityFilter
 
-object BarelyGenerite: BadOre("barely_generite") {
+object BarelyGenerite : BadOre("barely_generite") {
     override fun hasIngot() = true
     override fun placement(): RarityFilter = RarityFilter.onAverageOnceEvery(10000)
     override fun size() = 1

@@ -16,7 +16,6 @@
 
 package de.blukae.badores.ore
 
-import de.blukae.badores.MiningConsequence
 import net.minecraft.core.BlockPos
 import net.minecraft.data.loot.BlockLootSubProvider
 import net.minecraft.server.level.ServerLevel
@@ -33,7 +32,7 @@ import net.minecraft.world.level.levelgen.placement.HeightRangePlacement
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest
 import net.minecraft.world.level.storage.loot.LootTable
 
-object Appetite: BadOre("appetite") {
+object Appetite : BadOre("appetite") {
 
     override fun customLootTable(provider: BlockLootSubProvider): LootTable.Builder = LootTable.lootTable()
 

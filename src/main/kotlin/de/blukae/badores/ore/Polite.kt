@@ -36,7 +36,7 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier
 import net.neoforged.neoforge.common.Tags
 
 
-object Polite: BadOre("polite") {
+object Polite : BadOre("polite") {
     override fun biomes(lookup: HolderGetter<Biome>): HolderSet<Biome> = lookup.getOrThrow(Tags.Biomes.IS_COLD)
     override fun placement(): PlacementModifier = CountPlacement.of(UniformInt.of(4, 7))
     override fun hasIngot() = true
@@ -50,7 +50,7 @@ object Polite: BadOre("polite") {
         player: Player,
         willHarvest: Boolean
     ) {
-        val isNotOreBlock = (rawBlock?.let {state.`is`(it)} ?: false) || (ingotBlock?.let {state.`is`(it)} ?: false)
+        val isNotOreBlock = (rawBlock?.let { state.`is`(it) } ?: false) || (ingotBlock?.let { state.`is`(it) } ?: false)
 
         if (player is ServerPlayer && !isNotOreBlock) {
             RandomTranslation("badores.polite.mined", "Polite ore mined").send(player)

@@ -32,7 +32,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 
 
-object Enderite: BadOre("enderite") {
+object Enderite : BadOre("enderite") {
     private const val RADIUS: Int = 40
 
     override fun tools() = ToolInfo(1, 120, 4.0f, 1.0f, 15)
@@ -50,7 +50,17 @@ object Enderite: BadOre("enderite") {
             val factor = i / 128.0
             val particlePos = pos.center.add(pos.subtract(origin).center.multiply(factor, factor, factor))
 
-            level.sendParticles(ParticleTypes.PORTAL, particlePos.x, particlePos.y, particlePos.z, 1, 0.0, 0.0, 0.0, 1.0)
+            level.sendParticles(
+                ParticleTypes.PORTAL,
+                particlePos.x,
+                particlePos.y,
+                particlePos.z,
+                1,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            )
         }
 
         val teleportPos = pos.bottomCenter

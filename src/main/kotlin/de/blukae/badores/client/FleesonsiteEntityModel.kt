@@ -27,7 +27,6 @@ import net.minecraft.client.model.geom.builders.LayerDefinition
 import net.minecraft.client.model.geom.builders.MeshDefinition
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 import net.minecraft.util.Mth
-import org.joml.Vector3f
 
 // Made with Blockbench 4.12.6
 // Exported for Minecraft version 1.17 or later with Mojang mappings
@@ -51,63 +50,63 @@ class FleesonsiteEntityModel(root: ModelPart) : EntityModel<LivingEntityRenderSt
             val meshdefinition = MeshDefinition()
             val partdefinition = meshdefinition.root
 
-            val block = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "block",
                 CubeListBuilder.create().texOffs(0, 0).mirror()
                     .addBox(-8.0f, 0.0f, -6.0f, 16.0f, 16.0f, 16.0f, CubeDeformation(0.0f)).mirror(false),
                 PartPose.offsetAndRotation(0.0f, 5.0f, 0.0f, -0.1115f, 0.0f, 0.0f)
             )
 
-            val footright = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "footright",
                 CubeListBuilder.create().texOffs(0, 33).mirror()
                     .addBox(-3.0f, 0.0f, -3.0f, 6.0f, 4.0f, 6.0f, CubeDeformation(0.0f)).mirror(false),
                 PartPose.offsetAndRotation(-4.0f, 20.0f, 0.0f, 0.0f, 0.3718f, 0.0f)
             )
 
-            val toeright1 = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "toeright1",
                 CubeListBuilder.create().texOffs(0, 44).mirror()
                     .addBox(-1.5f, 0.0f, -8.0f, 4.0f, 4.0f, 7.0f, CubeDeformation(0.0f)).mirror(false),
                 PartPose.offsetAndRotation(-4.0f, 20.0f, 0.0f, 0.2231f, 0.0721f, 0.0f)
             )
 
-            val toeright2 = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "toeright2",
                 CubeListBuilder.create().texOffs(70, 0).mirror()
                     .addBox(-2.0f, 0.5f, -7.5f, 3.0f, 3.0f, 5.0f, CubeDeformation(0.0f)).mirror(false),
                 PartPose.offsetAndRotation(-4.0f, 20.0f, 0.0f, 0.2231f, 0.4811f, 0.0f)
             )
 
-            val toeright3 = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "toeright3",
                 CubeListBuilder.create().texOffs(70, 9).mirror()
                     .addBox(-2.5f, 0.5f, -6.0f, 3.0f, 3.0f, 5.0f, CubeDeformation(0.0f)).mirror(false),
                 PartPose.offsetAndRotation(-4.0f, 20.0f, 0.0f, 0.2231f, 0.9666f, 0.0f)
             )
 
-            val footleft = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "footleft",
                 CubeListBuilder.create().texOffs(25, 33).mirror()
                     .addBox(-3.0f, 0.0f, -3.0f, 6.0f, 4.0f, 6.0f, CubeDeformation(0.0f)).mirror(false),
                 PartPose.offsetAndRotation(4.0f, 20.0f, 0.0f, 0.0f, -0.3718f, 0.0f)
             )
 
-            val toeleft1 = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "toeleft1",
                 CubeListBuilder.create().texOffs(25, 44).mirror()
                     .addBox(-2.5f, 0.0f, -8.0f, 4.0f, 4.0f, 7.0f, CubeDeformation(0.0f)).mirror(false),
                 PartPose.offsetAndRotation(4.0f, 20.0f, 0.0f, 0.2231f, -0.0721f, 0.0f)
             )
 
-            val toeleft2 = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "toeleft2",
                 CubeListBuilder.create().texOffs(90, 0).mirror()
                     .addBox(-1.0f, 0.5f, -7.5f, 3.0f, 3.0f, 5.0f, CubeDeformation(0.0f)).mirror(false),
                 PartPose.offsetAndRotation(4.0f, 20.0f, 0.0f, 0.2231f, -0.481f, 0.0f)
             )
 
-            val toeleft3 = partdefinition.addOrReplaceChild(
+            partdefinition.addOrReplaceChild(
                 "toeleft3",
                 CubeListBuilder.create().texOffs(90, 9).mirror()
                     .addBox(-0.5f, 0.5f, -6.0f, 3.0f, 3.0f, 5.0f, CubeDeformation(0.0f)).mirror(false),

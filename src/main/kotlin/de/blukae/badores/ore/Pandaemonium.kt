@@ -30,7 +30,6 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.SoundType
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.levelgen.VerticalAnchor
@@ -43,17 +42,19 @@ import net.minecraft.world.phys.Vec3
 import net.neoforged.neoforge.common.util.DeferredSoundType
 
 
-object Pandaemonium: BadOre("pandaemonium") {
+object Pandaemonium : BadOre("pandaemonium") {
     override fun tickRate(isIngotBlock: Boolean): IntProvider? = ConstantInt.of(1000)
     override fun customLootTable(provider: BlockLootSubProvider): LootTable.Builder? = LootTable.lootTable()
-        .withPool(LootPool.lootPool()
-            .setRolls(UniformGenerator.between(0.0f, 2.0f))
-            .add(LootItem.lootTableItem(Blocks.NETHERRACK))
-            .add(LootItem.lootTableItem(Blocks.OBSIDIAN))
-            .add(LootItem.lootTableItem(Items.NETHER_WART))
-            .add(LootItem.lootTableItem(Items.FIRE_CHARGE))
-            .add(LootItem.lootTableItem(Items.BLAZE_ROD))
-            .add(LootItem.lootTableItem(Items.MAGMA_CREAM)))
+        .withPool(
+            LootPool.lootPool()
+                .setRolls(UniformGenerator.between(0.0f, 2.0f))
+                .add(LootItem.lootTableItem(Blocks.NETHERRACK))
+                .add(LootItem.lootTableItem(Blocks.OBSIDIAN))
+                .add(LootItem.lootTableItem(Items.NETHER_WART))
+                .add(LootItem.lootTableItem(Items.FIRE_CHARGE))
+                .add(LootItem.lootTableItem(Items.BLAZE_ROD))
+                .add(LootItem.lootTableItem(Items.MAGMA_CREAM))
+        )
 
     override fun heightPlacement(): HeightRangePlacement = HeightRangePlacement.uniform(
         VerticalAnchor.bottom(),
@@ -66,16 +67,19 @@ object Pandaemonium: BadOre("pandaemonium") {
         }
     }
 
-    override fun addBlockProperties(properties: BlockBehaviour.Properties): BlockBehaviour.Properties = super.addBlockProperties(properties)
-        .sound(DeferredSoundType(
-            1.0f,
-            1.0f,
-            { BadOres.PANDAEMONIUM_BREAK_SOUND_EVENT },
-            { SoundEvents.STONE_STEP },
-            { SoundEvents.STONE_PLACE },
-            { SoundEvents.STONE_HIT },
-            { SoundEvents.STONE_FALL },
-        ))
+    override fun addBlockProperties(properties: BlockBehaviour.Properties): BlockBehaviour.Properties =
+        super.addBlockProperties(properties)
+            .sound(
+                DeferredSoundType(
+                    1.0f,
+                    1.0f,
+                    { BadOres.PANDAEMONIUM_BREAK_SOUND_EVENT },
+                    { SoundEvents.STONE_STEP },
+                    { SoundEvents.STONE_PLACE },
+                    { SoundEvents.STONE_HIT },
+                    { SoundEvents.STONE_FALL },
+                )
+            )
 
     override fun onDestroyed(state: BlockState, level: Level, pos: BlockPos) {
         if (level !is ServerLevel) {

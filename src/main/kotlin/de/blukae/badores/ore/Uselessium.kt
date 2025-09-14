@@ -16,7 +16,7 @@
 
 package de.blukae.badores.ore
 
-object Uselessium: BadOre("uselessium") {
+object Uselessium : BadOre("uselessium") {
     override fun hasIngot() = true
     override fun hasIngotBlock() = false
 }

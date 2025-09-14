@@ -23,7 +23,7 @@ import net.minecraft.client.data.models.ModelProvider
 import net.minecraft.client.data.models.model.ModelTemplates
 import net.minecraft.data.PackOutput
 
-class BadOresModelProvider(output: PackOutput): ModelProvider(output, BadOres.MOD_ID) {
+class BadOresModelProvider(output: PackOutput) : ModelProvider(output, BadOres.MOD_ID) {
     override fun registerModels(blockModels: BlockModelGenerators, itemModels: ItemModelGenerators) {
         for (ore in BadOres.ORES) {
             if (ore.hasCustomModels()) {

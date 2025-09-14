@@ -33,7 +33,8 @@ import net.minecraft.world.level.storage.ValueOutput
 
 class FleesonsiteEntity(type: EntityType<out PathfinderMob>, level: Level) : PathfinderMob(type, level) {
     companion object {
-        private val DATA_IS_DEEPSLATE = SynchedEntityData.defineId(FleesonsiteEntity::class.java, EntityDataSerializers.BOOLEAN)
+        private val DATA_IS_DEEPSLATE =
+            SynchedEntityData.defineId(FleesonsiteEntity::class.java, EntityDataSerializers.BOOLEAN)
     }
 
     var isDeepslate: Boolean

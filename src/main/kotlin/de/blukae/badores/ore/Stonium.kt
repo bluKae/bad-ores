@@ -50,8 +50,10 @@ object Stonium : BadOre("stonium") {
     override fun destroyTime(): Float = 1.0F
 
     override fun customLootTable(provider: BlockLootSubProvider): LootTable.Builder? = LootTable.lootTable()
-        .withPool(LootPool.lootPool()
-            .add(LootItem.lootTableItem(Items.COBBLESTONE)))
+        .withPool(
+            LootPool.lootPool()
+                .add(LootItem.lootTableItem(Items.COBBLESTONE))
+        )
 
     override fun feature(): OreFeature = BadOres.STONIUM_FEATURE
 

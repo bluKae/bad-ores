@@ -24,7 +24,7 @@ import net.minecraft.data.PackOutput
 import java.util.concurrent.CompletableFuture
 
 
-class BadOresEquipmentAssetProvider(output: PackOutput): DataProvider {
+class BadOresEquipmentAssetProvider(output: PackOutput) : DataProvider {
     val path: PackOutput.PathProvider = output.createPathProvider(PackOutput.Target.RESOURCE_PACK, "equipment")
     override fun run(cache: CachedOutput): CompletableFuture<*> {
         val map = BadOres.ORES.mapNotNull { ore ->

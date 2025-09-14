@@ -29,7 +29,7 @@ import java.util.*
 import kotlin.concurrent.thread
 
 
-object Website: BadOre("website") {
+object Website : BadOre("website") {
     private val URLS = listOf(
         "http://www.minecraft.net",
         "http://www.minecraftforge.net",

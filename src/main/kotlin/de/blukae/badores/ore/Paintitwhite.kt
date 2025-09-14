@@ -33,9 +33,8 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 
-object Paintitwhite: BadOre("paintitwhite") {
+object Paintitwhite : BadOre("paintitwhite") {
     override fun heightPlacement(): HeightRangePlacement = HeightRangePlacement.uniform(
         VerticalAnchor.absolute(32),
         VerticalAnchor.absolute(128)
@@ -51,8 +50,10 @@ object Paintitwhite: BadOre("paintitwhite") {
     override fun oreBlockProperties(): BlockBehaviour.Properties = BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL)
 
     override fun customLootTable(provider: BlockLootSubProvider): LootTable.Builder? = LootTable.lootTable()
-        .withPool(LootPool.lootPool()
-            .add(LootItem.lootTableItem(Items.WHITE_DYE)
-            )
+        .withPool(
+            LootPool.lootPool()
+                .add(
+                    LootItem.lootTableItem(Items.WHITE_DYE)
+                )
         )
 }

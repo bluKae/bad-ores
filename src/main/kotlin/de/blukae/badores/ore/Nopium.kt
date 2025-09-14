@@ -26,7 +26,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 
 
-object Nopium: BadOre("nopium") {
+object Nopium : BadOre("nopium") {
     override fun hasIngot() = true
     override fun tools() = ToolInfo(2, 800, 0.5f, 1.0f, 1)
     override fun armor() = ArmorInfo(15, intArrayOf(2, 6, 5, 2), 1)
@@ -42,8 +42,10 @@ object Nopium: BadOre("nopium") {
             }
             entity.inventory.forEachIndexed { index, s ->
                 if (s === stack) {
-                    entity.inventory.setItem(index,
-                        ItemStack.EMPTY)
+                    entity.inventory.setItem(
+                        index,
+                        ItemStack.EMPTY
+                    )
                 }
             }
         } else {

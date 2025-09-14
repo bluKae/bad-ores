@@ -18,15 +18,13 @@ package de.blukae.badores.ore
 
 import de.blukae.badores.RandomTranslation
 import net.minecraft.core.BlockPos
-import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.CreativeModeTabs
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 
-object Misleadium: BadOre("misleadium") {
+object Misleadium : BadOre("misleadium") {
     const val SIDE_RANGE = 500
 
     override fun onDestroyedByPlayer(

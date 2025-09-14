@@ -29,7 +29,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
 
 
-object Lookslikediamondium: BadOre("lookslikediamondium") {
+object Lookslikediamondium : BadOre("lookslikediamondium") {
     override fun hasIngot() = true
     override fun hasRaw() = false
     override fun tools() = ToolInfo(0, 1, 2.0f, 0.0f, 1)
@@ -40,13 +40,23 @@ object Lookslikediamondium: BadOre("lookslikediamondium") {
     override fun hasCustomModels() = true
     override fun customModels(blockModels: BlockModelGenerators, itemModels: ItemModelGenerators) {
         fun block(block: Block, parent: String) {
-            blockModels.createTrivialBlock(block, TexturedModel.createDefault({ TextureMapping() },
-                ModelTemplates.create(parent)))
+            blockModels.createTrivialBlock(
+                block, TexturedModel.createDefault(
+                    { TextureMapping() },
+                    ModelTemplates.create(parent)
+                )
+            )
         }
 
         fun item(item: Item, parent: String) {
-            itemModels.itemModelOutput.accept(item, ItemModelUtils.plainModel(ModelTemplates.createItem(parent).create(item,
-                TextureMapping(), itemModels.modelOutput)))
+            itemModels.itemModelOutput.accept(
+                item, ItemModelUtils.plainModel(
+                    ModelTemplates.createItem(parent).create(
+                        item,
+                        TextureMapping(), itemModels.modelOutput
+                    )
+                )
+            )
         }
 
         block(oreBlock.get(), "diamond_ore")

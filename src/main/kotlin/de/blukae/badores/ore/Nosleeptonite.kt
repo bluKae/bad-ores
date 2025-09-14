@@ -37,7 +37,7 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier
 import net.minecraft.world.level.levelgen.placement.RarityFilter
 import net.minecraft.world.level.storage.loot.LootTable
 
-object Nosleeptonite: BadOre("nosleeptonite") {
+object Nosleeptonite : BadOre("nosleeptonite") {
     override fun heightPlacement(): HeightRangePlacement = HeightRangePlacement.uniform(
         VerticalAnchor.aboveBottom(5),
         VerticalAnchor.aboveBottom(40)

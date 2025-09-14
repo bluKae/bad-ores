@@ -17,7 +17,6 @@
 package de.blukae.badores
 
 import de.blukae.badores.ore.BadOre
-import net.minecraft.world.item.Item
 import net.minecraft.world.item.Item.Properties
 import net.minecraft.world.item.ToolMaterial
 import net.neoforged.neoforge.registries.DeferredItem
@@ -29,9 +28,10 @@ class BadOreToolSet(ore: BadOre, material: ToolMaterial) {
     val hoe: DeferredItem<BadOreItem> = BadOres.ITEMS.registerItem("${ore.name}_hoe") { properties: Properties ->
         BadOreItem(ore, properties.hoe(material, -2.0f, -1.0f))
     }
-    val pickaxe: DeferredItem<BadOreItem> = BadOres.ITEMS.registerItem("${ore.name}_pickaxe") { properties: Properties ->
-        BadOreItem(ore, properties.pickaxe(material, 1.0f, -2.8f))
-    }
+    val pickaxe: DeferredItem<BadOreItem> =
+        BadOres.ITEMS.registerItem("${ore.name}_pickaxe") { properties: Properties ->
+            BadOreItem(ore, properties.pickaxe(material, 1.0f, -2.8f))
+        }
     val shovel: DeferredItem<BadOreItem> = BadOres.ITEMS.registerItem("${ore.name}_shovel") { properties: Properties ->
         BadOreItem(ore, properties.shovel(material, 1.5f, -3.0f))
     }
