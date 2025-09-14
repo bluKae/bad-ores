@@ -18,16 +18,29 @@ package de.blukae.badores.client
 
 import de.blukae.badores.BadOres
 import de.blukae.badores.entity.FleesonsiteEntity
-import de.blukae.badores.entity.NosleeptoniteEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.MobRenderer
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 
 class FleesonsiteEntityRenderer(context: EntityRendererProvider.Context) :
-    MobRenderer<FleesonsiteEntity, LivingEntityRenderState, FleesonsiteEntityModel>(context,
+    MobRenderer<FleesonsiteEntity, FleesonsiteEntityRenderState, FleesonsiteEntityModel>(context,
         FleesonsiteEntityModel(context.bakeLayer(FleesonsiteEntityModel.LAYER)),
         1.0f) {
 
-    override fun getTextureLocation(renderState: LivingEntityRenderState) = BadOres.rl("textures/entity/fleesonsite.png")
-    override fun createRenderState() = LivingEntityRenderState()
+    override fun getTextureLocation(renderState: FleesonsiteEntityRenderState) = if (renderState.isDeepslate) {
+        BadOres.rl("textures/entity/deepslate_fleesonsite.png")
+    } else {
+        BadOres.rl("textures/entity/fleesonsite.png")
+    }
+
+    override fun createRenderState() = FleesonsiteEntityRenderState()
+
+    override fun extractRenderState(
+        entity: FleesonsiteEntity,
+        state: FleesonsiteEntityRenderState,
+        partialFrame: Float
+    ) {
+        super.extractRenderState(entity, state, partialFrame)
+        state.isDeepslate = entity.isDeepslate
+    }
 }

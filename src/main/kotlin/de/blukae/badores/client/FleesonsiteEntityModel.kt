@@ -123,8 +123,7 @@ class FleesonsiteEntityModel(root: ModelPart) : EntityModel<LivingEntityRenderSt
 
         val pos: Float = renderState.walkAnimationPos
         val speed: Float = renderState.walkAnimationSpeed
-        // block.offsetRotation(Vector3f(0f, 5f + Mth.cos(pos * 1.4f) * 2.5f * speed, 0f))
-        // block.setRotationPoint(0f, 5f + Mth.cos(f * 1.4f) * 2.5f * f1, 0f)
+
         block.yRot = 5f + Mth.cos(pos * 1.4f) * 2.5f * speed
         footright.xRot = Mth.cos(pos * 0.6662f) * 1.4f * speed
         toeright1.xRot = footright.xRot

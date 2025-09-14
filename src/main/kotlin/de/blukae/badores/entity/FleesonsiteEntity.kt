@@ -18,6 +18,8 @@ package de.blukae.badores.entity
 
 import de.blukae.badores.BadOres
 import de.blukae.badores.ore.Fleesonsite
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.damagesource.DamageSource
@@ -26,8 +28,18 @@ import net.minecraft.world.entity.PathfinderMob
 import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
 
 class FleesonsiteEntity(type: EntityType<out PathfinderMob>, level: Level) : PathfinderMob(type, level) {
+    companion object {
+        private val DATA_IS_DEEPSLATE = SynchedEntityData.defineId(FleesonsiteEntity::class.java, EntityDataSerializers.BOOLEAN)
+    }
+
+    var isDeepslate: Boolean
+        get() = entityData.get(DATA_IS_DEEPSLATE)
+        set(value) = entityData.set(DATA_IS_DEEPSLATE, value)
+
     override fun registerGoals() {
         goalSelector.addGoal(0, FloatGoal(this))
         goalSelector.addGoal(1, PanicGoal(this, 1.25))
@@ -45,10 +57,32 @@ class FleesonsiteEntity(type: EntityType<out PathfinderMob>, level: Level) : Pat
     override fun tick() {
         super.tick()
         if (tickCount % 10 == 0 && !level().isClientSide && level().getNearestPlayer(this, 10.0) == null) {
-            level().setBlockAndUpdate(blockPosition(), Fleesonsite.oreBlock.get().defaultBlockState())
+            if (isDeepslate) {
+                Fleesonsite.deepslateOreBlock?.let {
+                    level().setBlockAndUpdate(blockPosition(), it.get().defaultBlockState())
+                }
+            } else {
+                level().setBlockAndUpdate(blockPosition(), Fleesonsite.oreBlock.get().defaultBlockState())
+            }
+
             playSound(SoundEvents.CHICKEN_EGG)
             spawnAnim()
             discard()
         }
+    }
+
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        super.defineSynchedData(builder)
+        builder.define(DATA_IS_DEEPSLATE, false)
+    }
+
+    override fun readAdditionalSaveData(input: ValueInput) {
+        super.readAdditionalSaveData(input)
+        isDeepslate = input.getBooleanOr("isDeepslate", false)
+    }
+
+    override fun addAdditionalSaveData(output: ValueOutput) {
+        super.addAdditionalSaveData(output)
+        output.putBoolean("isDeepslate", isDeepslate)
     }
 }
