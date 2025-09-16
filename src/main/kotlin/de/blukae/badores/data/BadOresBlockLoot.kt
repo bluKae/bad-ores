@@ -27,16 +27,16 @@ class BadOresBlockLoot(registries: HolderLookup.Provider) :
     BlockLootSubProvider(setOf(), FeatureFlags.DEFAULT_FLAGS, registries) {
     override fun generate() {
         for (ore in BadOres.ORES) {
-            ore.customLootTable(this)?.let { lootTable ->
+            ore.customLootTable(this)?.also { lootTable ->
                 add(ore.oreBlock.get(), lootTable)
                 ore.deepslateOreBlock?.let { add(it.get(), lootTable) }
             } ?: run {
-                ore.raw?.let { raw ->
+                ore.raw?.also { raw ->
                     add(ore.oreBlock.get(), createOreDrop(ore.oreBlock.get(), raw.get()))
                     ore.deepslateOreBlock?.let {
                         add(it.get(), createOreDrop(it.get(), raw.get()))
                     }
-                } ?: ore.ingot?.let { ingot ->
+                } ?: ore.ingot?.also { ingot ->
                     add(ore.oreBlock.get(), createOreDrop(ore.oreBlock.get(), ingot.get()))
                     ore.deepslateOreBlock?.let {
                         add(it.get(), createOreDrop(it.get(), ingot.get()))

@@ -27,11 +27,13 @@ import de.blukae.badores.ore.*
 import net.minecraft.advancements.CriterionTrigger
 import net.minecraft.core.HolderSet
 import net.minecraft.core.RegistrySetBuilder
+import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.advancements.AdvancementProvider
 import net.minecraft.data.loot.LootTableProvider
 import net.minecraft.data.loot.LootTableProvider.SubProviderEntry
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
@@ -49,6 +51,8 @@ import net.minecraft.world.food.FoodProperties
 import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.CreativeModeTabs
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.SpawnEggItem
+import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.levelgen.GenerationStep
@@ -161,6 +165,23 @@ object BadOres {
         it.sized(1.0f, 1.0f)
     }
 
+    val FLEESONSITE_SPAWN_EGG: SpawnEggItem by ITEMS.registerItem("fleesonsite_spawn_egg") {
+        SpawnEggItem(FLEESONSITE_ENTITY_TYPE, it)
+    }
+
+    val DEEPSLATE_FLEESONSITE_SPAWN_EGG: SpawnEggItem by ITEMS.registerItem("deepslate_fleesonsite_spawn_egg") {
+        val entityData = CustomData.of(CompoundTag().also { tag ->
+            tag.store("id", ResourceLocation.CODEC, BuiltInRegistries.ENTITY_TYPE.getKey(FLEESONSITE_ENTITY_TYPE))
+            tag.putBoolean("IsDeepslate", true)
+        })
+
+        SpawnEggItem(FLEESONSITE_ENTITY_TYPE, it.component(DataComponents.ENTITY_DATA, entityData))
+    }
+
+    val NOSLEEPTONITE_SPAWN_EGG: SpawnEggItem by ITEMS.registerItem("nosleeptonite_spawn_egg") {
+        SpawnEggItem(NOSLEEPTONITE_ENTITY_TYPE, it)
+    }
+
     val KILLIUM_DAMAGE_TYPE: ResourceKey<DamageType> = ResourceKey.create(Registries.DAMAGE_TYPE, rl("killium"))
     val WANNAFITE_DAMAGE_TYPE: ResourceKey<DamageType> = ResourceKey.create(Registries.DAMAGE_TYPE, rl("wannafite"))
 
@@ -173,6 +194,8 @@ object BadOres {
     )
 
     val ORE_BOOK_ITEM: BadOreBookItem by ITEMS.registerItem("bad_ore_book", ::BadOreBookItem)
+
+    val ORE_BOOK_COMPONENTS: TagKey<Item> = TagKey.create(Registries.ITEM, rl("ore_book_components"))
 
     val BAD_ORE_TAB: CreativeModeTab by CREATIVE_MODE_TABS.register(
         "tab"
@@ -294,73 +317,74 @@ object BadOres {
 
         event.createDatapackRegistryObjects(
             RegistrySetBuilder()
-            .add(Registries.CONFIGURED_FEATURE) { context ->
-                for (ore in ORES) {
-                    val deepslateOreBlock = ore.deepslateOreBlock
-                    val targets = if (deepslateOreBlock != null) {
-                        listOf(
-                            OreConfiguration.target(ore.replace(), ore.oreBlock.get().defaultBlockState()),
-                            OreConfiguration.target(
-                                TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES),
-                                deepslateOreBlock.get().defaultBlockState()
-                            ),
+                .add(Registries.CONFIGURED_FEATURE) { context ->
+                    for (ore in ORES) {
+                        val deepslateOreBlock = ore.deepslateOreBlock
+                        val targets = if (deepslateOreBlock != null) {
+                            listOf(
+                                OreConfiguration.target(ore.replace(), ore.oreBlock.get().defaultBlockState()),
+                                OreConfiguration.target(
+                                    TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES),
+                                    deepslateOreBlock.get().defaultBlockState()
+                                ),
+                            )
+                        } else {
+                            listOf(
+                                OreConfiguration.target(ore.replace(), ore.oreBlock.get().defaultBlockState()),
+                            )
+                        }
+
+                        val feature = ConfiguredFeature(
+                            ore.feature(),
+                            OreConfiguration(targets, ore.size())
                         )
-                    } else {
-                        listOf(
-                            OreConfiguration.target(ore.replace(), ore.oreBlock.get().defaultBlockState()),
+
+                        context.register(ore.configuredFeature, feature)
+                    }
+                }
+                .add(Registries.PLACED_FEATURE) { context ->
+                    val configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE)
+
+                    for (ore in ORES) {
+                        val placementModifiers =
+                            listOf(ore.placement(), InSquarePlacement.spread(), ore.heightPlacement())
+                        val feature =
+                            PlacedFeature(configuredFeatures.getOrThrow(ore.configuredFeature), placementModifiers)
+
+                        context.register(ore.placedFeature, feature)
+                    }
+                }
+                .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS) { context ->
+                    val biomes = context.lookup(Registries.BIOME)
+                    val placedFeatures = context.lookup(Registries.PLACED_FEATURE)
+
+                    for (ore in ORES) {
+                        val modifier = BiomeModifiers.AddFeaturesBiomeModifier(
+                            ore.biomes(biomes),
+                            HolderSet.direct(placedFeatures.getOrThrow(ore.placedFeature)),
+                            GenerationStep.Decoration.UNDERGROUND_ORES
                         )
+
+                        context.register(ore.biomeModifier, modifier)
                     }
 
-                    val feature = ConfiguredFeature(
-                        ore.feature(),
-                        OreConfiguration(targets, ore.size())
-                    )
-
-                    context.register(ore.configuredFeature, feature)
                 }
-            }
-            .add(Registries.PLACED_FEATURE) { context ->
-                val configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE)
-
-                for (ore in ORES) {
-                    val placementModifiers = listOf(ore.placement(), InSquarePlacement.spread(), ore.heightPlacement())
-                    val feature =
-                        PlacedFeature(configuredFeatures.getOrThrow(ore.configuredFeature), placementModifiers)
-
-                    context.register(ore.placedFeature, feature)
+                .add(Registries.DAMAGE_TYPE) { context ->
+                    context.register(KILLIUM_DAMAGE_TYPE, DamageType("killium", 0.0F))
+                    context.register(WANNAFITE_DAMAGE_TYPE, DamageType("wannafite", 0.1F))
                 }
-            }
-            .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS) { context ->
-                val biomes = context.lookup(Registries.BIOME)
-                val placedFeatures = context.lookup(Registries.PLACED_FEATURE)
-
-                for (ore in ORES) {
-                    val modifier = BiomeModifiers.AddFeaturesBiomeModifier(
-                        ore.biomes(biomes),
-                        HolderSet.direct(placedFeatures.getOrThrow(ore.placedFeature)),
-                        GenerationStep.Decoration.UNDERGROUND_ORES
-                    )
-
-                    context.register(ore.biomeModifier, modifier)
-                }
-
-            }
-            .add(Registries.DAMAGE_TYPE) { context ->
-                context.register(KILLIUM_DAMAGE_TYPE, DamageType("killium", 0.0F))
-                context.register(WANNAFITE_DAMAGE_TYPE, DamageType("wannafite", 0.1F))
-            }
         )
 
         event.createProvider(::BadOresBlockTagsProvider)
         event.createProvider(::BadOresItemTagsProvider)
         event.createProvider(::BadOresDamageTypeTagsProvider)
-        event.createProvider(BadOresRecipeProvider.Companion::Runner)
         event.createProvider { output, lookupProvider ->
             AdvancementProvider(
                 output, lookupProvider,
                 listOf(BadOresAdvancements())
             )
         }
+        event.createProvider(BadOresRecipeProvider.Companion::Runner)
     }
 
     fun rl(path: String): ResourceLocation = ResourceLocation.fromNamespaceAndPath(MOD_ID, path)

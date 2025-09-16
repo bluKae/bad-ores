@@ -35,17 +35,7 @@ object Meteorite : BadOre("meteorite") {
         VerticalAnchor.top()
     )
 
-    override fun onDestroyedByPlayer(
-        state: BlockState,
-        level: Level,
-        pos: BlockPos,
-        player: Player,
-        willHarvest: Boolean
-    ) {
-        if (level !is ServerLevel || !willHarvest) {
-            return
-        }
-
+    private fun spawnMeteorites(level: ServerLevel, pos: BlockPos) {
         val number = level.random.nextInt(20) + 3
         val state =
             if (level.random.nextBoolean()) Blocks.STONE.defaultBlockState() else Blocks.NETHERRACK.defaultBlockState()
@@ -62,6 +52,18 @@ object Meteorite : BadOre("meteorite") {
                 it.setDeltaMovement(level.random.nextDouble(), 0.0, level.random.nextDouble())
                 level.addFreshEntity(it)
             }
+        }
+    }
+
+    override fun onDestroyedByPlayer(
+        state: BlockState,
+        level: Level,
+        pos: BlockPos,
+        player: Player,
+        willHarvest: Boolean
+    ) {
+        if (level is ServerLevel && willHarvest) {
+            spawnMeteorites(level, pos)
         }
     }
 }

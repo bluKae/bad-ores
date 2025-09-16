@@ -58,5 +58,9 @@ class BadOresModelProvider(output: PackOutput) : ModelProvider(output, BadOres.M
 
         itemModels.generateFlatItem(BadOres.ORE_BOOK_ITEM, ModelTemplates.FLAT_ITEM)
         itemModels.generateFlatItem(BadOres.MARMITE_BREAD_ITEM, ModelTemplates.FLAT_ITEM)
+
+        itemModels.generateFlatItem(BadOres.FLEESONSITE_SPAWN_EGG, ModelTemplates.FLAT_ITEM)
+        itemModels.generateFlatItem(BadOres.DEEPSLATE_FLEESONSITE_SPAWN_EGG, ModelTemplates.FLAT_ITEM)
+        itemModels.generateFlatItem(BadOres.NOSLEEPTONITE_SPAWN_EGG, ModelTemplates.FLAT_ITEM)
     }
 }

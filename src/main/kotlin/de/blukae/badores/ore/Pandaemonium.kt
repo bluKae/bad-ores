@@ -125,7 +125,7 @@ object Pandaemonium : BadOre("pandaemonium") {
     }
 
     override fun onTick(level: Level, pos: BlockPos, state: BlockState, blockEntity: BadOreBlockEntity) {
-        if (level !is ServerLevel && level.random.nextInt(10) == 0) {
+        if (level is ServerLevel && level.random.nextInt(10) == 0) {
             level.playSound(null, pos, BadOres.PANDAEMONIUM_BREAK_SOUND_EVENT, SoundSource.BLOCKS)
         }
     }

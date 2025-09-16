@@ -43,11 +43,9 @@ object Idlikeabite : BadOre("idlikeabite") {
         player: Player,
         willHarvest: Boolean
     ) {
-        if (level !is ServerLevel || !willHarvest) {
-            return
+        if (level is ServerLevel && willHarvest) {
+            player.foodData.addExhaustion(level.random.nextFloat() * 40.0f)
         }
-
-        player.foodData.addExhaustion(level.random.nextFloat() * 40.0f)
     }
 
     override fun onInventoryTick(stack: ItemStack, level: ServerLevel, entity: Entity, slot: EquipmentSlot?) {

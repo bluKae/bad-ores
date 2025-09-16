@@ -61,12 +61,12 @@ object Lookslikediamondium : BadOre("lookslikediamondium") {
 
         block(oreBlock.get(), "diamond_ore")
 
-        deepslateOreBlock?.let { block(it.get(), "deepslate_diamond_ore") }
-        ingotBlock?.let { block(it.get(), "diamond_block") }
+        block(deepslateOreBlock!!.get(), "deepslate_diamond_ore")
+        block(ingotBlock!!.get(), "diamond_block")
 
-        ingot?.let { item(it.get(), "diamond") }
+        item(ingot!!.get(), "diamond")
 
-        toolSet?.let {
+        toolSet!!.let {
             item(it.axe.get(), "diamond_axe")
             item(it.hoe.get(), "diamond_hoe")
             item(it.pickaxe.get(), "diamond_pickaxe")
@@ -74,7 +74,7 @@ object Lookslikediamondium : BadOre("lookslikediamondium") {
             item(it.sword.get(), "diamond_sword")
         }
 
-        armorSet?.let {
+        armorSet!!.let {
             item(it.helmet.get(), "diamond_helmet")
             item(it.chestplate.get(), "diamond_chestplate")
             item(it.leggings.get(), "diamond_leggings")

@@ -50,7 +50,7 @@ object Polite : BadOre("polite") {
         player: Player,
         willHarvest: Boolean
     ) {
-        val isNotOreBlock = (rawBlock?.let { state.`is`(it) } ?: false) || (ingotBlock?.let { state.`is`(it) } ?: false)
+        val isNotOreBlock = state.`is`(rawBlock!!) || state.`is`(ingotBlock!!)
 
         if (player is ServerPlayer && !isNotOreBlock) {
             RandomTranslation("badores.polite.mined", "Polite ore mined").send(player)
@@ -74,8 +74,4 @@ object Polite : BadOre("polite") {
             RandomTranslation("badores.polite.defend", "Politely defended").send(entity)
         }
     }
-
-    // onToolMine
-    // onToolAttack
-    // onArmorAttacked
 }

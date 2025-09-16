@@ -73,6 +73,10 @@ class BadOresLanguageProvider(output: PackOutput) : LanguageProvider(output, Bad
         add(BadOres.FLEESONSITE_ENTITY_TYPE, "Fleesonite")
         add(BadOres.NOSLEEPTONITE_ENTITY_TYPE, "Nosleeptonite")
 
+        add(BadOres.FLEESONSITE_SPAWN_EGG, "Fleesonsite Spawn Egg")
+        add(BadOres.DEEPSLATE_FLEESONSITE_SPAWN_EGG, "Deepslate Fleesonsite Spawn Egg")
+        add(BadOres.NOSLEEPTONITE_SPAWN_EGG, "Nosleeptonite Spawn Egg")
+
         add("death.attack.badores.wannafite", "%1\$s wants to fite!")
         add("death.attack.badores.killium", "%1\$s mined the wrong ore!")
 
@@ -198,7 +202,6 @@ class BadOresLanguageProvider(output: PackOutput) : LanguageProvider(output, Bad
             "amadeum" to "With plate tectonics come interesting side effects, sometimes. This almost crystal-like mineral strangely interacts with... Oh wait, you don't actually care about the mechanics, do you? ... This ore makes funny sounds, and can be worked into decent armor and tools.",
             "barely_generite" to "Is this a real ore? Or is it just phantastic? Whatever the case, it was only found once before, and is so exceedingly rare that you will probably never be able to make use of it. If you do, please tell us about its properties so we can expand this book!",
             "unobtainium" to "No methods applied to obtain this ore ever worked. Thus, not much is known - but it would make for a goddamn amazing armor, if finally acquired!",
-            "copper" to "Copper is often used in electronics and is otherwise just a generally useful metal. What do you mean, you already have ten other types of copper generating? This one is clearly better. Just remember that.",
             "ghostium" to "You can see it, but you can't grab it. Thus, it was labeled 'ghostium' for obvious reasons - along with similar things like the 'ghostrays' from our sun, or the 'blue-ghost-stuff' that you drink all day.",
             "killium" to "Mining this ore is so amazing, you can guarantee a heart attack afterwards. Just try it yourself - I assure you you will never do anything as great afterwards!",
             "uselessium" to "Believe it or not, but this ore is even more useless than crappium. It literally does nothing. Maybe it will go away if you concentrate on ignoring it long enough.",

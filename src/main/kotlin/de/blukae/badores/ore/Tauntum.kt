@@ -54,10 +54,8 @@ object Tauntum : BadOre("tauntum") {
     }
 
     override fun onTick(level: Level, pos: BlockPos, state: BlockState, blockEntity: BadOreBlockEntity) {
-        if (level !is ServerLevel) {
-            return
+        if (level is ServerLevel) {
+            level.playSound(null, pos, getMobSounds(level).random(), SoundSource.BLOCKS)
         }
-
-        level.playSound(null, pos, getMobSounds(level).random(), SoundSource.BLOCKS)
     }
 }

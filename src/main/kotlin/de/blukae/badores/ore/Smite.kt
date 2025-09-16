@@ -35,9 +35,11 @@ object Smite : BadOre("smite") {
     override fun armor() = ArmorInfo(8, intArrayOf(2, 5, 4, 2), 8)
 
     private fun spawnLightning(level: ServerLevel, pos: Vec3) {
-        val lightning = EntityType.LIGHTNING_BOLT.create(level, EntitySpawnReason.MOB_SUMMONED) ?: return
-        lightning.setPos(pos)
-        level.addFreshEntity(lightning)
+        EntityType.LIGHTNING_BOLT.create(level, EntitySpawnReason.MOB_SUMMONED)?.also {
+            it.setPos(pos)
+            level.addFreshEntity(it)
+        }
+
     }
 
     override fun onDestroyedByPlayer(

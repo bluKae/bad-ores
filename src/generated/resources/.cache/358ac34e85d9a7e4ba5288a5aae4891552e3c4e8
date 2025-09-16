@@ -1,8 +1,0 @@
-// 1.21.8	2025-08-10T23:08:07.048600769	Tags for minecraft:damage_type mod id badores
-54be1eb04abf00d0b6990e08be094eb053826213 data/minecraft/tags/damage_type/bypasses_armor.json
-54be1eb04abf00d0b6990e08be094eb053826213 data/minecraft/tags/damage_type/bypasses_effects.json
-54be1eb04abf00d0b6990e08be094eb053826213 data/minecraft/tags/damage_type/bypasses_enchantments.json
-54be1eb04abf00d0b6990e08be094eb053826213 data/minecraft/tags/damage_type/bypasses_resistance.json
-54be1eb04abf00d0b6990e08be094eb053826213 data/minecraft/tags/damage_type/bypasses_shield.json
-54be1eb04abf00d0b6990e08be094eb053826213 data/minecraft/tags/damage_type/bypasses_wolf_armor.json
-54be1eb04abf00d0b6990e08be094eb053826213 data/neoforge/tags/damage_type/is_magic.json

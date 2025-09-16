@@ -50,7 +50,7 @@ object Nosleeptonite : BadOre("nosleeptonite") {
     override fun tickRate(isIngotBlock: Boolean): IntProvider? = if (isIngotBlock) null else ConstantInt.of(1000)
 
     override fun onRandomTick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
-        if (state.`is`(oreBlock) || deepslateOreBlock?.let { state.`is`(it) } ?: true) {
+        if (state.`is`(oreBlock) || state.`is`(deepslateOreBlock!!)) {
             level.playSound(null, pos, BadOres.NOSLEEPTONITE_IDLE_SOUND_EVENT, SoundSource.BLOCKS)
         }
     }
@@ -77,6 +77,7 @@ object Nosleeptonite : BadOre("nosleeptonite") {
         BadOres.NOSLEEPTONITE_ENTITY_TYPE.create(level, EntitySpawnReason.TRIGGERED)?.also {
             it.snapTo(pos.bottomCenter)
             level.addFreshEntity(it)
+            it.spawnAnim()
         }
     }
 }

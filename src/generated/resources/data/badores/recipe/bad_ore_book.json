@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:book",
+    "#badores:ore_book_components"
+  ],
+  "result": {
+    "count": 1,
+    "id": "badores:bad_ore_book"
+  }
+}

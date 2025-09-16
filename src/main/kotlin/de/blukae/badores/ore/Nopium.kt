@@ -31,11 +31,7 @@ object Nopium : BadOre("nopium") {
     override fun tools() = ToolInfo(2, 800, 0.5f, 1.0f, 1)
     override fun armor() = ArmorInfo(15, intArrayOf(2, 6, 5, 2), 1)
 
-    override fun onInventoryTick(stack: ItemStack, level: ServerLevel, entity: Entity, slot: EquipmentSlot?) {
-        if (entity !is LivingEntity || level.random.nextInt(200) != 0) {
-            return
-        }
-
+    private fun dropItem(entity: LivingEntity, stack: ItemStack, slot: EquipmentSlot?) {
         if (slot == null) {
             if (entity !is Player) {
                 return
@@ -53,5 +49,11 @@ object Nopium : BadOre("nopium") {
         }
 
         entity.drop(stack, true, true)
+    }
+
+    override fun onInventoryTick(stack: ItemStack, level: ServerLevel, entity: Entity, slot: EquipmentSlot?) {
+        if (entity is LivingEntity && level.random.nextInt(200) == 0) {
+            dropItem(entity, stack, slot)
+        }
     }
 }

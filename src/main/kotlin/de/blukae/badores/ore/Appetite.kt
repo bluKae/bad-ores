@@ -43,11 +43,9 @@ object Appetite : BadOre("appetite") {
         player: Player,
         willHarvest: Boolean
     ) {
-        if (level !is ServerLevel) {
-            return
+        if (level is ServerLevel) {
+            player.foodData.eat(4, 0.2F)
         }
-
-        player.foodData.eat(4, 0.2F)
     }
 
     override fun oreBlockProperties(): BlockBehaviour.Properties = BlockBehaviour.Properties.ofFullCopy(Blocks.SAND)

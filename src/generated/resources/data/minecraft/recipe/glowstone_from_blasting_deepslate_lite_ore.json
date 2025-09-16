@@ -1,10 +1,10 @@
 {
-  "type": "minecraft:smelting",
+  "type": "minecraft:blasting",
   "category": "blocks",
-  "cookingtime": 200,
+  "cookingtime": 100,
   "experience": 0.7,
   "group": "glowstone_from_smelting_lite",
-  "ingredient": "badores:deepslate_explodeitmite_ore",
+  "ingredient": "badores:deepslate_lite_ore",
   "result": {
     "count": 1,
     "id": "minecraft:glowstone"

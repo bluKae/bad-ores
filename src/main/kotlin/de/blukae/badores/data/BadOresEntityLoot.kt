@@ -36,43 +36,39 @@ class BadOresEntityLoot(registries: HolderLookup.Provider) :
     override fun generate() {
         registries.lookupOrThrow(Registries.ENCHANTMENT)
 
-        Fleesonsite.raw?.let {
-            this.add(
-                BadOres.FLEESONSITE_ENTITY_TYPE,
-                LootTable.lootTable()
-                    .withPool(
-                        LootPool.lootPool()
-                            .add(
-                                LootItem.lootTableItem(it.get())
-                                    .apply(
-                                        EnchantedCountIncreaseFunction.lootingMultiplier(
-                                            this.registries,
-                                            UniformGenerator.between(0.0f, 1.0f)
-                                        )
+        this.add(
+            BadOres.FLEESONSITE_ENTITY_TYPE,
+            LootTable.lootTable()
+                .withPool(
+                    LootPool.lootPool()
+                        .add(
+                            LootItem.lootTableItem(Fleesonsite.raw!!.get())
+                                .apply(
+                                    EnchantedCountIncreaseFunction.lootingMultiplier(
+                                        this.registries,
+                                        UniformGenerator.between(0.0f, 1.0f)
                                     )
-                            )
-                    )
-            )
-        }
+                                )
+                        )
+                )
+        )
 
-        Nosleeptonite.raw?.let {
-            this.add(
-                BadOres.NOSLEEPTONITE_ENTITY_TYPE,
-                LootTable.lootTable()
-                    .withPool(
-                        LootPool.lootPool()
-                            .add(
-                                LootItem.lootTableItem(it.get())
-                                    .apply(
-                                        EnchantedCountIncreaseFunction.lootingMultiplier(
-                                            this.registries,
-                                            UniformGenerator.between(0.0f, 1.0f)
-                                        )
+        this.add(
+            BadOres.NOSLEEPTONITE_ENTITY_TYPE,
+            LootTable.lootTable()
+                .withPool(
+                    LootPool.lootPool()
+                        .add(
+                            LootItem.lootTableItem(Nosleeptonite.raw!!.get())
+                                .apply(
+                                    EnchantedCountIncreaseFunction.lootingMultiplier(
+                                        this.registries,
+                                        UniformGenerator.between(0.0f, 1.0f)
                                     )
-                            )
-                    )
-            )
-        }
+                                )
+                        )
+                )
+        )
     }
 
     override fun getKnownEntityTypes(): Stream<EntityType<*>?> = BadOres.ENTITY_TYPES.entries.map { it.get() }.stream()

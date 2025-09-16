@@ -26,12 +26,15 @@ class BadOresItemTagsProvider(output: PackOutput, lookupProvider: CompletableFut
     ItemTagsProvider(output, lookupProvider, BadOres.MOD_ID) {
 
     override fun addTags(provider: HolderLookup.Provider) {
+        val oreBookComponents = tag(BadOres.ORE_BOOK_COMPONENTS)
+
         for (ore in BadOres.ORES) {
             ore.armorSet?.let { armorSet ->
-                val repairIngredients = tag(armorSet.material.repairIngredient)
-                ore.ingot?.let {
-                    repairIngredients.add(it.get())
-                }
+                tag(armorSet.material.repairIngredient).add(ore.ingot!!.get())
+            }
+
+            listOfNotNull(ore.oreBlock, ore.deepslateOreBlock, ore.raw).forEach {
+                oreBookComponents.add(it.asItem())
             }
         }
     }

@@ -39,7 +39,11 @@ object Fleesonsite : BadOre("fleesonsite") {
     override fun customLootTable(provider: BlockLootSubProvider): LootTable.Builder? = LootTable.lootTable()
 
 
-    private fun flee(level: ServerLevel, pos: BlockPos, state: BlockState, destroyBlock: Boolean) {
+    private fun flee(level: ServerLevel, pos: BlockPos, state: BlockState, destroyBlock: Boolean): Boolean {
+        if (!state.`is`(oreBlock) && !state.`is`(deepslateOreBlock!!)) {
+            return false
+        }
+
         if (destroyBlock) {
             level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState())
         }
@@ -47,17 +51,17 @@ object Fleesonsite : BadOre("fleesonsite") {
         BadOres.FLEESONSITE_ENTITY_TYPE.create(level, EntitySpawnReason.TRIGGERED)?.also {
             it.snapTo(pos.bottomCenter)
             it.isDeepslate = !state.`is`(oreBlock)
-            it.spawnAnim()
             level.addFreshEntity(it)
+            it.spawnAnim()
         }
+
+        return true
     }
 
     override fun onTick(level: Level, pos: BlockPos, state: BlockState, blockEntity: BadOreBlockEntity) {
         if (level is ServerLevel) {
-            if (state.`is`(oreBlock) || deepslateOreBlock?.let { state.`is`(it) } ?: false) {
-                if (level.getNearestPlayer(pos.center.x, pos.center.y, pos.center.z, 10.0, false) != null) {
-                    flee(level, pos, state, true)
-                }
+            if (level.getNearestPlayer(pos.center.x, pos.center.y, pos.center.z, 10.0, true) != null) {
+                flee(level, pos, state, true)
             }
         }
     }
@@ -76,10 +80,12 @@ object Fleesonsite : BadOre("fleesonsite") {
         hitResult: BlockHitResult
     ): InteractionResult {
         if (level is ServerLevel) {
-            flee(level, pos, state, true)
+            if (flee(level, pos, state, true)) {
+                return InteractionResult.SUCCESS_SERVER
+            }
         }
 
-        return InteractionResult.SUCCESS_SERVER
+        return InteractionResult.PASS
     }
 
     override fun spawnAfterBreak(

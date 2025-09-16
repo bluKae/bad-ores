@@ -31,8 +31,6 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 
 object Killium : BadOre("killium") {
-    // custom trigger
-
     private fun killPlayer(level: ServerLevel, entity: LivingEntity) {
         val damageType = level.registryAccess()
             .lookupOrThrow(Registries.DAMAGE_TYPE)
@@ -48,14 +46,12 @@ object Killium : BadOre("killium") {
         player: Player,
         willHarvest: Boolean
     ) {
-        if (level !is ServerLevel || player !is ServerPlayer) {
-            return
-        }
-
-        if (level.random.nextInt(5) == 0) {
-            BadOres.MINE_KILLIUM_TRIGGER.trigger(player)
-        } else {
-            killPlayer(level, player)
+        if (level is ServerLevel && player is ServerPlayer) {
+            if (level.random.nextInt(5) == 0) {
+                BadOres.MINE_KILLIUM_TRIGGER.trigger(player)
+            } else {
+                killPlayer(level, player)
+            }
         }
     }
 

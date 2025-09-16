@@ -35,14 +35,12 @@ object Wantarite : BadOre("wantarite") {
         stack: ItemStack,
         dropExperience: Boolean
     ) {
-        EntityType.PIG.spawn(
-            level,
-            { it.setItemSlot(EquipmentSlot.SADDLE, Items.SADDLE.defaultInstance) },
-            pos,
-            EntitySpawnReason.MOB_SUMMONED,
-            false,
-            false
-        )
+        EntityType.PIG.create(level, EntitySpawnReason.MOB_SUMMONED)?.also {
+            it.snapTo(pos.bottomCenter)
+            it.setItemSlot(EquipmentSlot.SADDLE, Items.SADDLE.defaultInstance)
+            level.addFreshEntity(it)
+            it.spawnAnim()
+        }
     }
 
     override fun customLootTable(provider: BlockLootSubProvider): LootTable.Builder? = LootTable.lootTable()

@@ -49,14 +49,12 @@ object Wannafite : BadOre("wannafite") {
         player: Player,
         willHarvest: Boolean
     ) {
-        if (level !is ServerLevel || !willHarvest) {
-            return
+        if (level is ServerLevel && willHarvest) {
+            val damageType = level.registryAccess()
+                .lookupOrThrow(Registries.DAMAGE_TYPE)
+                .getOrThrow(BadOres.WANNAFITE_DAMAGE_TYPE)
+
+            player.hurtServer(level, DamageSource(damageType), 4.0f)
         }
-
-        val damageType = level.registryAccess()
-            .lookupOrThrow(Registries.DAMAGE_TYPE)
-            .getOrThrow(BadOres.WANNAFITE_DAMAGE_TYPE)
-
-        player.hurtServer(level, DamageSource(damageType), 4.0f)
     }
 }

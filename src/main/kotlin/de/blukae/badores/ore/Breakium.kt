@@ -34,10 +34,10 @@ object Breakium : BadOre("breakium") {
         if (level !is ServerLevel) {
             return
         }
+
         val tool = player.getItemInHand(InteractionHand.MAIN_HAND)
-        if (tool.isEmpty) {
-            return
+        if (!tool.isEmpty) {
+            tool.hurtAndBreak(tool.maxDamage - tool.damageValue, player, InteractionHand.MAIN_HAND)
         }
-        tool.hurtAndBreak(tool.maxDamage - tool.damageValue, player, InteractionHand.MAIN_HAND)
     }
 }

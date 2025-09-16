@@ -34,16 +34,14 @@ object Misleadium : BadOre("misleadium") {
         player: Player,
         willHarvest: Boolean
     ) {
-        if (player !is ServerPlayer || !willHarvest) {
-            return
+        if (player is ServerPlayer && willHarvest) {
+            CreativeModeTabs.tryRebuildTabContents(level.enabledFeatures(), true, level.registryAccess())
+            val stack = CreativeModeTabs.allTabs().flatMap { it.displayItems }.random()
+
+            val x = (pos.x + level.random.nextInt(SIDE_RANGE) - level.random.nextInt(SIDE_RANGE))
+            val y = (level.random.nextInt(level.minY, level.maxY))
+            val z = (pos.z + level.random.nextInt(SIDE_RANGE) - level.random.nextInt(SIDE_RANGE))
+            RandomTranslation("badores.misleadium.baseMessage", "Mislead", stack.hoverName, x, y, z).send(player)
         }
-
-        CreativeModeTabs.tryRebuildTabContents(level.enabledFeatures(), true, level.registryAccess())
-        val stack = CreativeModeTabs.allTabs().flatMap { it.displayItems }.random()
-
-        val x = (pos.x + level.random.nextInt(SIDE_RANGE) - level.random.nextInt(SIDE_RANGE))
-        val y = (level.random.nextInt(level.minY, level.maxY))
-        val z = (pos.z + level.random.nextInt(SIDE_RANGE) - level.random.nextInt(SIDE_RANGE))
-        RandomTranslation("badores.misleadium.baseMessage", "Mislead", stack.hoverName, x, y, z).send(player)
     }
 }

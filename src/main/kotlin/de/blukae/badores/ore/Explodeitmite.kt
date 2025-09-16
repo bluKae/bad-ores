@@ -35,38 +35,29 @@ object Explodeitmite : BadOre("explodeitmite") {
     override fun destroyTime() = 8.0f
     override fun explosionResistance() = 10.0f
 
+    private fun explode(level: ServerLevel, pos: BlockPos) {
+        val p = pos.center.add(Direction.UP.unitVec3)
+        level.explode(
+            null,
+            p.x,
+            p.y,
+            p.z,
+            2.0f + level.random.nextFloat() * 3.0f,
+            false,
+            Level.ExplosionInteraction.BLOCK
+        )
+    }
+
     override fun onRandomTick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
         if (random.nextInt(4) == 0) {
             level.removeBlock(pos, false)
-            val p = pos.center.add(Direction.UP.unitVec3)
-            level.explode(
-                null,
-                p.x,
-                p.y,
-                p.z,
-                2.0f + random.nextFloat() * 3.0f,
-                false,
-                Level.ExplosionInteraction.BLOCK
-            )
+            explode(level, pos)
         }
     }
 
     override fun onDestroyed(state: BlockState, level: Level, pos: BlockPos) {
-        if (level !is ServerLevel) {
-            return
-        }
-
-        if (level.random.nextInt(4) == 0) {
-            val p = pos.center.add(Direction.UP.unitVec3)
-            level.explode(
-                null,
-                p.x,
-                p.y,
-                p.z,
-                2.0f + level.random.nextFloat() * 3.0f,
-                false,
-                Level.ExplosionInteraction.BLOCK
-            )
+        if (level is ServerLevel && level.random.nextInt(4) == 0) {
+            explode(level, pos)
         }
     }
 }

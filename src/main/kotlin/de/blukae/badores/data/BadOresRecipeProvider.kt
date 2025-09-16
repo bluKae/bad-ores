@@ -17,6 +17,7 @@
 package de.blukae.badores.data
 
 import de.blukae.badores.BadOres
+import de.blukae.badores.advancement.MineBadOreTrigger
 import de.blukae.badores.ore.Explodeitmite
 import de.blukae.badores.ore.Lite
 import de.blukae.badores.ore.Marmite
@@ -150,15 +151,13 @@ class BadOresRecipeProvider(registries: HolderLookup.Provider, output: RecipeOut
             }
         }
 
-        Marmite.ingot?.let {
-            shapeless(RecipeCategory.FOOD, BadOres.MARMITE_BREAD_ITEM)
-                .requires(Items.BREAD)
-                .requires(it)
-                .unlockedBy("has_${it.id.path}", this.has(it))
-                .save(output)
-        }
+        shapeless(RecipeCategory.FOOD, BadOres.MARMITE_BREAD_ITEM)
+            .requires(Items.BREAD)
+            .requires(Marmite.ingot!!)
+            .unlockedBy("has_${Marmite.ingot.id.path}", has(Marmite.ingot))
+            .save(output)
 
-        val explodeitmiteSmeltables = listOfNotNull(Explodeitmite.oreBlock, Explodeitmite.deepslateOreBlock)
+        val explodeitmiteSmeltables = listOf(Explodeitmite.oreBlock, Explodeitmite.deepslateOreBlock!!)
         oreSmelting(
             explodeitmiteSmeltables,
             RecipeCategory.MISC,
@@ -176,9 +175,9 @@ class BadOresRecipeProvider(registries: HolderLookup.Provider, output: RecipeOut
             "gunpowder_from_smelting_explodeitmite"
         )
 
-        listOfNotNull(Lite.oreBlock, Lite.deepslateOreBlock)
+        val liteSmeltables = listOf(Lite.oreBlock, Lite.deepslateOreBlock!!)
         oreSmelting(
-            explodeitmiteSmeltables,
+            liteSmeltables,
             RecipeCategory.MISC,
             Items.GLOWSTONE,
             0.7f,
@@ -186,13 +185,19 @@ class BadOresRecipeProvider(registries: HolderLookup.Provider, output: RecipeOut
             "glowstone_from_smelting_lite"
         )
         oreBlasting(
-            explodeitmiteSmeltables,
+            liteSmeltables,
             RecipeCategory.MISC,
             Items.GLOWSTONE,
             0.7f,
             100,
             "glowstone_from_smelting_lite"
         )
+
+        shapeless(RecipeCategory.MISC, BadOres.ORE_BOOK_ITEM)
+            .requires(Items.BOOK)
+            .requires(BadOres.ORE_BOOK_COMPONENTS)
+            .unlockedBy("mine_bad_ore", MineBadOreTrigger.TriggerInstance.minedAny())
+            .save(output)
     }
 
     companion object {

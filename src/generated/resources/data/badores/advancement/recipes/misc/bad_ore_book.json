@@ -1,0 +1,25 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "badores:bad_ore_book"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "mine_bad_ore": {
+      "trigger": "badores:mine_bad_ore"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "mine_bad_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "badores:bad_ore_book"
+    ]
+  }
+}

@@ -33,12 +33,9 @@ object Movium : BadOre("movium") {
         player: Player,
         willHarvest: Boolean
     ) {
-        if (level !is ServerLevel || player.preventsBlockDrops()) {
-            return
+        if (level is ServerLevel && !player.preventsBlockDrops()) {
+            level.setBlockAndUpdate(pos.offset(Direction.getRandom(level.random).unitVec3i), state)
         }
-
-        val p = pos.offset(Direction.getRandom(level.random).unitVec3i)
-        level.setBlockAndUpdate(p, state)
     }
 
     override fun customLootTable(provider: BlockLootSubProvider): LootTable.Builder? = LootTable.lootTable()

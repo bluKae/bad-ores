@@ -28,6 +28,7 @@ import net.minecraft.world.entity.PathfinderMob
 import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.storage.ValueInput
 import net.minecraft.world.level.storage.ValueOutput
 
@@ -40,6 +41,12 @@ class FleesonsiteEntity(type: EntityType<out PathfinderMob>, level: Level) : Pat
     var isDeepslate: Boolean
         get() = entityData.get(DATA_IS_DEEPSLATE)
         set(value) = entityData.set(DATA_IS_DEEPSLATE, value)
+
+    val blockState: BlockState
+        get() {
+            val block = if (isDeepslate) Fleesonsite.deepslateOreBlock!! else Fleesonsite.oreBlock
+            return block.get().defaultBlockState()
+        }
 
     override fun registerGoals() {
         goalSelector.addGoal(0, FloatGoal(this))
@@ -57,14 +64,8 @@ class FleesonsiteEntity(type: EntityType<out PathfinderMob>, level: Level) : Pat
 
     override fun tick() {
         super.tick()
-        if (tickCount % 10 == 0 && !level().isClientSide && level().getNearestPlayer(this, 10.0) == null) {
-            if (isDeepslate) {
-                Fleesonsite.deepslateOreBlock?.let {
-                    level().setBlockAndUpdate(blockPosition(), it.get().defaultBlockState())
-                }
-            } else {
-                level().setBlockAndUpdate(blockPosition(), Fleesonsite.oreBlock.get().defaultBlockState())
-            }
+        if (tickCount % 10 == 0 && !level().isClientSide && level().getNearestPlayer(x, y, z, 12.0, true) == null) {
+            level().setBlockAndUpdate(blockPosition(), blockState)
 
             playSound(SoundEvents.CHICKEN_EGG)
             spawnAnim()
@@ -79,11 +80,11 @@ class FleesonsiteEntity(type: EntityType<out PathfinderMob>, level: Level) : Pat
 
     override fun readAdditionalSaveData(input: ValueInput) {
         super.readAdditionalSaveData(input)
-        isDeepslate = input.getBooleanOr("isDeepslate", false)
+        isDeepslate = input.getBooleanOr("IsDeepslate", false)
     }
 
     override fun addAdditionalSaveData(output: ValueOutput) {
         super.addAdditionalSaveData(output)
-        output.putBoolean("isDeepslate", isDeepslate)
+        output.putBoolean("IsDeepslate", isDeepslate)
     }
 }
