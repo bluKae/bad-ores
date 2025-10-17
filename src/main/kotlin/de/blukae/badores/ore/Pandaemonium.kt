@@ -16,7 +16,7 @@
 
 package de.blukae.badores.ore
 
-import de.blukae.badores.BadOreBlockEntity
+import de.blukae.badores.block.BadOreBlockEntity
 import de.blukae.badores.BadOres
 import net.minecraft.core.BlockPos
 import net.minecraft.data.loot.BlockLootSubProvider

@@ -16,6 +16,7 @@
 
 package de.blukae.badores
 
+import de.blukae.badores.item.BadOreItem
 import de.blukae.badores.ore.Fleesonsite
 import de.blukae.badores.ore.Ghostium
 import de.blukae.badores.ore.Iwontfite

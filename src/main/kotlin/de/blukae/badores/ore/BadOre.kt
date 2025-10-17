@@ -17,6 +17,10 @@
 package de.blukae.badores.ore
 
 import de.blukae.badores.*
+import de.blukae.badores.block.BadOreBlock
+import de.blukae.badores.block.BadOreBlockEntity
+import de.blukae.badores.item.BadOreBlockItem
+import de.blukae.badores.item.BadOreItem
 import net.minecraft.client.data.models.BlockModelGenerators
 import net.minecraft.client.data.models.ItemModelGenerators
 import net.minecraft.core.BlockPos

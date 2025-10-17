@@ -14,7 +14,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package de.blukae.badores
+package de.blukae.badores.item
 
 import de.blukae.badores.ore.BadOre
 import net.minecraft.core.BlockPos
@@ -22,18 +22,16 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.item.Item
+import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockState
 
-class BadOreItem(val ore: BadOre, properties: Properties) : Item(properties) {
+class BadOreBlockItem(val ore: BadOre, block: Block, properties: Properties) : BlockItem(block, properties) {
     override fun inventoryTick(stack: ItemStack, level: ServerLevel, entity: Entity, slot: EquipmentSlot?) {
         super.inventoryTick(stack, level, entity, slot)
         ore.onInventoryTick(stack, level, entity, slot)
-        if (slot?.isArmor ?: false) {
-            ore.onArmorTick(stack, level, entity, slot)
-        }
     }
 
     override fun postHurtEnemy(stack: ItemStack, target: LivingEntity, attacker: LivingEntity) {

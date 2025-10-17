@@ -14,7 +14,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package de.blukae.badores
+package de.blukae.badores.item
 
 import de.blukae.badores.ore.BadOre
 import net.minecraft.core.BlockPos
@@ -22,7 +22,6 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.item.AxeItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.ShovelItem
 import net.minecraft.world.item.ToolMaterial

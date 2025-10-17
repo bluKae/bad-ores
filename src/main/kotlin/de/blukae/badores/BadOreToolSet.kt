@@ -16,6 +16,10 @@
 
 package de.blukae.badores
 
+import de.blukae.badores.item.BadOreAxeItem
+import de.blukae.badores.item.BadOreHoeItem
+import de.blukae.badores.item.BadOreItem
+import de.blukae.badores.item.BadOreShovelItem
 import de.blukae.badores.ore.BadOre
 import net.minecraft.world.item.Item.Properties
 import net.minecraft.world.item.ToolMaterial

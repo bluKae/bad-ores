@@ -17,7 +17,7 @@
 package de.blukae.badores.ore
 
 import de.blukae.badores.ArmorInfo
-import de.blukae.badores.BadOreBlockEntity
+import de.blukae.badores.block.BadOreBlockEntity
 import de.blukae.badores.ToolInfo
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel

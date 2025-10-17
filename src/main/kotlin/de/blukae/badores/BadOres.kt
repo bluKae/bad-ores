@@ -20,9 +20,11 @@ import com.mojang.logging.LogUtils
 import de.blukae.badores.advancement.HurtIwontfiteTrigger
 import de.blukae.badores.advancement.MineBadOreTrigger
 import de.blukae.badores.advancement.MineKilliumTrigger
+import de.blukae.badores.block.BadOreBlockEntity
 import de.blukae.badores.data.*
 import de.blukae.badores.entity.FleesonsiteEntity
 import de.blukae.badores.entity.NosleeptoniteEntity
+import de.blukae.badores.item.BadOreBookItem
 import de.blukae.badores.ore.*
 import net.minecraft.advancements.CriterionTrigger
 import net.minecraft.core.HolderSet

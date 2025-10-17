@@ -16,6 +16,7 @@
 
 package de.blukae.badores
 
+import de.blukae.badores.item.BadOreItem
 import de.blukae.badores.ore.BadOre
 import net.minecraft.world.item.equipment.ArmorMaterial
 import net.minecraft.world.item.equipment.ArmorType

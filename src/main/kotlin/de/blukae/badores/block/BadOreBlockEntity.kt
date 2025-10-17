@@ -14,8 +14,9 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package de.blukae.badores
+package de.blukae.badores.block
 
+import de.blukae.badores.BadOres
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
