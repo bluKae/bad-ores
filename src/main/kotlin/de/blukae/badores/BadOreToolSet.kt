@@ -22,18 +22,18 @@ import net.minecraft.world.item.ToolMaterial
 import net.neoforged.neoforge.registries.DeferredItem
 
 class BadOreToolSet(ore: BadOre, material: ToolMaterial) {
-    val axe: DeferredItem<BadOreItem> = BadOres.ITEMS.registerItem("${ore.name}_axe") { properties: Properties ->
-        BadOreItem(ore, properties.axe(material, 6.0f, -3.1f))
+    val axe: DeferredItem<BadOreAxeItem> = BadOres.ITEMS.registerItem("${ore.name}_axe") { properties: Properties ->
+        BadOreAxeItem(ore, material, 6.0f, -3.1f, properties)
     }
-    val hoe: DeferredItem<BadOreItem> = BadOres.ITEMS.registerItem("${ore.name}_hoe") { properties: Properties ->
-        BadOreItem(ore, properties.hoe(material, -2.0f, -1.0f))
+    val hoe: DeferredItem<BadOreHoeItem> = BadOres.ITEMS.registerItem("${ore.name}_hoe") { properties: Properties ->
+        BadOreHoeItem(ore, material, -2.0f, -1.0f, properties)
     }
     val pickaxe: DeferredItem<BadOreItem> =
         BadOres.ITEMS.registerItem("${ore.name}_pickaxe") { properties: Properties ->
             BadOreItem(ore, properties.pickaxe(material, 1.0f, -2.8f))
         }
-    val shovel: DeferredItem<BadOreItem> = BadOres.ITEMS.registerItem("${ore.name}_shovel") { properties: Properties ->
-        BadOreItem(ore, properties.shovel(material, 1.5f, -3.0f))
+    val shovel: DeferredItem<BadOreShovelItem> = BadOres.ITEMS.registerItem("${ore.name}_shovel") { properties: Properties ->
+        BadOreShovelItem(ore, material, 1.5f, -3.0f, properties)
     }
     val sword: DeferredItem<BadOreItem> = BadOres.ITEMS.registerItem("${ore.name}_sword") { properties: Properties ->
         BadOreItem(ore, properties.sword(material, 3.0f, -2.4f))
