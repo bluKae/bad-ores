@@ -50,10 +50,4 @@ class BadOreBlockItem(val ore: BadOre, block: Block, properties: Properties) : B
         ore.onMine(stack, level, state, pos, miningEntity)
         return super.mineBlock(stack, level, state, pos, miningEntity)
     }
-
-    companion object {
-        fun build(ore: BadOre, block: DeferredBlock<*>) = { properties: Properties ->
-            BadOreBlockItem(ore, block.get(), properties)
-        }
-    }
 }

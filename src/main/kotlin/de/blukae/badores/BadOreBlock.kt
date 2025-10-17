@@ -158,10 +158,4 @@ class BadOreBlock(val ore: BadOre, val isIngotBlock: Boolean, properties: Proper
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
         return ore.shape(isIngotBlock, level, pos, context) ?: super.getShape(state, level, pos, context)
     }
-
-    companion object {
-        fun build(ore: BadOre, isIngotBlock: Boolean) = { properties: Properties ->
-            BadOreBlock(ore, isIngotBlock, properties)
-        }
-    }
 }

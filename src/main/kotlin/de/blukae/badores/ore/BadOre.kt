@@ -86,7 +86,7 @@ abstract class BadOre(val name: String) {
     val repairsTag: TagKey<Item> = TagKey.create(Registries.ITEM, BadOres.rl("repairs_${name}_armor"))
 
     val oreBlock: DeferredBlock<BadOreBlock> =
-        BadOres.BLOCKS.registerBlock("${name}_ore", BadOreBlock.build(this, false), oreBlockProperties())
+        BadOres.BLOCKS.registerBlock("${name}_ore", { properties -> BadOreBlock(this, false, properties) }, oreBlockProperties())
     val deepslateOreBlock: DeferredBlock<BadOreBlock>?
     val ingot: DeferredItem<BadOreItem>?
     val raw: DeferredItem<BadOreItem>?
@@ -96,7 +96,9 @@ abstract class BadOre(val name: String) {
     val armorSet: BadOreArmorSet?
 
     init {
-        BadOres.ITEMS.registerItem("${name}_ore", BadOreBlockItem.build(this, oreBlock))
+        BadOres.ITEMS.registerItem("${name}_ore") { properties ->
+            BadOreBlockItem(this, oreBlock.get(), properties)
+        }
         deepslateOreBlock = if (hasDeepslateVariant()) buildDeepslateOre() else null
         ingot = if (hasIngot()) buildIngot() else null
         raw = if (hasRaw()) buildRaw() else null
@@ -109,31 +111,41 @@ abstract class BadOre(val name: String) {
     private fun buildDeepslateOre(): DeferredBlock<BadOreBlock> {
         val block = BadOres.BLOCKS.registerBlock(
             "deepslate_${name}_ore",
-            BadOreBlock.build(this, false),
+            { properties -> BadOreBlock(this, false, properties) },
             oreDeepslateBlockProperties()
         )
-        BadOres.ITEMS.registerItem("deepslate_${name}_ore", BadOreBlockItem.build(this, block))
+        BadOres.ITEMS.registerItem("deepslate_${name}_ore") { properties ->
+            BadOreBlockItem(this, block.get(), properties)
+        }
         return block
     }
 
     private fun buildIngot(): DeferredItem<BadOreItem> {
-        return BadOres.ITEMS.registerItem(ingotName(), BadOreItem.build(this))
+        return BadOres.ITEMS.registerItem(ingotName()) { properties ->
+            BadOreItem(this, properties)
+        }
     }
 
     private fun buildRaw(): DeferredItem<BadOreItem> {
-        return BadOres.ITEMS.registerItem("raw_${name}", BadOreItem.build(this))
+        return BadOres.ITEMS.registerItem("raw_${name}") { properties ->
+            BadOreItem(this, properties)
+        }
     }
 
     private fun buildRawBlock(): DeferredBlock<BadOreBlock> {
         val block =
-            BadOres.BLOCKS.registerBlock("raw_${name}_block", BadOreBlock.build(this, true), rawBlockProperties())
-        BadOres.ITEMS.registerItem("raw_${name}_block", BadOreBlockItem.build(this, block))
+            BadOres.BLOCKS.registerBlock("raw_${name}_block", { properties -> BadOreBlock(this, true, properties) }, rawBlockProperties())
+        BadOres.ITEMS.registerItem("raw_${name}_block") { properties ->
+            BadOreBlockItem(this, block.get(), properties)
+        }
         return block
     }
 
     private fun buildIngotBlock(): DeferredBlock<BadOreBlock> {
-        val block = BadOres.BLOCKS.registerBlock("${name}_block", BadOreBlock.build(this, true), ingotBlockProperties())
-        BadOres.ITEMS.registerItem("${name}_block", BadOreBlockItem.build(this, block))
+        val block = BadOres.BLOCKS.registerBlock("${name}_block", { properties -> BadOreBlock(this, true, properties) }, ingotBlockProperties())
+        BadOres.ITEMS.registerItem("${name}_block") { properties ->
+            BadOreBlockItem(this, block.get(), properties)
+        }
         return block
     }
 
