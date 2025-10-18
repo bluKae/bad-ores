@@ -24,8 +24,7 @@ For more information, check out the Book of Ums and Ites in-game, which can be c
 
 ## Trailer
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/BcjCSXcPfVw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
+[![Watch Trailer](https://img.youtube.com/vi/BcjCSXcPfVw/0.jpg)](https://www.youtube.com/watch?v=BcjCSXcPfVw)
 
 ## Note
 
