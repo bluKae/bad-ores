@@ -24,10 +24,5 @@
       "mine_bad_ore"
     ]
   ],
-  "rewards": {
-    "recipes": [
-      "badores:bad_ore_book"
-    ]
-  },
   "sends_telemetry_event": true
 }
