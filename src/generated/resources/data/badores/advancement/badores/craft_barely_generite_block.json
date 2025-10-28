@@ -12,7 +12,7 @@
     "description": {
       "translate": "advancements.badores.badores.craft_barely_generite_block.description"
     },
-    "frame": "goal",
+    "frame": "challenge",
     "icon": {
       "count": 1,
       "id": "badores:barely_generite_block"

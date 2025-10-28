@@ -1,6 +1,16 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_ore_book_component": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#badores:ore_book_components"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "badores:bad_ore_book"
@@ -14,7 +24,8 @@
   "requirements": [
     [
       "has_the_recipe",
-      "mine_bad_ore"
+      "mine_bad_ore",
+      "has_ore_book_component"
     ]
   ],
   "rewards": {

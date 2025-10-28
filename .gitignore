@@ -25,5 +25,4 @@ run-data
 
 repo
 
-.kotlin
 src/generated/resources/.cache

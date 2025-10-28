@@ -6,7 +6,14 @@
         "items": [
           {
             "items": "badores:barely_generite_ore"
-          },
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_deepslate_barely_generite": {
+      "conditions": {
+        "items": [
           {
             "items": "badores:deepslate_barely_generite_ore"
           }
@@ -30,7 +37,8 @@
   },
   "requirements": [
     [
-      "has_barely_generite"
+      "has_barely_generite",
+      "has_deepslate_barely_generite"
     ]
   ],
   "sends_telemetry_event": true
