@@ -60,14 +60,15 @@ public class Pandaemonium implements OreTemplate {
 
     @Override
     public BlockBehaviour.Properties getOreBlockProperties(boolean isDeepslate) {
-        return OreTemplate.super.getOreBlockProperties(isDeepslate).sound(new DeferredSoundType(
-                1.0f,
-                1.0f,
-                PANDAEMONIUM_BREAK_SOUND_EVENT,
-                () -> SoundEvents.STONE_STEP,
-                () -> SoundEvents.STONE_PLACE,
-                () -> SoundEvents.STONE_HIT,
-                () -> SoundEvents.STONE_FALL));
+        return OreTemplate.super.getOreBlockProperties(isDeepslate)
+                .sound(new DeferredSoundType(
+                    1.0f,
+                    1.0f,
+                    PANDAEMONIUM_BREAK_SOUND_EVENT,
+                    () -> SoundEvents.STONE_STEP,
+                    () -> SoundEvents.STONE_PLACE,
+                    () -> SoundEvents.STONE_HIT,
+                    () -> SoundEvents.STONE_FALL));
     }
 
     @Override
@@ -90,7 +91,7 @@ public class Pandaemonium implements OreTemplate {
 
     @Override
     public void onTick(Level level, BlockPos pos, BlockState state, BadOreBlockEntity blockEntity) {
-        if (level instanceof ServerLevel && level.random.nextInt(10) == 0) {
+    if (!level.isClientSide() && level.random.nextInt(10) == 0) {
             level.playSound(null, pos, PANDAEMONIUM_BREAK_SOUND_EVENT.get(), SoundSource.BLOCKS);
         }
     }

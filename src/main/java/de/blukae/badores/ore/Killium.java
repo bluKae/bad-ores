@@ -46,14 +46,13 @@ public class Killium implements OreTemplate {
 
     private void killPlayer(ServerLevel level, LivingEntity entity) {
         var damageType = level.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DAMAGE_TYPE);
-
         entity.hurtServer(level, new DamageSource(damageType), Float.MAX_VALUE);
     }
 
     @Override
     public void onInventoryTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot) {
-        if (entity instanceof LivingEntity && level.random.nextInt(1000) == 0) {
-            killPlayer(level, (LivingEntity) entity);
+        if (entity instanceof LivingEntity livingEntity && level.random.nextInt(1000) == 0) {
+            killPlayer(level, livingEntity);
         }
     }
 

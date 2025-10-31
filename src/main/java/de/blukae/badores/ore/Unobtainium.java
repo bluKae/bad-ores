@@ -22,6 +22,7 @@ public class Unobtainium implements OreTemplate {
 
     @Override
     public BlockBehaviour.Properties getOreBlockProperties(boolean isDeepslate) {
-        return OreTemplate.super.getOreBlockProperties(isDeepslate).strength(-1.0F, 3600000.0F);
+        return OreTemplate.super.getOreBlockProperties(isDeepslate)
+                .strength(-1.0F, 3600000.0F);
     }
 }

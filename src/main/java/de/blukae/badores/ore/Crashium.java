@@ -68,7 +68,7 @@ public class Crashium implements OreTemplate {
 
     @Override
     public void onArmorTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot) {
-        if (entity instanceof ServerPlayer player && level.random.nextInt(800) == 0) {
+        if (!level.isClientSide() && level.random.nextInt(800) == 0 && entity instanceof ServerPlayer player) {
             crash(player);
         }
     }

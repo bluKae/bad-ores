@@ -16,6 +16,8 @@
 
 package de.blukae.badores.entity;
 
+import de.blukae.badores.ore.Fleesonsite;
+import de.blukae.badores.ore.Nosleeptonite;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -46,16 +48,16 @@ public class NosleeptoniteEntity extends Monster {
 
     @Override
     protected @Nullable SoundEvent getAmbientSound() {
-        return super.getAmbientSound();
+        return Nosleeptonite.NOSLEEPTONITE_AMBIENT.get();
     }
 
     @Override
     protected @Nullable SoundEvent getHurtSound(DamageSource damageSource) {
-        return super.getHurtSound(damageSource);
+        return Nosleeptonite.NOSLEEPTONITE_HURT.get();
     }
 
     @Override
     protected @Nullable SoundEvent getDeathSound() {
-        return super.getDeathSound();
+        return Nosleeptonite.NOSLEEPTONITE_DEATH.get();
     }
 }

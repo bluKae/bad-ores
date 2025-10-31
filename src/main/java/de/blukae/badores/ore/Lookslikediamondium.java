@@ -101,7 +101,7 @@ public class Lookslikediamondium implements OreTemplate {
 
     @Override
     public ResourceLocation getEquipmentTextureLocation(String name) {
-        return ResourceLocation.parse("diamond");
+        return ResourceLocation.withDefaultNamespace("diamond");
     }
 
     @Override

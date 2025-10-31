@@ -63,12 +63,8 @@ public class BadOreBlock extends Block implements EntityBlock {
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state,
                                                                             BlockEntityType<T> blockEntityType) {
         if (blockEntityType == BadOres.BAD_ORE_BLOCK_ENTITY.get() && tickRate != null) {
-            return (level1, pos, state1, blockEntity) -> ((BadOreBlockEntity) blockEntity).tick(
-                    level1,
-                    pos,
-                    state1,
-                    template,
-                    tickRate);
+            return (level1, pos, state1, blockEntity) -> ((BadOreBlockEntity) blockEntity)
+                    .tick(level1, pos, state1, template, tickRate);
         }
 
         return null;

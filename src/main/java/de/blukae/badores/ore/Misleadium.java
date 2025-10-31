@@ -53,8 +53,8 @@ public class Misleadium implements OreTemplate {
             int x = pos.getX() + random.nextInt(SIDE_RANGE) - random.nextInt(SIDE_RANGE);
             int y = random.nextInt(level.getMinY(), level.getMaxY());
             int z = pos.getZ() + random.nextInt(SIDE_RANGE) - random.nextInt(SIDE_RANGE);
-            new RandomTranslation("badores.misleadium.baseMessage", "Mislead", stack.getHoverName(), x, y, z).send(
-                    serverPlayer);
+            new RandomTranslation("badores.misleadium.baseMessage", "Mislead", stack.getHoverName(), x, y, z)
+                    .send(serverPlayer);
         }
     }
 }

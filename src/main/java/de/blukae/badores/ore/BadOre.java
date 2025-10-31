@@ -46,41 +46,56 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import javax.annotation.Nullable;
 
 public enum BadOre implements OreBookPage {
-    AMADEUM(new Amadeum()), APPETITE(new Appetite()), BALANCIUM(new Balancium()),
-    BARELY_GENERITE(new BarelyGenerite()), BREAKIUM(
-            new Breakium()), CRAPPIUM(new Crappium()), CRASHIUM(new Crashium()), ENDERITE(new Enderite()),
-    EXPLODEITMITE(
-            new Explodeitmite()), FLEESONSITE(new Fleesonsite()), GHOSTIUM(new Ghostium()),
-    IDLIKEABITE(new Idlikeabite()), IWONTFITE(
-            new Iwontfite()), KAKKARITE(new Kakkarite()), KILLIUM(new Killium()), LITE(new Lite()), LOOKSLIKEDIAMONDIUM(
-            new Lookslikediamondium()), MARMITE(new Marmite()), METEORITE(new Meteorite()),
-    MISLEADIUM(new Misleadium()), MOVIUM(
-            new Movium()), NOPIUM(new Nopium()), NOSLEEPTONITE(new Nosleeptonite()), PAINTITWHITE(new Paintitwhite())
-    , PANDAEMONIUM(
-            new Pandaemonium()), POLITE(new Polite()), SHIFTIUM(new Shiftium()), SMITE(new Smite()),
-    STONIUM(new Stonium()), STREETSCUM(
-            new Streetscum()), TAUNTUM(new Tauntum()), UNOBTAINIUM(new Unobtainium()), USELESSIUM(new Uselessium()),
-    WANNAFITE(
-            new Wannafite()), WANTARITE(new Wantarite()), WEBSITE(new Website()), ZOMBIEUNITE(new Zombieunite());
+    AMADEUM(new Amadeum()),
+    APPETITE(new Appetite()),
+    BALANCIUM(new Balancium()),
+    BARELY_GENERITE(new BarelyGenerite()),
+    BREAKIUM(new Breakium()),
+    CRAPPIUM(new Crappium()),
+    CRASHIUM(new Crashium()),
+    ENDERITE(new Enderite()),
+    EXPLODEITMITE(new Explodeitmite()),
+    FLEESONSITE(new Fleesonsite()),
+    GHOSTIUM(new Ghostium()),
+    IDLIKEABITE(new Idlikeabite()),
+    IWONTFITE(new Iwontfite()),
+    KAKKARITE(new Kakkarite()),
+    KILLIUM(new Killium()),
+    LITE(new Lite()),
+    LOOKSLIKEDIAMONDIUM(new Lookslikediamondium()),
+    MARMITE(new Marmite()),
+    METEORITE(new Meteorite()),
+    MISLEADIUM(new Misleadium()),
+    MOVIUM(new Movium()),
+    NOPIUM(new Nopium()),
+    NOSLEEPTONITE(new Nosleeptonite()),
+    PAINTITWHITE(new Paintitwhite()),
+    PANDAEMONIUM(new Pandaemonium()),
+    POLITE(new Polite()),
+    SHIFTIUM(new Shiftium()),
+    SMITE(new Smite()),
+    STONIUM(new Stonium()),
+    STREETSCUM(new Streetscum()),
+    TAUNTUM(new Tauntum()),
+    UNOBTAINIUM(new Unobtainium()),
+    USELESSIUM(new Uselessium()),
+    WANNAFITE(new Wannafite()),
+    WANTARITE(new Wantarite()),
+    WEBSITE(new Website()),
+    ZOMBIEUNITE(new Zombieunite());
 
     public final OreTemplate template;
 
     public final String name = this.name().toLowerCase();
 
     public final DeferredBlock<BadOreBlock> oreBlock;
-    @Nullable
     public final DeferredBlock<BadOreBlock> deepslateOreBlock;
-    @Nullable
     public final DeferredBlock<BadOreBlock> rawIngotBlock;
-    @Nullable
     public final DeferredBlock<BadOreBlock> ingotBlock;
-    @Nullable
     public final DeferredItem<BadOreItem> rawIngot;
-    @Nullable
     public final DeferredItem<BadOreItem> ingot;
-    @Nullable
+
     public final ArmorSet armor;
-    @Nullable
     public final ToolSet tools;
 
     public final ResourceKey<ConfiguredFeature<?, ?>> configuredFeature = ResourceKey.create(

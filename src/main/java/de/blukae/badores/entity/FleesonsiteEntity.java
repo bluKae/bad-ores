@@ -17,6 +17,7 @@
 package de.blukae.badores.entity;
 
 import de.blukae.badores.ore.BadOre;
+import de.blukae.badores.ore.Fleesonsite;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -90,7 +91,7 @@ public class FleesonsiteEntity extends PathfinderMob {
 
     @Override
     protected @Nullable SoundEvent getAmbientSound() {
-        return super.getAmbientSound();
+        return Fleesonsite.FLEESONSITE_AMBIENT.get();
     }
 
     @Override
@@ -107,11 +108,11 @@ public class FleesonsiteEntity extends PathfinderMob {
 
     @Override
     protected @Nullable SoundEvent getHurtSound(DamageSource damageSource) {
-        return super.getHurtSound(damageSource);
+        return Fleesonsite.FLEESONSITE_HURT.get();
     }
 
     @Override
     protected @Nullable SoundEvent getDeathSound() {
-        return super.getDeathSound();
+        return Fleesonsite.FLEESONSITE_DEATH.get();
     }
 }

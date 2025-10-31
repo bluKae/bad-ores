@@ -30,25 +30,51 @@ import java.util.Arrays;
 import java.util.Locale;
 
 public class Website implements OreTemplate {
-    private static final String[] URLS = new String[]{"http://www.minecraft.net", "http://www.minecraftforge.net",
-            "http://www.google.com", "http://www.minecraftforum.net", "http://www.minecraftwiki.net", "http://mcp" +
-            ".ocean-labs.de/modjam/"};
+    private static final String[] URLS = new String[]{
+            "http://www.minecraft.net",
+            "http://www.minecraftforge.net",
+            "http://www.google.com",
+            "http://www.minecraftforum.net",
+            "http://www.minecraftwiki.net",
+            "http://mcp.ocean-labs.de/modjam/"
+    };
 
-    private static final String[][] COMMANDS = new String[][]{{"xdg-open", null}, {"gio", "open", null}, {"gvfs-open"
-            , null}, {"gnome-open", null}, // Gnome
+    private static final String[][] COMMANDS = new String[][]{
+            {"xdg-open", null},
+            {"gio", "open", null},
+            {"gvfs-open", null},
+            {"gnome-open", null}, // Gnome
             {"mate-open", null}, // Mate
             {"exo-open", null}, // Xfce
             {"enlightenment_open", null}, // Enlightenment
-            {"gdbus", "call", "--session", "--dest", "org.freedesktop.portal.Desktop", "--object-path", "/org" +
-                    "/freedesktop/portal/desktop", "--method", "org.freedesktop.portal.OpenURI.OpenURI", "", null,
-                    "{}"}, // Flatpak
+            {"gdbus", "call", "--session", "--dest", "org.freedesktop.portal.Desktop", "--object-path",
+                    "/org/freedesktop/portal/desktop", "--method", "org.freedesktop.portal.OpenURI.OpenURI",
+                    "", null, "{}"}, // Flatpak
             {"open", null}, // Mac OS fallback
             {"rundll32", "url.dll,FileProtocolHandler", null} // Windows fallback
     };
 
-    private static final String[] BROWSERS = new String[]{System.getenv("BROWSER"), "x-www-browser", "firefox",
-            "librewolf", "iceweasel", "seamonkey", "mozilla", "epiphany", "konqueror", "chromium", "chromium-browser"
-            , "google-chrome", "brave", "edge", "www-browser", "links2", "elinks", "links", "lynx:w3m"};
+    private static final String[] BROWSERS = new String[]{
+            System.getenv("BROWSER"),
+            "x-www-browser",
+            "firefox",
+            "librewolf",
+            "iceweasel",
+            "seamonkey",
+            "mozilla",
+            "epiphany",
+            "konqueror",
+            "chromium",
+            "chromium-browser",
+            "google-chrome",
+            "brave",
+            "edge",
+            "www-browser",
+            "links2",
+            "elinks",
+            "links",
+            "lynx:w3m"
+    };
 
     @Override
     public LootTable.Builder getCustomLootTable(BlockLootSubProvider provider) {

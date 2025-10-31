@@ -30,23 +30,21 @@ import java.util.List;
 public class Streetscum implements OreTemplate {
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (!(level instanceof ServerLevel) || player.preventsBlockDrops()) {
-            return;
-        }
-
-        Inventory inventory = player.getInventory();
-        List<Integer> availableItems = new ArrayList<>(inventory.getContainerSize());
-        for (int index = 0; index < inventory.getContainerSize(); index++) {
-            if (!inventory.getItem(index).isEmpty()) {
-                availableItems.add(index);
+        if (!level.isClientSide() && !player.preventsBlockDrops()) {
+            Inventory inventory = player.getInventory();
+            List<Integer> availableItems = new ArrayList<>(inventory.getContainerSize());
+            for (int index = 0; index < inventory.getContainerSize(); index++) {
+                if (!inventory.getItem(index).isEmpty()) {
+                    availableItems.add(index);
+                }
             }
-        }
 
-        int remove = level.getRandom().nextInt(availableItems.size() / 3 + 1);
-        for (int i = 0; i < remove; i++) {
-            int posIndex = level.getRandom().nextInt(availableItems.size());
-            inventory.setItem(availableItems.get(posIndex), ItemStack.EMPTY);
-            availableItems.remove(posIndex);
+            int remove = level.getRandom().nextInt(availableItems.size() / 3 + 1);
+            for (int i = 0; i < remove; i++) {
+                int posIndex = level.getRandom().nextInt(availableItems.size());
+                inventory.setItem(availableItems.get(posIndex), ItemStack.EMPTY);
+                availableItems.remove(posIndex);
+            }
         }
     }
 }

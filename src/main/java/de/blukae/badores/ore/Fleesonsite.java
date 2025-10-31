@@ -61,7 +61,6 @@ public class Fleesonsite implements OreTemplate {
     public static final Supplier<SoundEvent> FLEESONSITE_AMBIENT = BadOres.SOUND_EVENTS.register(
             "entity.fleesonsite" + ".ambient",
             SoundEvent::createVariableRangeEvent);
-
     public static final Supplier<SoundEvent> FLEESONSITE_DEATH = BadOres.SOUND_EVENTS.register(
             "entity.fleesonsite" + ".death",
             SoundEvent::createVariableRangeEvent);
@@ -129,11 +128,13 @@ public class Fleesonsite implements OreTemplate {
     @Override
     public InteractionResult onUseWithoutItem(BlockState state, Level level, BlockPos pos, Player player,
                                               HitResult hitResult) {
-        if (!level.isClientSide()) {
-            if (flee(level, pos, state)) {
+        if (state.is(BadOre.FLEESONSITE.ores)) {
+            if (!level.isClientSide()) {
+                flee(level, pos, state);
                 level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
-                return InteractionResult.SUCCESS_SERVER;
+                return InteractionResult.SUCCESS;
             }
+            return InteractionResult.SUCCESS_SERVER;
         }
         return InteractionResult.PASS;
     }
@@ -146,19 +147,13 @@ public class Fleesonsite implements OreTemplate {
         }
     }
 
-    private boolean flee(Level level, BlockPos pos, BlockState state) {
-        if (state.is(BadOre.FLEESONSITE.ores)) {
-            FleesonsiteEntity entity = FLEESONSITE_ENTITY_TYPE.get().create(level, EntitySpawnReason.TRIGGERED);
-            if (entity != null) {
-                entity.snapTo(pos.getBottomCenter());
-                entity.setDeepslate(state.is(BadOre.FLEESONSITE.deepslateOreBlock));
-                level.addFreshEntity(entity);
-                entity.spawnAnim();
-            }
-
-            return true;
+    private void flee(Level level, BlockPos pos, BlockState state) {
+        FleesonsiteEntity entity = FLEESONSITE_ENTITY_TYPE.get().create(level, EntitySpawnReason.TRIGGERED);
+        if (entity != null) {
+            entity.snapTo(pos.getBottomCenter());
+            entity.setDeepslate(state.is(BadOre.FLEESONSITE.deepslateOreBlock));
+            level.addFreshEntity(entity);
+            entity.spawnAnim();
         }
-
-        return false;
     }
 }

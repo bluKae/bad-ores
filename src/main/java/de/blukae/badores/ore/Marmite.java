@@ -36,7 +36,11 @@ public class Marmite implements OreTemplate {
 
     public static final DeferredItem<Item> MARMITE_BREAD_ITEM = BadOres.ITEMS.registerSimpleItem(
             "marmite_bread",
-            properties -> properties.food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.8F).build()));
+            properties -> properties
+                    .food(new FoodProperties.Builder()
+                        .nutrition(6)
+                        .saturationModifier(0.8F)
+                        .build()));
 
     @Override
     public boolean hasDeepslateVariant() {

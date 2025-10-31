@@ -57,7 +57,8 @@ public class BadOresBlockTags extends BlockTagsProvider {
             }
 
             if (ore.tools != null) {
-                tag(ore.tools.material.incorrectBlocksForDrops()).addTag(ore.template.getToolInfo().incorrectBlocksForDrops());
+                tag(ore.tools.material.incorrectBlocksForDrops())
+                        .addTag(ore.template.getToolInfo().incorrectBlocksForDrops());
             }
         }
     }

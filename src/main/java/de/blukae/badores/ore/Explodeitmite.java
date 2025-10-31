@@ -51,12 +51,12 @@ public class Explodeitmite implements OreTemplate {
 
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (level instanceof ServerLevel && level.getRandom().nextInt(4) == 0) {
-            explode((ServerLevel) level, pos);
+        if (!level.isClientSide() && level.getRandom().nextInt(4) == 0) {
+            explode(level, pos);
         }
     }
 
-    private void explode(ServerLevel level, BlockPos pos) {
+    private void explode(Level level, BlockPos pos) {
         Vec3 p = pos.getCenter().add(Direction.UP.getUnitVec3());
         level.explode(
                 null,

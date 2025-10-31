@@ -32,7 +32,9 @@ import net.neoforged.neoforge.event.EventHooks;
 public class Zombieunite implements OreTemplate {
     @Override
     public LootTable.Builder getCustomLootTable(BlockLootSubProvider provider) {
-        return LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(Items.ZOMBIE_HEAD)));
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(Items.ZOMBIE_HEAD)));
     }
 
     @Override

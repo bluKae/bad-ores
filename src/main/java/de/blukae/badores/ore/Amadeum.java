@@ -45,21 +45,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Amadeum implements OreTemplate {
-    public static final List<Holder<SoundEvent>> SOUNDS = Arrays.stream(NoteBlockInstrument.values())
+    private static final List<Holder<SoundEvent>> SOUNDS = Arrays.stream(NoteBlockInstrument.values())
             .filter(NoteBlockInstrument::isTunable)
             .map(NoteBlockInstrument::getSoundEvent)
-            .collect(Collectors.toList());
+            .toList();
 
-    public static void playRandomSound(Level level, Vec3 pos) {
+    private static void playRandomSound(Level level, Vec3 pos) {
         float pitch = NoteBlock.getPitchFromNote(level.random.nextInt(25));
         Holder<SoundEvent> sound = SOUNDS.get(level.random.nextInt(SOUNDS.size()));
         level.playSound(null, pos.x(), pos.y(), pos.z(), sound, SoundSource.BLOCKS, 3.0F, pitch);
-    }
-
-    public static void playRandomItemSound(Level level, Entity entity) {
-        if (level.random.nextInt(200) == 0) {
-            playRandomSound(level, entity.position());
-        }
     }
 
     @Override
@@ -101,6 +95,8 @@ public class Amadeum implements OreTemplate {
 
     @Override
     public void onInventoryTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot) {
-        playRandomItemSound(level, entity);
+        if (level.random.nextInt(200) == 0) {
+            playRandomSound(level, entity.position());
+        }
     }
 }

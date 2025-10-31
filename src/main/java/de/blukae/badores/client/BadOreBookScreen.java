@@ -35,7 +35,9 @@ import java.util.stream.Stream;
 
 public class BadOreBookScreen extends Screen {
 
-    private static final OreBookPage[] PAGES = Stream.concat(Arrays.stream(BadOre.values()), Stream.of(new Doesntevenexistium()))
+    private static final OreBookPage[] PAGES = Stream.concat(
+                    Arrays.stream(BadOre.values()),
+                    Stream.of(new Doesntevenexistium()))
             .sorted(Comparator.comparing(OreBookPage::getId))
             .toArray(OreBookPage[]::new);
 
@@ -68,9 +70,9 @@ public class BadOreBookScreen extends Screen {
                 page.getName().withStyle(ChatFormatting.UNDERLINE),
                 i + 40 + 4 + 16,
                 17,
-                -16777216,
+                0,
                 false);
-        guiGraphics.drawWordWrap(font, page.getDescription(), i + 40, 17 + 15, 115, -16777216, false);
+        guiGraphics.drawWordWrap(font, page.getDescription(), i + 40, 17 + 15, 115, 0, false);
 
         super.render(guiGraphics, mouseX, mouseY, partialFrames);
     }
@@ -81,7 +83,7 @@ public class BadOreBookScreen extends Screen {
             return true;
         }
 
-        switch (event.scancode()) {
+        switch (event.key()) {
             case 266 -> backButton.onPress(event);
             case 267 -> forwardButton.onPress(event);
 
@@ -98,19 +100,27 @@ public class BadOreBookScreen extends Screen {
         int i = (this.width - 192) / 2;
 
         backButton = this.addRenderableWidget(new PageButton(
-                i + 43, 159, false, button -> {
-            if (backButton.visible) {
-                currentPage--;
-            }
-            updateButtonVisibility();
-        }, true));
+                i + 43,
+                159,
+                false,
+                button -> {
+                    if (backButton.visible) {
+                        currentPage--;
+                    }
+                    updateButtonVisibility();
+                },
+                true));
         forwardButton = this.addRenderableWidget(new PageButton(
-                i + 116, 159, true, button -> {
-            if (forwardButton.visible) {
-                currentPage++;
-            }
-            updateButtonVisibility();
-        }, true));
+                i + 116,
+                159,
+                true,
+                button -> {
+                    if (forwardButton.visible) {
+                        currentPage++;
+                    }
+                    updateButtonVisibility();
+                },
+                true));
 
         updateButtonVisibility();
     }
