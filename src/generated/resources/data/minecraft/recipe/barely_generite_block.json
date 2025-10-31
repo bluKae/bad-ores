@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "badores:barely_generite_ingot"
+    "#": {
+      "item": "badores:barely_generite_ingot"
+    }
   },
   "pattern": [
     "###",

@@ -20,7 +20,6 @@ import de.blukae.badores.RandomTranslation;
 import de.blukae.badores.util.ArmorInfo;
 import de.blukae.badores.util.ToolInfo;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
@@ -67,15 +66,15 @@ public class Crashium implements OreTemplate {
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot) {
-        if (entity instanceof ServerPlayer player && level.random.nextInt(800) == 0) {
+    public void onArmorTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        if (!level.isClientSide() && level.random.nextInt(800) == 0 && entity instanceof ServerPlayer player) {
             crash(player);
         }
     }
 
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer && !player.preventsBlockDrops()) {
+        if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer && !player.isCreative()) {
             crash(serverPlayer);
         }
     }

@@ -4,7 +4,9 @@
   "cookingtime": 100,
   "experience": 0.7,
   "group": "marmite",
-  "ingredient": "badores:raw_marmite",
+  "ingredient": {
+    "item": "badores:raw_marmite"
+  },
   "result": {
     "count": 1,
     "id": "badores:marmite"

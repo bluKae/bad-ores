@@ -18,14 +18,11 @@ package de.blukae.badores.ore;
 
 import de.blukae.badores.util.ArmorInfo;
 import de.blukae.badores.util.ToolInfo;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,23 +48,10 @@ public class Nopium implements OreTemplate {
     }
 
     @Override
-    public void onInventoryTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot) {
-        if (entity instanceof LivingEntity livingEntity && level.random.nextInt(200) == 0) {
-            if (slot == null) {
-                if (livingEntity instanceof Player player) {
-                    Inventory inventory = player.getInventory();
-                    for (int index = 0; index < inventory.getContainerSize(); index++) {
-                        ItemStack s = inventory.getItem(index);
-                        if (s == stack) {
-                            inventory.setItem(index, ItemStack.EMPTY);
-                        }
-                    }
-                }
-            } else {
-                livingEntity.setItemSlot(slot, ItemStack.EMPTY);
-            }
-
-            livingEntity.drop(stack, true, true);
+    public void onInventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        if (!level.isClientSide() && entity instanceof Player player && level.random.nextInt(200) == 0) {
+            player.getInventory().setItem(slotId, ItemStack.EMPTY);
+            player.drop(stack, true, true);
         }
     }
 }

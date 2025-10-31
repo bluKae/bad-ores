@@ -76,7 +76,9 @@ public class Stonium implements OreTemplate {
 
     @Override
     public LootTable.Builder getCustomLootTable(BlockLootSubProvider provider) {
-        return LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(Items.COBBLESTONE)));
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(Items.COBBLESTONE)));
     }
 
     public static class StoniumFeature extends OreFeature {

@@ -20,27 +20,28 @@ import de.blukae.badores.BadOres;
 import de.blukae.badores.ore.BadOre;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.TagAppender;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
 public class BadOresBlockTags extends BlockTagsProvider {
-    public BadOresBlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(output, lookupProvider, BadOres.MOD_ID);
+    public BadOresBlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
+                            @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, lookupProvider, BadOres.MOD_ID, existingFileHelper);
     }
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        TagAppender<Block, Block> allOres = tag(BadOres.BAD_ORES_TAG);
+        IntrinsicTagAppender<Block> allOres = tag(BadOres.BAD_ORES_TAG);
 
         for (BadOre ore : BadOre.values()) {
             allOres.add(ore.oreBlock.get());
-            TagAppender<Block, Block> ores = tag(ore.ores).add(ore.oreBlock.get());
-            TagAppender<Block, Block> toolNeeded = tag(ore.template.toolTag()).add(ore.oreBlock.get());
+            IntrinsicTagAppender<Block> ores = tag(ore.ores).add(ore.oreBlock.get());
+            IntrinsicTagAppender<Block> toolNeeded = tag(ore.template.toolTag()).add(ore.oreBlock.get());
 
             if (ore.deepslateOreBlock != null) {
                 allOres.add(ore.deepslateOreBlock.get());
@@ -50,14 +51,15 @@ public class BadOresBlockTags extends BlockTagsProvider {
 
             TagKey<Block> levelTag = ore.template.levelTag();
             if (levelTag != null) {
-                TagAppender<Block, Block> mineableWith = tag(levelTag).add(ore.oreBlock.get());
+                IntrinsicTagAppender<Block> mineableWith = tag(levelTag).add(ore.oreBlock.get());
                 if (ore.deepslateOreBlock != null) {
                     mineableWith.add(ore.deepslateOreBlock.get());
                 }
             }
 
             if (ore.tools != null) {
-                tag(ore.tools.material.incorrectBlocksForDrops()).addTag(ore.template.getToolInfo().incorrectBlocksForDrops());
+                tag(ore.tools.tier.getIncorrectBlocksForDrops())
+                        .addTag(ore.template.getToolInfo().incorrectBlocksForDrops());
             }
         }
     }

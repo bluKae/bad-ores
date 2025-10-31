@@ -25,7 +25,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -65,7 +64,7 @@ public class Tauntum implements OreTemplate {
         if (mobSounds == null) {
             List<SoundEvent> sounds = BuiltInRegistries.ENTITY_TYPE.stream()
                     .map(entity -> {
-                        if (entity.create(level, EntitySpawnReason.MOB_SUMMONED) instanceof Mob mob) {
+                        if (entity.create(level) instanceof Mob mob) {
                             return ((MobMixin) mob).invokeGetAmbientSound();
                         }
                         return null;

@@ -4,7 +4,9 @@
   "cookingtime": 200,
   "experience": 0.7,
   "group": "enderite_ingot",
-  "ingredient": "badores:deepslate_enderite_ore",
+  "ingredient": {
+    "item": "badores:deepslate_enderite_ore"
+  },
   "result": {
     "count": 1,
     "id": "badores:enderite_ingot"

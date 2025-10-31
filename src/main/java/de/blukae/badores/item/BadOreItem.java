@@ -18,15 +18,12 @@ package de.blukae.badores.item;
 
 import de.blukae.badores.ore.OreTemplate;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 
 public class BadOreItem extends Item {
     public final OreTemplate template;
@@ -49,11 +46,8 @@ public class BadOreItem extends Item {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, ServerLevel level, Entity entity, @Nullable EquipmentSlot slot) {
-        super.inventoryTick(stack, level, entity, slot);
-        template.onInventoryTick(stack, level, entity, slot);
-        if (slot != null && slot.isArmor()) {
-            template.onArmorTick(stack, level, entity, slot);
-        }
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        super.inventoryTick(stack, level, entity, slotId, isSelected);
+        template.onInventoryTick(stack, level, entity, slotId, isSelected);
     }
 }

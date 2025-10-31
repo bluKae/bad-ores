@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "badores:raw_polite_block"
+    {
+      "item": "badores:raw_polite_block"
+    }
   ],
   "result": {
     "count": 9,

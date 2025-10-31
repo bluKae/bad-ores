@@ -16,13 +16,12 @@
 
 package de.blukae.badores.item;
 
-import de.blukae.badores.client.BadOreBookScreen;
 import de.blukae.badores.client.BadOresClient;
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class BadOreBookItem extends Item {
@@ -31,10 +30,11 @@ public class BadOreBookItem extends Item {
     }
 
     @Override
-    public InteractionResult use(Level level, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+        ItemStack itemstack = player.getItemInHand(usedHand);
         if (level.isClientSide()) {
             BadOresClient.openBadOreBook();
         }
-        return InteractionResult.SUCCESS;
+        return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
     }
 }

@@ -4,7 +4,9 @@
   "cookingtime": 200,
   "experience": 0.7,
   "group": "glowstone_from_smelting_lite",
-  "ingredient": "badores:lite_ore",
+  "ingredient": {
+    "item": "badores:lite_ore"
+  },
   "result": {
     "count": 1,
     "id": "minecraft:glowstone"

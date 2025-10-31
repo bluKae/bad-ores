@@ -16,7 +16,10 @@
 
 package de.blukae.badores.client;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import de.blukae.badores.BadOres;
+import de.blukae.badores.entity.FleesonsiteEntity;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -28,23 +31,35 @@ import net.minecraft.util.Mth;
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
-public class FleesonsiteEntityModel extends EntityModel<FleesonsiteEntityRenderer.State> {
+public class FleesonsiteEntityModel extends EntityModel<FleesonsiteEntity> {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer
     // and passed into this model's constructor
     public static final ModelLayerLocation LAYER = new ModelLayerLocation(BadOres.rl("fleesonsite"), "main");
 
-    private final ModelPart block = root.getChild("block");
-    private final ModelPart footright = root.getChild("footright");
-    private final ModelPart toeright1 = root.getChild("toeright1");
-    private final ModelPart toeright2 = root.getChild("toeright2");
-    private final ModelPart toeright3 = root.getChild("toeright3");
-    private final ModelPart footleft = root.getChild("footleft");
-    private final ModelPart toeleft1 = root.getChild("toeleft1");
-    private final ModelPart toeleft2 = root.getChild("toeleft2");
-    private final ModelPart toeleft3 = root.getChild("toeleft3");
+    private final ModelPart root;
+
+    private final ModelPart block;
+    private final ModelPart footright;
+    private final ModelPart toeright1;
+    private final ModelPart toeright2;
+    private final ModelPart toeright3;
+    private final ModelPart footleft;
+    private final ModelPart toeleft1;
+    private final ModelPart toeleft2;
+    private final ModelPart toeleft3;
 
     protected FleesonsiteEntityModel(ModelPart root) {
-        super(root);
+        this.root = root;
+
+        block = root.getChild("block");
+        footright = root.getChild("footright");
+        toeright1 = root.getChild("toeright1");
+        toeright2 = root.getChild("toeright2");
+        toeright3 = root.getChild("toeright3");
+        footleft = root.getChild("footleft");
+        toeleft1 = root.getChild("toeleft1");
+        toeleft2 = root.getChild("toeleft2");
+        toeleft3 = root.getChild("toeleft3");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -136,20 +151,22 @@ public class FleesonsiteEntityModel extends EntityModel<FleesonsiteEntityRendere
     }
 
     @Override
-    public void setupAnim(FleesonsiteEntityRenderer.State renderState) {
-        super.setupAnim(renderState);
-
-        float pos = renderState.walkAnimationPos;
-        float speed = renderState.walkAnimationSpeed;
-
-        block.yRot = 5f + Mth.cos(pos * 1.4f) * 2.5f * speed;
-        footright.xRot = Mth.cos(pos * 0.6662f) * 1.4f * speed;
+    public void setupAnim(FleesonsiteEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks,
+                          float netHeadYaw, float headPitch) {
+        block.yRot = 5f + Mth.cos(limbSwing * 1.4f) * 2.5f * limbSwingAmount;
+        footright.xRot = Mth.cos(limbSwing * 0.6662f) * 1.4f * limbSwingAmount;
         toeright1.xRot = footright.xRot;
         toeright2.xRot = footright.xRot;
         toeright3.xRot = footright.xRot;
-        footleft.xRot = Mth.cos(pos * 0.6662f + (float) Math.PI) * 1.4f * speed;
+        footleft.xRot = Mth.cos(limbSwing * 0.6662f + (float) Math.PI) * 1.4f * limbSwingAmount;
         toeleft1.xRot = footleft.xRot;
         toeleft2.xRot = footleft.xRot;
         toeleft3.xRot = footleft.xRot;
+    }
+
+    @Override
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay,
+                               int color) {
+        root.render(poseStack, buffer, packedLight, packedOverlay, color);
     }
 }

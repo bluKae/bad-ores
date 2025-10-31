@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "smite_gemstone",
   "ingredients": [
-    "badores:smite_block"
+    {
+      "item": "badores:smite_block"
+    }
   ],
   "result": {
     "count": 9,

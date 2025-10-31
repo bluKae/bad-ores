@@ -4,7 +4,9 @@
   "cookingtime": 200,
   "experience": 0.7,
   "group": "amadeum_ingot",
-  "ingredient": "badores:amadeum_ore",
+  "ingredient": {
+    "item": "badores:amadeum_ore"
+  },
   "result": {
     "count": 1,
     "id": "badores:amadeum_ingot"

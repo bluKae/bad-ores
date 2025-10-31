@@ -17,57 +17,74 @@
 package de.blukae.badores.util;
 
 import de.blukae.badores.BadOres;
-import de.blukae.badores.item.BadOreItem;
+import de.blukae.badores.item.BadOreArmorItem;
 import de.blukae.badores.ore.OreTemplate;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.equipment.ArmorMaterial;
-import net.minecraft.world.item.equipment.ArmorType;
-import net.minecraft.world.item.equipment.EquipmentAssets;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public class ArmorSet {
-    public final ArmorMaterial material;
+    public final Holder<ArmorMaterial> material;
 
-    public final DeferredItem<BadOreItem> helmet;
-    public final DeferredItem<BadOreItem> chestplate;
-    public final DeferredItem<BadOreItem> leggings;
-    public final DeferredItem<BadOreItem> boots;
+    public final DeferredItem<BadOreArmorItem> helmet;
+    public final DeferredItem<BadOreArmorItem> chestplate;
+    public final DeferredItem<BadOreArmorItem> leggings;
+    public final DeferredItem<BadOreArmorItem> boots;
 
-    public ArmorSet(String name, OreTemplate template, ArmorInfo info) {
-        material = new ArmorMaterial(
-                info.durability(),
-                new EnumMap<>(Map.of(ArmorType.HELMET,
-                        info.reductions()[0],
-                        ArmorType.CHESTPLATE,
-                        info.reductions()[1],
-                        ArmorType.LEGGINGS,
-                        info.reductions()[2],
-                        ArmorType.BOOTS,
-                        info.reductions()[3])),
-                info.enchantability(),
-                SoundEvents.ARMOR_EQUIP_GENERIC,
-                0.0f,
-                0.0f,
-                TagKey.create(Registries.ITEM, BadOres.rl("repairs_" + name + "_armor")),
-                ResourceKey.create(EquipmentAssets.ROOT_ID, BadOres.rl(name)));
+    public ArmorSet(String name, OreTemplate template, Supplier<Ingredient> repairIngredient, ArmorInfo info) {
+        material = BadOres.ARMOR_MATERIALS.register(
+                name, () -> new ArmorMaterial(
+                        new EnumMap<>(Map.of(
+                                ArmorItem.Type.HELMET,
+                                info.reductions()[0],
+                                ArmorItem.Type.CHESTPLATE,
+                                info.reductions()[1],
+                                ArmorItem.Type.LEGGINGS,
+                                info.reductions()[2],
+                                ArmorItem.Type.BOOTS,
+                                info.reductions()[3])),
+                        info.enchantability(),
+                        SoundEvents.ARMOR_EQUIP_GENERIC,
+                        repairIngredient,
+                        List.of(new ArmorMaterial.Layer(template.getEquipmentTextureLocation(name))),
+                        0.0f,
+                        0.0f));
 
         helmet = BadOres.ITEMS.registerItem(
                 name + "_helmet",
-                properties -> new BadOreItem(template, properties.humanoidArmor(material, ArmorType.HELMET)));
+                properties -> new BadOreArmorItem(
+                        template,
+                        material,
+                        ArmorItem.Type.HELMET,
+                        properties.durability(info.durability())));
         chestplate = BadOres.ITEMS.registerItem(
                 name + "_chestplate",
-                properties -> new BadOreItem(template, properties.humanoidArmor(material, ArmorType.CHESTPLATE)));
+                properties -> new BadOreArmorItem(
+                        template,
+                        material,
+                        ArmorItem.Type.CHESTPLATE,
+                        properties.durability(info.durability())));
         leggings = BadOres.ITEMS.registerItem(
                 name + "_leggings",
-                properties -> new BadOreItem(template, properties.humanoidArmor(material, ArmorType.LEGGINGS)));
+                properties -> new BadOreArmorItem(
+                        template,
+                        material,
+                        ArmorItem.Type.LEGGINGS,
+                        properties.durability(info.durability())));
         boots = BadOres.ITEMS.registerItem(
                 name + "_boots",
-                properties -> new BadOreItem(template, properties.humanoidArmor(material, ArmorType.BOOTS)));
+                properties -> new BadOreArmorItem(
+                        template,
+                        material,
+                        ArmorItem.Type.BOOTS,
+                        properties.durability(info.durability())));
     }
 }

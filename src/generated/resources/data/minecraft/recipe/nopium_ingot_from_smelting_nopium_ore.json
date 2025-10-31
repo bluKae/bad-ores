@@ -4,7 +4,9 @@
   "cookingtime": 200,
   "experience": 0.7,
   "group": "nopium_ingot",
-  "ingredient": "badores:nopium_ore",
+  "ingredient": {
+    "item": "badores:nopium_ore"
+  },
   "result": {
     "count": 1,
     "id": "badores:nopium_ingot"

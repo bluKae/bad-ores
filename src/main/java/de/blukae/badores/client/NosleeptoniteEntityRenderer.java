@@ -20,22 +20,15 @@ import de.blukae.badores.BadOres;
 import de.blukae.badores.entity.NosleeptoniteEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 
-public class NosleeptoniteEntityRenderer extends MobRenderer<NosleeptoniteEntity, LivingEntityRenderState,
-        NosleeptoniteEntityModel> {
+public class NosleeptoniteEntityRenderer extends MobRenderer<NosleeptoniteEntity, NosleeptoniteEntityModel> {
     public NosleeptoniteEntityRenderer(EntityRendererProvider.Context context) {
         super(context, new NosleeptoniteEntityModel(context.bakeLayer(NosleeptoniteEntityModel.LAYER)), 1.0F);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(LivingEntityRenderState renderState) {
+    public ResourceLocation getTextureLocation(NosleeptoniteEntity entity) {
         return BadOres.rl("textures/entity/nosleeptonite.png");
-    }
-
-    @Override
-    public LivingEntityRenderState createRenderState() {
-        return new LivingEntityRenderState();
     }
 }

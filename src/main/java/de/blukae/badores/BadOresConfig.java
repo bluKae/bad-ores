@@ -38,7 +38,11 @@ public class BadOresConfig {
 
     public static final ModConfigSpec.ConfigValue<List<? extends String>> ITEM_STRINGS =
             BUILDER.comment("A list of " + "items to log on common setup.")
-            .defineListAllowEmpty("items", List.of("minecraft:iron_ingot"), () -> "", BadOresConfig::validateItemName);
+                    .defineListAllowEmpty(
+                            "items",
+                            List.of("minecraft:iron_ingot"),
+                            () -> "",
+                            BadOresConfig::validateItemName);
 
     static final ModConfigSpec SPEC = BUILDER.build();
 

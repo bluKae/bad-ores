@@ -30,7 +30,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 @Mod(value = BadOres.MOD_ID, dist = Dist.CLIENT)
 @EventBusSubscriber(value = Dist.CLIENT)
@@ -55,16 +55,12 @@ public class BadOresClient {
         event.registerEntityRenderer(Nosleeptonite.NOSLEEPTONITE_ENTITY_TYPE.get(), NosleeptoniteEntityRenderer::new);
     }
 
-    @SubscribeEvent
-    public static void registerClientPayloadHandlers(RegisterClientPayloadHandlersEvent event) {
-        event.register(
-                RandomTranslation.TYPE, (data, context) -> {
-                    Player player = Minecraft.getInstance().player;
-                    if (player != null) {
-                        Minecraft.getInstance()
-                                .getChatListener()
-                                .handleSystemMessage(data.getRandomComponent(player.getRandom()), false);
-                    }
-                });
+    public static void handleRandomTranslation(final RandomTranslation data, final IPayloadContext context) {
+        Player player = Minecraft.getInstance().player;
+        if (player != null) {
+            Minecraft.getInstance()
+                    .getChatListener()
+                    .handleSystemMessage(data.getRandomComponent(player.getRandom()), false);
+        }
     }
 }

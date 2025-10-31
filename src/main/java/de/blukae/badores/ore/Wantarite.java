@@ -19,9 +19,8 @@ package de.blukae.badores.ore;
 import net.minecraft.core.BlockPos;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -37,10 +36,10 @@ public class Wantarite implements OreTemplate {
     @Override
     public void spawnAfterBreak(BlockState state, ServerLevel level, BlockPos pos, ItemStack stack,
                                 boolean dropExperience) {
-        Pig pig = EntityType.PIG.create(level, EntitySpawnReason.MOB_SUMMONED);
+        Pig pig = EntityType.PIG.create(level);
         if (pig != null) {
-            pig.snapTo(pos.getBottomCenter());
-            pig.setItemSlot(EquipmentSlot.SADDLE, Items.SADDLE.getDefaultInstance());
+            pig.moveTo(pos.getBottomCenter());
+            pig.equipSaddle(Items.SADDLE.getDefaultInstance(), SoundSource.BLOCKS);
             level.addFreshEntity(pig);
             pig.spawnAnim();
         }

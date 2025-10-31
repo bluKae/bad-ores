@@ -19,5 +19,6 @@ package de.blukae.badores.util;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
-public record ToolInfo(TagKey<Block> incorrectBlocksForDrops, int maxUses, float efficiency, float damage, int enchantability) {
+public record ToolInfo(TagKey<Block> incorrectBlocksForDrops, int maxUses, float efficiency, float damage,
+                       int enchantability) {
 }

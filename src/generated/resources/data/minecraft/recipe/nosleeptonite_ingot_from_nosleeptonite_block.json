@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "nosleeptonite_ingot",
   "ingredients": [
-    "badores:nosleeptonite_block"
+    {
+      "item": "badores:nosleeptonite_block"
+    }
   ],
   "result": {
     "count": 9,

@@ -26,7 +26,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -44,16 +43,15 @@ public class Killium implements OreTemplate {
             "mine_killium",
             MineKilliumTrigger::new);
 
-    private void killPlayer(ServerLevel level, LivingEntity entity) {
+    private void killPlayer(Level level, LivingEntity entity) {
         var damageType = level.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DAMAGE_TYPE);
-
-        entity.hurtServer(level, new DamageSource(damageType), Float.MAX_VALUE);
+        entity.hurt(new DamageSource(damageType), Float.MAX_VALUE);
     }
 
     @Override
-    public void onInventoryTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot) {
-        if (entity instanceof LivingEntity && level.random.nextInt(1000) == 0) {
-            killPlayer(level, (LivingEntity) entity);
+    public void onInventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        if (!level.isClientSide() && entity instanceof LivingEntity livingEntity && level.random.nextInt(1000) == 0) {
+            killPlayer(level, livingEntity);
         }
     }
 
@@ -62,8 +60,8 @@ public class Killium implements OreTemplate {
         if (!level.isClientSide()) {
             if (level.random.nextInt(5) == 0 && player instanceof ServerPlayer serverPlayer) {
                 MINE_KILLIUM_TRIGGER.get().trigger(serverPlayer);
-            } else if (level instanceof ServerLevel serverLevel) {
-                killPlayer(serverLevel, player);
+            } else {
+                killPlayer(level, player);
             }
         }
     }

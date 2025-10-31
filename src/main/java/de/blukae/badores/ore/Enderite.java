@@ -25,7 +25,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -59,46 +58,49 @@ public class Enderite implements OreTemplate {
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot) {
-        if (entity instanceof LivingEntity && level.random.nextInt(1000) == 0) {
-            teleportEntity(level, entity.blockPosition(), (LivingEntity) entity);
+    public void onArmorTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        if (!level.isClientSide() && entity instanceof LivingEntity livingEntity && level.random.nextInt(1000) == 0) {
+            teleportEntity(level, entity.blockPosition(), livingEntity);
         }
     }
 
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (level instanceof ServerLevel && willHarvest) {
-            teleportEntity((ServerLevel) level, pos, player);
+        if (!level.isClientSide() && willHarvest) {
+            teleportEntity(level, pos, player);
         }
     }
 
     @Override
     public void onMine(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity miningEntity) {
-        if (level instanceof ServerLevel && level.random.nextInt(5) == 0) {
-            teleportEntity((ServerLevel) level, miningEntity.blockPosition(), miningEntity);
+        if (!level.isClientSide() && level.random.nextInt(5) == 0) {
+            teleportEntity(level, miningEntity.blockPosition(), miningEntity);
         }
     }
 
-    private void teleportEntity(ServerLevel level, BlockPos origin, LivingEntity entity) {
+    private void teleportEntity(Level level, BlockPos origin, LivingEntity entity) {
         BlockPos pos = new BlockPos(
                 level.random.nextIntBetweenInclusive(origin.getX() - RADIUS, origin.getX() + RADIUS),
-                level.random.nextIntBetweenInclusive(level.getMinY() + 10, level.getMaxY() - 10),
+                level.random.nextIntBetweenInclusive(10, level.dimensionType().height() - 20) + level.dimensionType()
+                        .minY(),
                 level.random.nextIntBetweenInclusive(origin.getZ() - RADIUS, origin.getZ() + RADIUS));
 
         for (int i = 0; i < 128; i++) {
             double factor = i / 128.0;
             Vec3 particlePos = pos.getCenter().add(pos.subtract(origin).getCenter().multiply(factor, factor, factor));
 
-            level.sendParticles(
-                    ParticleTypes.PORTAL,
-                    particlePos.x,
-                    particlePos.y,
-                    particlePos.z,
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0);
+            if (level instanceof ServerLevel serverLevel) {
+                serverLevel.sendParticles(
+                        ParticleTypes.PORTAL,
+                        particlePos.x,
+                        particlePos.y,
+                        particlePos.z,
+                        1,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0);
+            }
         }
 
         Vec3 teleportPos = pos.getBottomCenter();

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "badores:amadeum_ingot"
+    "#": {
+      "item": "badores:amadeum_ingot"
+    }
   },
   "pattern": [
     "###",

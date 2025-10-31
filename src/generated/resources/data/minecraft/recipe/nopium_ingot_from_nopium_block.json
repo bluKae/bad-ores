@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "nopium_ingot",
   "ingredients": [
-    "badores:nopium_block"
+    {
+      "item": "badores:nopium_block"
+    }
   ],
   "result": {
     "count": 9,

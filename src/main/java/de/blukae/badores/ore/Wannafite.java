@@ -21,7 +21,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.player.Player;
@@ -49,13 +48,13 @@ public class Wannafite implements OreTemplate {
 
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (!level.isClientSide() && willHarvest && level instanceof ServerLevel serverLevel) {
+        if (!level.isClientSide() && willHarvest) {
             var damageType = level.registryAccess()
                     .lookup(Registries.DAMAGE_TYPE)
                     .orElseThrow()
                     .getOrThrow(DAMAGE_TYPE);
 
-            player.hurtServer(serverLevel, new DamageSource(damageType), 4.0f);
+            player.hurt(new DamageSource(damageType), 4.0f);
         }
     }
 }

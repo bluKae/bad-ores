@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "barely_generite_ingot",
   "ingredients": [
-    "badores:barely_generite_block"
+    {
+      "item": "badores:barely_generite_block"
+    }
   ],
   "result": {
     "count": 9,

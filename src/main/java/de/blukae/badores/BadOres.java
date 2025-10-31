@@ -19,6 +19,7 @@ package de.blukae.badores;
 import com.mojang.logging.LogUtils;
 import de.blukae.badores.advancement.MineBadOreTrigger;
 import de.blukae.badores.block.BadOreBlockEntity;
+import de.blukae.badores.client.BadOresClient;
 import de.blukae.badores.item.BadOreBookItem;
 import de.blukae.badores.item.BadOreItem;
 import de.blukae.badores.ore.BadOre;
@@ -33,19 +34,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -78,10 +73,13 @@ public class BadOres {
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MOD_ID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
-            DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE,
-            MOD_ID);
+            DeferredRegister.create(
+                    BuiltInRegistries.BLOCK_ENTITY_TYPE,
+                    MOD_ID);
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MOD_ID);
-    public static final DeferredRegister.Entities ENTITY_TYPES = DeferredRegister.createEntities(MOD_ID);
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(
+            BuiltInRegistries.ENTITY_TYPE,
+            MOD_ID);
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(
             BuiltInRegistries.CREATIVE_MODE_TAB,
             MOD_ID);
@@ -93,6 +91,9 @@ public class BadOres {
             MOD_ID);
     public static final DeferredRegister<CriterionTrigger<?>> TRIGGER_TYPES = DeferredRegister.create(
             BuiltInRegistries.TRIGGER_TYPES,
+            MOD_ID);
+    public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS = DeferredRegister.create(
+            BuiltInRegistries.ARMOR_MATERIAL,
             MOD_ID);
 
     public static final DeferredItem<BadOreBookItem> BAD_ORE_BOOK_ITEM = ITEMS.registerItem(
@@ -119,7 +120,7 @@ public class BadOres {
                         validBlocks.add(ore.deepslateOreBlock.get());
                     }
                 }
-                return new BlockEntityType<>(BadOreBlockEntity::new, validBlocks);
+                return new BlockEntityType<>(BadOreBlockEntity::new, validBlocks, null);
             });
 
     public static final Supplier<MineBadOreTrigger> MINE_BAD_ORE_TRIGGER = TRIGGER_TYPES.register(
@@ -141,6 +142,7 @@ public class BadOres {
         SOUND_EVENTS.register(modEventBus);
         TRIGGER_TYPES.register(modEventBus);
         FEATURES.register(modEventBus);
+        ARMOR_MATERIALS.register(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, BadOresConfig.SPEC);
     }
@@ -168,7 +170,10 @@ public class BadOres {
     @SubscribeEvent
     public static void registerPayloadHandlers(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar("1");
-        registrar.commonToClient(RandomTranslation.TYPE, RandomTranslation.STREAM_CODEC);
+        registrar.commonToClient(
+                RandomTranslation.TYPE,
+                RandomTranslation.STREAM_CODEC,
+                BadOresClient::handleRandomTranslation);
     }
 
     @SubscribeEvent

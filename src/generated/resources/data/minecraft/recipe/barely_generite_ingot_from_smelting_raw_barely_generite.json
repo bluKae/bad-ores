@@ -4,7 +4,9 @@
   "cookingtime": 200,
   "experience": 0.7,
   "group": "barely_generite_ingot",
-  "ingredient": "badores:raw_barely_generite",
+  "ingredient": {
+    "item": "badores:raw_barely_generite"
+  },
   "result": {
     "count": 1,
     "id": "badores:barely_generite_ingot"

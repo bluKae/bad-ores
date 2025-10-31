@@ -22,10 +22,7 @@ import de.blukae.badores.ore.Fleesonsite;
 import de.blukae.badores.ore.Marmite;
 import de.blukae.badores.ore.Nosleeptonite;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.LanguageProvider;
-
-import java.util.function.Supplier;
 
 public class BadOresTranslations extends LanguageProvider {
     public BadOresTranslations(PackOutput output) {
@@ -358,11 +355,6 @@ public class BadOresTranslations extends LanguageProvider {
                 "website",
                 "This ore has discovered a way to break the 4th wall and found a tunnel out of the " + "box. It " +
                         "slowly discoveres the infinite possibilities outside of Minecraft.");
-    }
-
-    public void addBlock(Supplier<? extends Block> key, String name) {
-        super.addBlock(key, name);
-        add(key.get().asItem(), name);
     }
 
     public void addRandom(String key, String... values) {

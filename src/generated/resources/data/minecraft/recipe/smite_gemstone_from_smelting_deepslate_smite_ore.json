@@ -4,7 +4,9 @@
   "cookingtime": 200,
   "experience": 0.7,
   "group": "smite_gemstone",
-  "ingredient": "badores:deepslate_smite_ore",
+  "ingredient": {
+    "item": "badores:deepslate_smite_ore"
+  },
   "result": {
     "count": 1,
     "id": "badores:smite_gemstone"

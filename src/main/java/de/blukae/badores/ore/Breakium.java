@@ -18,6 +18,7 @@ package de.blukae.badores.ore;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -29,7 +30,7 @@ public class Breakium implements OreTemplate {
         if (!level.isClientSide()) {
             ItemStack tool = player.getItemInHand(InteractionHand.MAIN_HAND);
             if (!tool.isEmpty()) {
-                tool.hurtAndBreak(tool.getMaxDamage() - tool.getDamageValue(), player, InteractionHand.MAIN_HAND);
+                tool.hurtAndBreak(tool.getMaxDamage() - tool.getDamageValue(), player, EquipmentSlot.MAINHAND);
             }
         }
     }

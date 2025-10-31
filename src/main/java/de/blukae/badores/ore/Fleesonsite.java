@@ -21,6 +21,7 @@ import de.blukae.badores.block.BadOreBlockEntity;
 import de.blukae.badores.entity.FleesonsiteEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.nbt.CompoundTag;
@@ -30,20 +31,20 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
-import net.minecraft.world.item.component.TypedEntityData;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.HitResult;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.Nullable;
 
@@ -52,16 +53,15 @@ import java.util.function.Supplier;
 public class Fleesonsite implements OreTemplate {
 
     public static final Supplier<EntityType<FleesonsiteEntity>> FLEESONSITE_ENTITY_TYPE =
-            BadOres.ENTITY_TYPES.registerEntityType(
-            "fleesonsite",
-            FleesonsiteEntity::new,
-            MobCategory.CREATURE,
-            builder -> builder.sized(1.0f, 1.0f));
+            BadOres.ENTITY_TYPES.register(
+                    "fleesonsite",
+                    () -> EntityType.Builder.of(FleesonsiteEntity::new, MobCategory.CREATURE)
+                            .sized(1.0f, 1.0f)
+                            .build("fleesonsite"));
 
     public static final Supplier<SoundEvent> FLEESONSITE_AMBIENT = BadOres.SOUND_EVENTS.register(
             "entity.fleesonsite" + ".ambient",
             SoundEvent::createVariableRangeEvent);
-
     public static final Supplier<SoundEvent> FLEESONSITE_DEATH = BadOres.SOUND_EVENTS.register(
             "entity.fleesonsite" + ".death",
             SoundEvent::createVariableRangeEvent);
@@ -71,16 +71,24 @@ public class Fleesonsite implements OreTemplate {
 
     public static final DeferredItem<SpawnEggItem> FLEESONSITE_SPAWN_EGG = BadOres.ITEMS.registerItem(
             "fleesonsite_spawn_egg",
-            SpawnEggItem::new,
-            properties -> properties.spawnEgg(FLEESONSITE_ENTITY_TYPE.get()));
+            properties -> new DeferredSpawnEggItem(
+                    FLEESONSITE_ENTITY_TYPE,
+                    0x8F8F8F,
+                    0x2CE4F9,
+                    properties));
 
     public static final DeferredItem<SpawnEggItem> DEEPSLATE_FLEESONSITE_SPAWN_EGG = BadOres.ITEMS.registerItem(
-            "deepslate_fleesonsite_spawn_egg", SpawnEggItem::new, properties -> {
+            "deepslate_fleesonsite_spawn_egg",
+            properties -> {
                 CompoundTag tag = new CompoundTag();
+                tag.putString("id", BuiltInRegistries.ENTITY_TYPE.getKey(FLEESONSITE_ENTITY_TYPE.get()).toString());
                 tag.putBoolean("IsDeepslate", true);
-                return properties.component(
-                        DataComponents.ENTITY_DATA,
-                        TypedEntityData.of(FLEESONSITE_ENTITY_TYPE.get(), tag));
+
+                return new DeferredSpawnEggItem(
+                        FLEESONSITE_ENTITY_TYPE,
+                        0x626262,
+                        0x2CE4F9,
+                        properties.component(DataComponents.ENTITY_DATA, CustomData.of(tag)));
             });
 
     public static final TagKey<Item> FLEESONSITE_JUMP = TagKey.create(Registries.ITEM, BadOres.rl("fleesonsite_jump"));
@@ -129,12 +137,15 @@ public class Fleesonsite implements OreTemplate {
     @Override
     public InteractionResult onUseWithoutItem(BlockState state, Level level, BlockPos pos, Player player,
                                               HitResult hitResult) {
-        if (!level.isClientSide()) {
-            if (flee(level, pos, state)) {
+        if (state.is(BadOre.FLEESONSITE.ores)) {
+            if (!level.isClientSide()) {
+                flee(level, pos, state);
                 level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
-                return InteractionResult.SUCCESS_SERVER;
+                return InteractionResult.SUCCESS;
             }
+            return InteractionResult.sidedSuccess(level.isClientSide());
         }
+
         return InteractionResult.PASS;
     }
 
@@ -146,19 +157,13 @@ public class Fleesonsite implements OreTemplate {
         }
     }
 
-    private boolean flee(Level level, BlockPos pos, BlockState state) {
-        if (state.is(BadOre.FLEESONSITE.ores)) {
-            FleesonsiteEntity entity = FLEESONSITE_ENTITY_TYPE.get().create(level, EntitySpawnReason.TRIGGERED);
-            if (entity != null) {
-                entity.snapTo(pos.getBottomCenter());
-                entity.setDeepslate(state.is(BadOre.FLEESONSITE.deepslateOreBlock));
-                level.addFreshEntity(entity);
-                entity.spawnAnim();
-            }
-
-            return true;
+    private void flee(Level level, BlockPos pos, BlockState state) {
+        FleesonsiteEntity entity = FLEESONSITE_ENTITY_TYPE.get().create(level);
+        if (entity != null) {
+            entity.moveTo(pos.getBottomCenter());
+            entity.setDeepslate(state.is(BadOre.FLEESONSITE.deepslateOreBlock));
+            level.addFreshEntity(entity);
+            entity.spawnAnim();
         }
-
-        return false;
     }
 }

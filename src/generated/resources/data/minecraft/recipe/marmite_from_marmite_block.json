@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "marmite",
   "ingredients": [
-    "badores:marmite_block"
+    {
+      "item": "badores:marmite_block"
+    }
   ],
   "result": {
     "count": 9,

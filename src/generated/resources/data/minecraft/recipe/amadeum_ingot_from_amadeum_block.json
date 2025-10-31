@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "amadeum_ingot",
   "ingredients": [
-    "badores:amadeum_block"
+    {
+      "item": "badores:amadeum_block"
+    }
   ],
   "result": {
     "count": 9,

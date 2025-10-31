@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "badores:raw_barely_generite_block"
+    {
+      "item": "badores:raw_barely_generite_block"
+    }
   ],
   "result": {
     "count": 9,

@@ -44,7 +44,7 @@ public class Meteorite implements OreTemplate {
                     Blocks.NETHERRACK.defaultBlockState();
             for (int i = 0; i < number; i++) {
                 double spawnX = pos.getX() + METEORITE_SPAWN_SIDE * (random.nextDouble() - random.nextDouble() - 0.5);
-                double spawnY = level.getMaxY() + 5.0;
+                double spawnY = level.dimensionType().minY() + level.dimensionType().height() + 5.0;
                 double spawnZ = pos.getZ() + METEORITE_SPAWN_SIDE * (random.nextDouble() - random.nextDouble() - 0.5);
 
                 FallingBlockEntity entity = new FallingBlockEntity(level, spawnX, spawnY, spawnZ, spawnState);

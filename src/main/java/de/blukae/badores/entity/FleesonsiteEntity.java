@@ -17,6 +17,7 @@
 package de.blukae.badores.entity;
 
 import de.blukae.badores.ore.BadOre;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -29,8 +30,6 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.Nullable;
 
 public class FleesonsiteEntity extends PathfinderMob {
@@ -94,15 +93,15 @@ public class FleesonsiteEntity extends PathfinderMob {
     }
 
     @Override
-    protected void addAdditionalSaveData(ValueOutput output) {
-        super.addAdditionalSaveData(output);
-        output.putBoolean("IsDeepslate", isDeepslate());
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
+        compound.putBoolean("IsDeepslate", isDeepslate());
     }
 
     @Override
-    protected void readAdditionalSaveData(ValueInput input) {
-        super.readAdditionalSaveData(input);
-        setDeepslate(input.getBooleanOr("IsDeepslate", false));
+    public void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
+        setDeepslate(compound.getBoolean("IsDeepslate"));
     }
 
     @Override

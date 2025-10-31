@@ -20,34 +20,17 @@ import de.blukae.badores.BadOres;
 import de.blukae.badores.entity.FleesonsiteEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 
-public class FleesonsiteEntityRenderer extends MobRenderer<FleesonsiteEntity, FleesonsiteEntityRenderer.State,
-        FleesonsiteEntityModel> {
+public class FleesonsiteEntityRenderer extends MobRenderer<FleesonsiteEntity, FleesonsiteEntityModel> {
     public FleesonsiteEntityRenderer(EntityRendererProvider.Context context) {
         super(context, new FleesonsiteEntityModel(context.bakeLayer(FleesonsiteEntityModel.LAYER)), 1.0F);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(State renderState) {
-        return renderState.isDeepslate ?
+    public ResourceLocation getTextureLocation(FleesonsiteEntity entity) {
+        return entity.isDeepslate() ?
                 BadOres.rl("textures/entity/deepslate_fleesonsite.png") :
                 BadOres.rl("textures/entity/fleesonsite.png");
-    }
-
-    @Override
-    public void extractRenderState(FleesonsiteEntity entity, State state, float partialFrames) {
-        super.extractRenderState(entity, state, partialFrames);
-        state.isDeepslate = entity.isDeepslate();
-    }
-
-    @Override
-    public State createRenderState() {
-        return new State();
-    }
-
-    public static class State extends LivingEntityRenderState {
-        public boolean isDeepslate = false;
     }
 }

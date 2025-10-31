@@ -34,18 +34,19 @@ import net.minecraft.advancements.critereon.RecipeCraftedTrigger;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.data.AdvancementProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.function.Consumer;
 
-public class BadOresAdvancements implements AdvancementSubProvider {
+public class BadOresAdvancements implements AdvancementProvider.AdvancementGenerator {
     @Override
-    public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> writer) {
+    public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> saver,
+                         ExistingFileHelper existingFileHelper) {
         HolderGetter<EntityType<?>> entityTypes = registries.lookupOrThrow(Registries.ENTITY_TYPE);
         HolderGetter<Block> blocks = registries.lookupOrThrow(Registries.BLOCK);
 
@@ -60,7 +61,7 @@ public class BadOresAdvancements implements AdvancementSubProvider {
                         false,
                         false)
                 .addCriterion("mine_bad_ore", MineBadOreTrigger.TriggerInstance.minedAny())
-                .save(writer, BadOres.rl("badores/root"));
+                .save(saver, BadOres.rl("badores/root"), existingFileHelper);
 
         AdvancementHolder findBarelyGenerite = Advancement.Builder.advancement()
                 .display(
@@ -80,7 +81,7 @@ public class BadOresAdvancements implements AdvancementSubProvider {
                 .addCriterion(
                         "has_deepslate_barely_generite",
                         InventoryChangeTrigger.TriggerInstance.hasItems(BadOre.BARELY_GENERITE.deepslateOreBlock))
-                .save(writer, BadOres.rl("badores/find_barely_generite"));
+                .save(saver, BadOres.rl("badores/find_barely_generite"), existingFileHelper);
 
         Advancement.Builder.advancement()
                 .parent(findBarelyGenerite)
@@ -95,10 +96,9 @@ public class BadOresAdvancements implements AdvancementSubProvider {
                         false)
                 .addCriterion(
                         "craft_barely_generite_block",
-                        RecipeCraftedTrigger.TriggerInstance.craftedItem(ResourceKey.create(
-                                Registries.RECIPE,
-                                ResourceLocation.withDefaultNamespace("barely_generite_block"))))
-                .save(writer, BadOres.rl("badores/craft_barely_generite_block"));
+                        RecipeCraftedTrigger.TriggerInstance.craftedItem(
+                                ResourceLocation.withDefaultNamespace("barely_generite_block")))
+                .save(saver, BadOres.rl("badores/craft_barely_generite_block"), existingFileHelper);
 
         Advancement.Builder.advancement()
                 .parent(root)
@@ -112,7 +112,7 @@ public class BadOresAdvancements implements AdvancementSubProvider {
                         true,
                         false)
                 .addCriterion("deal_iwontfite_damage", HurtIwontfiteTrigger.TriggerInstance.hurtWithIwontfite())
-                .save(writer, BadOres.rl("badores" + "/deal_iwontfite_damage"));
+                .save(saver, BadOres.rl("badores" + "/deal_iwontfite_damage"), existingFileHelper);
 
         Advancement.Builder.advancement()
                 .parent(root)
@@ -128,8 +128,8 @@ public class BadOresAdvancements implements AdvancementSubProvider {
                 .addCriterion(
                         "kill_nosleeptonite",
                         KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity()
-                                .of(entityTypes, Nosleeptonite.NOSLEEPTONITE_ENTITY_TYPE.get())))
-                .save(writer, BadOres.rl("badores/kill_nosleeptonite"));
+                                .of(Nosleeptonite.NOSLEEPTONITE_ENTITY_TYPE.get())))
+                .save(saver, BadOres.rl("badores/kill_nosleeptonite"), existingFileHelper);
 
         Advancement.Builder mineAllOresBuilder = Advancement.Builder.advancement().parent(findBarelyGenerite).display(
                 BadOres.BAD_ORE_BOOK_ITEM,
@@ -145,7 +145,7 @@ public class BadOresAdvancements implements AdvancementSubProvider {
                     "mine_" + ore.name + "_ore",
                     MineBadOreTrigger.TriggerInstance.minedTag(blocks, ore.ores));
         }
-        mineAllOresBuilder.save(writer, BadOres.rl("badores/mine_all_ores"));
+        mineAllOresBuilder.save(saver, BadOres.rl("badores/mine_all_ores"), existingFileHelper);
 
         Advancement.Builder.advancement()
                 .parent(root)
@@ -159,7 +159,7 @@ public class BadOresAdvancements implements AdvancementSubProvider {
                         true,
                         false)
                 .addCriterion("mine_killium", MineKilliumTrigger.TriggerInstance.minedSafely())
-                .save(writer, BadOres.rl("badores/mine_killium"));
+                .save(saver, BadOres.rl("badores/mine_killium"), existingFileHelper);
 
         Advancement.Builder.advancement()
                 .parent(root)
@@ -175,7 +175,7 @@ public class BadOresAdvancements implements AdvancementSubProvider {
                 .addCriterion(
                         "has_marmite_bread",
                         InventoryChangeTrigger.TriggerInstance.hasItems(Marmite.MARMITE_BREAD_ITEM))
-                .save(writer, BadOres.rl("badores/obtain_marmite_bread"));
+                .save(saver, BadOres.rl("badores/obtain_marmite_bread"), existingFileHelper);
 
         Advancement.Builder.advancement()
                 .parent(root)
@@ -191,7 +191,7 @@ public class BadOresAdvancements implements AdvancementSubProvider {
                 .addCriterion(
                         "mine_zombieunite",
                         MineBadOreTrigger.TriggerInstance.minedTag(blocks, BadOre.ZOMBIEUNITE.ores))
-                .save(writer, BadOres.rl("badores/mine_zombieunite"));
+                .save(saver, BadOres.rl("badores/mine_zombieunite"), existingFileHelper);
 
         Advancement.Builder.advancement()
                 .parent(root)
@@ -207,7 +207,7 @@ public class BadOresAdvancements implements AdvancementSubProvider {
                 .addCriterion(
                         "has_fleesonite_ingot",
                         InventoryChangeTrigger.TriggerInstance.hasItems(BadOre.FLEESONSITE.ingot))
-                .save(writer, BadOres.rl("badores/obtain_fleesonite_ingot"));
+                .save(saver, BadOres.rl("badores/obtain_fleesonite_ingot"), existingFileHelper);
 
         Advancement.Builder.advancement()
                 .parent(root)
@@ -227,6 +227,6 @@ public class BadOresAdvancements implements AdvancementSubProvider {
                 .addCriterion(
                         "has_deepslate_shiftium_ore",
                         InventoryChangeTrigger.TriggerInstance.hasItems(BadOre.SHIFTIUM.deepslateOreBlock))
-                .save(writer, BadOres.rl("badores/obtain_shiftium_ore"));
+                .save(saver, BadOres.rl("badores/obtain_shiftium_ore"), existingFileHelper);
     }
 }

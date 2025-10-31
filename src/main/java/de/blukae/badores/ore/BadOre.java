@@ -31,6 +31,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -46,41 +47,56 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import javax.annotation.Nullable;
 
 public enum BadOre implements OreBookPage {
-    AMADEUM(new Amadeum()), APPETITE(new Appetite()), BALANCIUM(new Balancium()),
-    BARELY_GENERITE(new BarelyGenerite()), BREAKIUM(
-            new Breakium()), CRAPPIUM(new Crappium()), CRASHIUM(new Crashium()), ENDERITE(new Enderite()),
-    EXPLODEITMITE(
-            new Explodeitmite()), FLEESONSITE(new Fleesonsite()), GHOSTIUM(new Ghostium()),
-    IDLIKEABITE(new Idlikeabite()), IWONTFITE(
-            new Iwontfite()), KAKKARITE(new Kakkarite()), KILLIUM(new Killium()), LITE(new Lite()), LOOKSLIKEDIAMONDIUM(
-            new Lookslikediamondium()), MARMITE(new Marmite()), METEORITE(new Meteorite()),
-    MISLEADIUM(new Misleadium()), MOVIUM(
-            new Movium()), NOPIUM(new Nopium()), NOSLEEPTONITE(new Nosleeptonite()), PAINTITWHITE(new Paintitwhite())
-    , PANDAEMONIUM(
-            new Pandaemonium()), POLITE(new Polite()), SHIFTIUM(new Shiftium()), SMITE(new Smite()),
-    STONIUM(new Stonium()), STREETSCUM(
-            new Streetscum()), TAUNTUM(new Tauntum()), UNOBTAINIUM(new Unobtainium()), USELESSIUM(new Uselessium()),
-    WANNAFITE(
-            new Wannafite()), WANTARITE(new Wantarite()), WEBSITE(new Website()), ZOMBIEUNITE(new Zombieunite());
+    AMADEUM(new Amadeum()),
+    APPETITE(new Appetite()),
+    BALANCIUM(new Balancium()),
+    BARELY_GENERITE(new BarelyGenerite()),
+    BREAKIUM(new Breakium()),
+    CRAPPIUM(new Crappium()),
+    CRASHIUM(new Crashium()),
+    ENDERITE(new Enderite()),
+    EXPLODEITMITE(new Explodeitmite()),
+    FLEESONSITE(new Fleesonsite()),
+    GHOSTIUM(new Ghostium()),
+    IDLIKEABITE(new Idlikeabite()),
+    IWONTFITE(new Iwontfite()),
+    KAKKARITE(new Kakkarite()),
+    KILLIUM(new Killium()),
+    LITE(new Lite()),
+    LOOKSLIKEDIAMONDIUM(new Lookslikediamondium()),
+    MARMITE(new Marmite()),
+    METEORITE(new Meteorite()),
+    MISLEADIUM(new Misleadium()),
+    MOVIUM(new Movium()),
+    NOPIUM(new Nopium()),
+    NOSLEEPTONITE(new Nosleeptonite()),
+    PAINTITWHITE(new Paintitwhite()),
+    PANDAEMONIUM(new Pandaemonium()),
+    POLITE(new Polite()),
+    SHIFTIUM(new Shiftium()),
+    SMITE(new Smite()),
+    STONIUM(new Stonium()),
+    STREETSCUM(new Streetscum()),
+    TAUNTUM(new Tauntum()),
+    UNOBTAINIUM(new Unobtainium()),
+    USELESSIUM(new Uselessium()),
+    WANNAFITE(new Wannafite()),
+    WANTARITE(new Wantarite()),
+    WEBSITE(new Website()),
+    ZOMBIEUNITE(new Zombieunite());
 
     public final OreTemplate template;
 
     public final String name = this.name().toLowerCase();
 
     public final DeferredBlock<BadOreBlock> oreBlock;
-    @Nullable
     public final DeferredBlock<BadOreBlock> deepslateOreBlock;
-    @Nullable
     public final DeferredBlock<BadOreBlock> rawIngotBlock;
-    @Nullable
     public final DeferredBlock<BadOreBlock> ingotBlock;
-    @Nullable
     public final DeferredItem<BadOreItem> rawIngot;
-    @Nullable
     public final DeferredItem<BadOreItem> ingot;
-    @Nullable
+
     public final ArmorSet armor;
-    @Nullable
     public final ToolSet tools;
 
     public final ResourceKey<ConfiguredFeature<?, ?>> configuredFeature = ResourceKey.create(
@@ -104,7 +120,7 @@ public enum BadOre implements OreBookPage {
         oreBlock = BadOres.BLOCKS.registerBlock(
                 name + "_ore",
                 properties -> new BadOreBlock(template, true, properties),
-                () -> template.getOreBlockProperties(false));
+                template.getOreBlockProperties(false));
         BadOres.ITEMS.registerItem(
                 name + "_ore",
                 properties -> new BadOreBlockItem(template, oreBlock.get(), properties));
@@ -113,7 +129,7 @@ public enum BadOre implements OreBookPage {
             deepslateOreBlock = BadOres.BLOCKS.registerBlock(
                     "deepslate_" + name + "_ore",
                     properties -> new BadOreBlock(template, true, properties),
-                    () -> template.getOreBlockProperties(true));
+                    template.getOreBlockProperties(true));
             BadOres.ITEMS.registerItem(
                     "deepslate_" + name + "_ore",
                     properties -> new BadOreBlockItem(template, deepslateOreBlock.get(), properties));
@@ -125,7 +141,7 @@ public enum BadOre implements OreBookPage {
             rawIngotBlock = BadOres.BLOCKS.registerBlock(
                     "raw_" + name + "_block",
                     properties -> new BadOreBlock(template, false, properties),
-                    () -> BlockBehaviour.Properties.of()
+                    BlockBehaviour.Properties.of()
                             .mapColor(mapColor)
                             .instrument(NoteBlockInstrument.BASEDRUM)
                             .requiresCorrectToolForDrops()
@@ -141,12 +157,12 @@ public enum BadOre implements OreBookPage {
             ingotBlock = BadOres.BLOCKS.registerBlock(
                     name + "_block",
                     properties -> new BadOreBlock(template, false, properties),
-                    () -> BlockBehaviour.Properties.of()
+                    BlockBehaviour.Properties.of()
                             .mapColor(mapColor)
                             .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
                             .requiresCorrectToolForDrops()
                             .strength(5.0F, 6.0F)
-                            .sound(SoundType.IRON));
+                            .sound(SoundType.METAL));
             BadOres.ITEMS.registerItem(
                     name + "_block",
                     properties -> new BadOreBlockItem(template, ingotBlock.get(), properties));
@@ -157,19 +173,18 @@ public enum BadOre implements OreBookPage {
         rawIngot = template.hasRawIngot() ?
                 BadOres.ITEMS.registerItem(
                         "raw_" + name,
-                        properties -> new BadOreItem(template, properties),
-                        properties -> properties) :
+                        properties -> new BadOreItem(template, properties)) :
                 null;
         ingot = template.hasIngot() ? BadOres.ITEMS.registerItem(
                 template.getIngotName(name),
-                properties -> new BadOreItem(template, properties),
-                properties -> properties) : null;
+                properties -> new BadOreItem(template, properties)) :
+                null;
 
         ArmorInfo armorInfo = template.getArmorInfo();
-        armor = armorInfo != null ? new ArmorSet(name, template, armorInfo) : null;
+        armor = armorInfo != null ? new ArmorSet(name, template, () -> Ingredient.of(ingot), armorInfo) : null;
 
         ToolInfo toolInfo = template.getToolInfo();
-        tools = toolInfo != null ? new ToolSet(name, template, toolInfo) : null;
+        tools = toolInfo != null ? new ToolSet(name, template, () -> Ingredient.of(ingot), toolInfo) : null;
     }
 
     @Override

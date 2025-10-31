@@ -4,7 +4,9 @@
   "cookingtime": 200,
   "experience": 0.7,
   "group": "uselessium_ingot",
-  "ingredient": "badores:deepslate_uselessium_ore",
+  "ingredient": {
+    "item": "badores:deepslate_uselessium_ore"
+  },
   "result": {
     "count": 1,
     "id": "badores:uselessium_ingot"

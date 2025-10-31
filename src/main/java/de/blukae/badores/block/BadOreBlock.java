@@ -24,6 +24,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -36,10 +37,13 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class BadOreBlock extends Block implements EntityBlock {
     @Nullable
@@ -63,12 +67,8 @@ public class BadOreBlock extends Block implements EntityBlock {
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state,
                                                                             BlockEntityType<T> blockEntityType) {
         if (blockEntityType == BadOres.BAD_ORE_BLOCK_ENTITY.get() && tickRate != null) {
-            return (level1, pos, state1, blockEntity) -> ((BadOreBlockEntity) blockEntity).tick(
-                    level1,
-                    pos,
-                    state1,
-                    template,
-                    tickRate);
+            return (level1, pos, state1, blockEntity) -> ((BadOreBlockEntity) blockEntity)
+                    .tick(level1, pos, state1, template, tickRate);
         }
 
         return null;
@@ -81,9 +81,13 @@ public class BadOreBlock extends Block implements EntityBlock {
     }
 
     @Override
-    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player
-            , InteractionHand hand, BlockHitResult hitResult) {
-        return template.onUseItemOn(stack, state, level, pos, player, hand, hitResult);
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
+                                              Player player, InteractionHand hand, BlockHitResult hitResult) {
+        ItemInteractionResult result = template.onUseItemOn(stack, state, level, pos, player, hand, hitResult);
+        if (result != null) {
+            return result;
+        }
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
     @Override
@@ -125,13 +129,13 @@ public class BadOreBlock extends Block implements EntityBlock {
 
     @Override
     public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player,
-                                       ItemStack toolStack, boolean willHarvest, FluidState fluid) {
+                                       boolean willHarvest, FluidState fluid) {
         template.onDestroyedByPlayer(state, level, pos, player, willHarvest);
-        return super.onDestroyedByPlayer(state, level, pos, player, toolStack, willHarvest, fluid);
+        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
     }
 
     @Override
-    public void onBlockExploded(BlockState state, ServerLevel level, BlockPos pos, Explosion explosion) {
+    public void onBlockExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
         super.onBlockExploded(state, level, pos, explosion);
         template.onExploded(state, level, pos, explosion);
     }

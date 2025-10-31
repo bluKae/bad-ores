@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "enderite_ingot",
   "ingredients": [
-    "badores:enderite_block"
+    {
+      "item": "badores:enderite_block"
+    }
   ],
   "result": {
     "count": 9,

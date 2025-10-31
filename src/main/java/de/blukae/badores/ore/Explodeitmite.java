@@ -17,7 +17,6 @@
 package de.blukae.badores.ore;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
@@ -51,13 +50,13 @@ public class Explodeitmite implements OreTemplate {
 
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (level instanceof ServerLevel && level.getRandom().nextInt(4) == 0) {
-            explode((ServerLevel) level, pos);
+        if (!level.isClientSide() && level.getRandom().nextInt(4) == 0) {
+            explode(level, pos);
         }
     }
 
-    private void explode(ServerLevel level, BlockPos pos) {
-        Vec3 p = pos.getCenter().add(Direction.UP.getUnitVec3());
+    private void explode(Level level, BlockPos pos) {
+        Vec3 p = pos.getCenter().add(0.0, 1.0, 0.0);
         level.explode(
                 null,
                 p.x,

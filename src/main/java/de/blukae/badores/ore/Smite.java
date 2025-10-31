@@ -19,9 +19,11 @@ package de.blukae.badores.ore;
 import de.blukae.badores.util.ArmorInfo;
 import de.blukae.badores.util.ToolInfo;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
@@ -64,15 +66,15 @@ public class Smite implements OreTemplate {
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot) {
-        if (level.random.nextInt(200) == 0) {
+    public void onArmorTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        if (!level.isClientSide() && level.random.nextInt(200) == 0) {
             spawnLightning(level, entity.position());
         }
     }
 
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (!level.isClientSide() && !player.preventsBlockDrops()) {
+        if (!level.isClientSide() && !player.isCreative()) {
             if (level.random.nextInt(3) == 0) {
                 spawnLightning(level, player.position());
             } else {
@@ -82,8 +84,10 @@ public class Smite implements OreTemplate {
     }
 
     @Override
-    public void onExploded(BlockState state, ServerLevel level, BlockPos pos, Explosion explosion) {
-        spawnLightning(level, pos.getBottomCenter());
+    public void onExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
+        if (!level.isClientSide()) {
+            spawnLightning(level, pos.getBottomCenter());
+        }
     }
 
     @Override
@@ -96,9 +100,9 @@ public class Smite implements OreTemplate {
     }
 
     private void spawnLightning(Level level, Vec3 pos) {
-        LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level, EntitySpawnReason.MOB_SUMMONED);
+        LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level);
         if (lightningBolt != null) {
-            lightningBolt.snapTo(pos);
+            lightningBolt.moveTo(pos);
             level.addFreshEntity(lightningBolt);
         }
     }

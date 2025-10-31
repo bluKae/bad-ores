@@ -4,7 +4,9 @@
   "cookingtime": 100,
   "experience": 0.7,
   "group": "fleesonsite_ingot",
-  "ingredient": "badores:deepslate_fleesonsite_ore",
+  "ingredient": {
+    "item": "badores:deepslate_fleesonsite_ore"
+  },
   "result": {
     "count": 1,
     "id": "badores:fleesonsite_ingot"

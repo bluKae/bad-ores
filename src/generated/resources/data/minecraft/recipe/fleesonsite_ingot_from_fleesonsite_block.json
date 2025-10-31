@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "fleesonsite_ingot",
   "ingredients": [
-    "badores:fleesonsite_block"
+    {
+      "item": "badores:fleesonsite_block"
+    }
   ],
   "result": {
     "count": 9,

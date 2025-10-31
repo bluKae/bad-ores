@@ -45,7 +45,8 @@ public class MineBadOreTrigger extends SimpleCriterionTrigger<MineBadOreTrigger.
     }
 
     public void trigger(ServerPlayer player, ServerLevel level, BlockPos pos, BlockState state, ItemStack tool) {
-        LootParams params = new LootParams.Builder(level).withParameter(LootContextParams.ORIGIN, pos.getCenter())
+        LootParams params = new LootParams.Builder(level)
+                .withParameter(LootContextParams.ORIGIN, pos.getCenter())
                 .withParameter(LootContextParams.THIS_ENTITY, player)
                 .withParameter(LootContextParams.BLOCK_STATE, state)
                 .withParameter(LootContextParams.TOOL, tool)
@@ -56,9 +57,12 @@ public class MineBadOreTrigger extends SimpleCriterionTrigger<MineBadOreTrigger.
 
     public record TriggerInstance(Optional<ContextAwarePredicate> player,
                                   Optional<ContextAwarePredicate> location) implements SimpleInstance {
-        public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                        EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(TriggerInstance::player),
-                        ContextAwarePredicate.CODEC.optionalFieldOf("location").forGetter(TriggerInstance::location))
+        public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create(
+                instance -> instance.group(
+                        EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player")
+                                .forGetter(TriggerInstance::player),
+                        ContextAwarePredicate.CODEC.optionalFieldOf("location")
+                                .forGetter(TriggerInstance::location))
                 .apply(instance, TriggerInstance::new));
 
         public static Criterion<TriggerInstance> minedAny() {
@@ -68,7 +72,7 @@ public class MineBadOreTrigger extends SimpleCriterionTrigger<MineBadOreTrigger.
 
         public static Criterion<TriggerInstance> minedTag(HolderGetter<Block> blocks, TagKey<Block> tag) {
             LocationPredicate.Builder locationPredicate = LocationPredicate.Builder.location()
-                    .setBlock(BlockPredicate.Builder.block().of(blocks, tag));
+                    .setBlock(BlockPredicate.Builder.block().of(tag));
 
             ContextAwarePredicate location = ContextAwarePredicate.create(LocationCheck.checkLocation(locationPredicate)
                     .build());
@@ -80,7 +84,8 @@ public class MineBadOreTrigger extends SimpleCriterionTrigger<MineBadOreTrigger.
         @Override
         public void validate(CriterionValidator validator) {
             SimpleInstance.super.validate(validator);
-            location.ifPresent(l -> validator.validate(l, LootContextParamSets.ADVANCEMENT_LOCATION, "location"));
+            location.ifPresent(l ->
+                    validator.validate(l, LootContextParamSets.ADVANCEMENT_LOCATION, "location"));
         }
 
         public boolean matches(LootContext context) {

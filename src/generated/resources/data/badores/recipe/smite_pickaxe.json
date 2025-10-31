@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": "#c:rods/wooden",
-    "X": "badores:smite_gemstone"
+    "#": {
+      "tag": "c:rods/wooden"
+    },
+    "X": {
+      "item": "badores:smite_gemstone"
+    }
   },
   "pattern": [
     "XXX",

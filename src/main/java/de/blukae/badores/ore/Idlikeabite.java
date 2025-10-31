@@ -21,7 +21,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -66,15 +65,15 @@ public class Idlikeabite implements OreTemplate {
     }
 
     @Override
-    public void onInventoryTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot) {
-        if (entity instanceof Player && level.getRandom().nextInt(200) == 0) {
-            ((Player) entity).getFoodData().addExhaustion(1.0f);
+    public void onInventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        if (!level.isClientSide() && entity instanceof Player player && level.getRandom().nextInt(200) == 0) {
+            player.getFoodData().addExhaustion(1.0f);
         }
     }
 
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (level instanceof ServerLevel && willHarvest) {
+        if (level.isClientSide() && willHarvest) {
             player.getFoodData().addExhaustion(level.getRandom().nextFloat() * 40.0f);
         }
     }

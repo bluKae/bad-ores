@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "minecraft:book",
-    "#badores:ore_book_components"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "tag": "badores:ore_book_components"
+    }
   ],
   "result": {
     "count": 1,

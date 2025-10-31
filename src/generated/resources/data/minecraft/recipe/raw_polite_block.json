@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "badores:raw_polite"
+    "#": {
+      "item": "badores:raw_polite"
+    }
   },
   "pattern": [
     "###",

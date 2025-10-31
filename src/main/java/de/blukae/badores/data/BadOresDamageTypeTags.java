@@ -23,22 +23,25 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.DamageTypeTagsProvider;
 import net.minecraft.tags.DamageTypeTags;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
 public class BadOresDamageTypeTags extends DamageTypeTagsProvider {
-    public BadOresDamageTypeTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(output, lookupProvider, BadOres.MOD_ID);
+    public BadOresDamageTypeTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
+                                 @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, lookupProvider, BadOres.MOD_ID, existingFileHelper);
     }
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(DamageTypeTags.BYPASSES_ARMOR).add(Killium.DAMAGE_TYPE);
-        tag(DamageTypeTags.BYPASSES_EFFECTS).add(Killium.DAMAGE_TYPE);
-        tag(DamageTypeTags.BYPASSES_ENCHANTMENTS).add(Killium.DAMAGE_TYPE);
-        tag(DamageTypeTags.BYPASSES_RESISTANCE).add(Killium.DAMAGE_TYPE);
-        tag(DamageTypeTags.BYPASSES_SHIELD).add(Killium.DAMAGE_TYPE);
-        tag(DamageTypeTags.BYPASSES_WOLF_ARMOR).add(Killium.DAMAGE_TYPE);
-        tag(Tags.DamageTypes.IS_MAGIC).add(Killium.DAMAGE_TYPE);
+        tag(DamageTypeTags.BYPASSES_ARMOR).addOptional(Killium.DAMAGE_TYPE.location());
+        tag(DamageTypeTags.BYPASSES_EFFECTS).addOptional(Killium.DAMAGE_TYPE.location());
+        tag(DamageTypeTags.BYPASSES_ENCHANTMENTS).addOptional(Killium.DAMAGE_TYPE.location());
+        tag(DamageTypeTags.BYPASSES_RESISTANCE).addOptional(Killium.DAMAGE_TYPE.location());
+        tag(DamageTypeTags.BYPASSES_SHIELD).addOptional(Killium.DAMAGE_TYPE.location());
+        tag(DamageTypeTags.BYPASSES_WOLF_ARMOR).addOptional(Killium.DAMAGE_TYPE.location());
+        tag(Tags.DamageTypes.IS_MAGIC).addOptional(Killium.DAMAGE_TYPE.location());
     }
 }

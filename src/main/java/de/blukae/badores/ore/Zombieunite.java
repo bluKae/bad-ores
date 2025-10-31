@@ -32,7 +32,9 @@ import net.neoforged.neoforge.event.EventHooks;
 public class Zombieunite implements OreTemplate {
     @Override
     public LootTable.Builder getCustomLootTable(BlockLootSubProvider provider) {
-        return LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(Items.ZOMBIE_HEAD)));
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(Items.ZOMBIE_HEAD)));
     }
 
     @Override
@@ -44,6 +46,6 @@ public class Zombieunite implements OreTemplate {
             return 0.0f;
         }
         int i = EventHooks.doPlayerHarvestCheck(player, state, level, pos) ? 30 : 100;
-        return player.getDestroySpeed(state, pos) / 3.0f / (float) i;
+        return player.getDigSpeed(state, pos) / 3.0f / (float) i;
     }
 }

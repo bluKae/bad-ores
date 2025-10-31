@@ -33,7 +33,7 @@ public class Movium implements OreTemplate {
 
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (!level.isClientSide() && !player.preventsBlockDrops()) {
+        if (!level.isClientSide() && !player.isCreative()) {
             level.setBlockAndUpdate(pos.relative(Direction.getRandom(level.random)), state);
         }
     }

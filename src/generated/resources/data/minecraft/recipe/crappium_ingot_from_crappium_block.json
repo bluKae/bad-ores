@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "crappium_ingot",
   "ingredients": [
-    "badores:crappium_block"
+    {
+      "item": "badores:crappium_block"
+    }
   ],
   "result": {
     "count": 9,

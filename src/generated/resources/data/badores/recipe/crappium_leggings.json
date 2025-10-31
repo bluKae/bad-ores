@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "X": "badores:crappium_ingot"
+    "X": {
+      "item": "badores:crappium_ingot"
+    }
   },
   "pattern": [
     "XXX",

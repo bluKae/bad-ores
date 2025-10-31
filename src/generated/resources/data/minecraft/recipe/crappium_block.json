@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "badores:crappium_ingot"
+    "#": {
+      "item": "badores:crappium_ingot"
+    }
   },
   "pattern": [
     "###",

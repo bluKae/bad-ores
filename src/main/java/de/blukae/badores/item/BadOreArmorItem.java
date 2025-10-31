@@ -1,0 +1,57 @@
+/*
+ * Copyright (C) 2025 bluKae
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package de.blukae.badores.item;
+
+import de.blukae.badores.ore.OreTemplate;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+
+public class BadOreArmorItem extends ArmorItem {
+    private final OreTemplate template;
+
+    public BadOreArmorItem(OreTemplate template, Holder<ArmorMaterial> material, Type type, Properties properties) {
+        super(material, type, properties);
+        this.template = template;
+    }
+
+
+    @Override
+    public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        super.postHurtEnemy(stack, target, attacker);
+        template.onEntityHurt(stack, target, attacker);
+    }
+
+    @Override
+    public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity miningEntity) {
+        template.onMine(stack, level, state, pos, miningEntity);
+        return super.mineBlock(stack, level, state, pos, miningEntity);
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        super.inventoryTick(stack, level, entity, slotId, isSelected);
+        template.onInventoryTick(stack, level, entity, slotId, isSelected);
+        template.onArmorTick(stack, level, entity, slotId, isSelected);
+    }
+}

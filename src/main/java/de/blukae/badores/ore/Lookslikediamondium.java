@@ -20,16 +20,13 @@ import de.blukae.badores.util.ArmorInfo;
 import de.blukae.badores.util.ArmorSet;
 import de.blukae.badores.util.ToolInfo;
 import de.blukae.badores.util.ToolSet;
-import net.minecraft.client.data.models.BlockModelGenerators;
-import net.minecraft.client.data.models.ItemModelGenerators;
-import net.minecraft.client.data.models.model.ItemModelUtils;
-import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.data.models.model.TextureMapping;
-import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.client.model.generators.ModelProvider;
+import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredItem;
 
 public class Lookslikediamondium implements OreTemplate {
     @Override
@@ -58,50 +55,57 @@ public class Lookslikediamondium implements OreTemplate {
     }
 
     @Override
-    public void buildCustomModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
-        final class CustomModelsHelper {
-            void block(Block block, String parent) {
-                blockModels.createTrivialBlock(
-                        block,
-                        TexturedModel.createDefault(
-                                textureMapping -> new TextureMapping(),
-                                ModelTemplates.create(parent)));
+    public void buildCustomBlockStates(BlockStateProvider provider) {
+        final class CustomStatesHelper {
+            void block(DeferredBlock<?> block, String parent) {
+                provider.simpleBlock(
+                        block.get(), provider.models()
+                                .withExistingParent(
+                                        block.getId().getPath(),
+                                        ModelProvider.BLOCK_FOLDER + "/" + parent));
             }
+        }
 
-            void item(Item item, String parent) {
-                itemModels.itemModelOutput.accept(
-                        item,
-                        ItemModelUtils.plainModel(ModelTemplates.createItem(parent)
-                                .create(item, new TextureMapping(), itemModels.modelOutput)));
+        CustomStatesHelper helper = new CustomStatesHelper();
+
+        helper.block(BadOre.LOOKSLIKEDIAMONDIUM.oreBlock, "diamond_ore");
+        helper.block(BadOre.LOOKSLIKEDIAMONDIUM.deepslateOreBlock, "deepslate_diamond_ore");
+        helper.block(BadOre.LOOKSLIKEDIAMONDIUM.ingotBlock, "diamond_block");
+    }
+
+    @Override
+    public void buildCustomItemModels(ItemModelProvider provider) {
+        final class CustomModelsHelper {
+            void item(DeferredItem<?> item, String parent) {
+                provider.withExistingParent(item.getId().toString(), ModelProvider.ITEM_FOLDER + "/" + parent);
             }
         }
 
         CustomModelsHelper helper = new CustomModelsHelper();
 
-        helper.block(BadOre.LOOKSLIKEDIAMONDIUM.oreBlock.get(), "diamond_ore");
+        provider.simpleBlockItem(BadOre.LOOKSLIKEDIAMONDIUM.oreBlock.get());
+        provider.simpleBlockItem(BadOre.LOOKSLIKEDIAMONDIUM.deepslateOreBlock.get());
+        provider.simpleBlockItem(BadOre.LOOKSLIKEDIAMONDIUM.ingotBlock.get());
 
-        helper.block(BadOre.LOOKSLIKEDIAMONDIUM.deepslateOreBlock.get(), "deepslate_diamond_ore");
-        helper.block(BadOre.LOOKSLIKEDIAMONDIUM.ingotBlock.get(), "diamond_block");
-
-        helper.item(BadOre.LOOKSLIKEDIAMONDIUM.ingot.get(), "diamond");
+        helper.item(BadOre.LOOKSLIKEDIAMONDIUM.ingot, "diamond");
 
         ToolSet tools = BadOre.LOOKSLIKEDIAMONDIUM.tools;
-        helper.item(tools.axe.get(), "diamond_axe");
-        helper.item(tools.hoe.get(), "diamond_hoe");
-        helper.item(tools.pickaxe.get(), "diamond_pickaxe");
-        helper.item(tools.shovel.get(), "diamond_shovel");
-        helper.item(tools.sword.get(), "diamond_sword");
+        helper.item(tools.axe, "diamond_axe");
+        helper.item(tools.hoe, "diamond_hoe");
+        helper.item(tools.pickaxe, "diamond_pickaxe");
+        helper.item(tools.shovel, "diamond_shovel");
+        helper.item(tools.sword, "diamond_sword");
 
         ArmorSet armor = BadOre.LOOKSLIKEDIAMONDIUM.armor;
-        helper.item(armor.helmet.get(), "diamond_helmet");
-        helper.item(armor.chestplate.get(), "diamond_chestplate");
-        helper.item(armor.leggings.get(), "diamond_leggings");
-        helper.item(armor.boots.get(), "diamond_boots");
+        helper.item(armor.helmet, "diamond_helmet");
+        helper.item(armor.chestplate, "diamond_chestplate");
+        helper.item(armor.leggings, "diamond_leggings");
+        helper.item(armor.boots, "diamond_boots");
     }
 
     @Override
     public ResourceLocation getEquipmentTextureLocation(String name) {
-        return ResourceLocation.parse("diamond");
+        return ResourceLocation.withDefaultNamespace("diamond");
     }
 
     @Override

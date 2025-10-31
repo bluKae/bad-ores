@@ -21,31 +21,27 @@ import de.blukae.badores.ore.BadOre;
 import de.blukae.badores.ore.Fleesonsite;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.TagAppender;
+import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.common.data.ItemTagsProvider;
+import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
 public class BadOresItemTags extends ItemTagsProvider {
-    public BadOresItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(output, lookupProvider, BadOres.MOD_ID);
+    public BadOresItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
+                           CompletableFuture<TagLookup<Block>> blockTags,
+                           @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, lookupProvider, blockTags, BadOres.MOD_ID, existingFileHelper);
     }
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        TagAppender<Item, Item> oreBookComponents = tag(BadOres.ORE_BOOK_COMPONENTS);
+        IntrinsicTagAppender<Item> oreBookComponents = tag(BadOres.ORE_BOOK_COMPONENTS);
 
         for (BadOre ore : BadOre.values()) {
-            if (ore.armor != null) {
-                tag(ore.armor.material.repairIngredient()).add(ore.ingot.get());
-            }
-
-            if (ore.tools != null) {
-                tag(ore.tools.material.repairItems()).add(ore.ingot.get());
-            }
-
-            TagAppender<Item, Item> oreItems = tag(ore.oreItems).add(ore.oreBlock.asItem());
+            IntrinsicTagAppender<Item> oreItems = tag(ore.oreItems).add(ore.oreBlock.asItem());
             oreBookComponents.add(ore.oreBlock.asItem());
             if (ore.deepslateOreBlock != null) {
                 oreItems.add(ore.deepslateOreBlock.asItem());

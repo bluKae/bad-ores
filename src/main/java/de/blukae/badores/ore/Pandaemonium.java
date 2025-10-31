@@ -27,7 +27,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.item.ItemStack;
@@ -60,14 +59,15 @@ public class Pandaemonium implements OreTemplate {
 
     @Override
     public BlockBehaviour.Properties getOreBlockProperties(boolean isDeepslate) {
-        return OreTemplate.super.getOreBlockProperties(isDeepslate).sound(new DeferredSoundType(
-                1.0f,
-                1.0f,
-                PANDAEMONIUM_BREAK_SOUND_EVENT,
-                () -> SoundEvents.STONE_STEP,
-                () -> SoundEvents.STONE_PLACE,
-                () -> SoundEvents.STONE_HIT,
-                () -> SoundEvents.STONE_FALL));
+        return OreTemplate.super.getOreBlockProperties(isDeepslate)
+                .sound(new DeferredSoundType(
+                    1.0f,
+                    1.0f,
+                    PANDAEMONIUM_BREAK_SOUND_EVENT,
+                    () -> SoundEvents.STONE_STEP,
+                    () -> SoundEvents.STONE_PLACE,
+                    () -> SoundEvents.STONE_HIT,
+                    () -> SoundEvents.STONE_FALL));
     }
 
     @Override
@@ -90,7 +90,7 @@ public class Pandaemonium implements OreTemplate {
 
     @Override
     public void onTick(Level level, BlockPos pos, BlockState state, BadOreBlockEntity blockEntity) {
-        if (level instanceof ServerLevel && level.random.nextInt(10) == 0) {
+        if (!level.isClientSide() && level.random.nextInt(10) == 0) {
             level.playSound(null, pos, PANDAEMONIUM_BREAK_SOUND_EVENT.get(), SoundSource.BLOCKS);
         }
     }
@@ -103,9 +103,9 @@ public class Pandaemonium implements OreTemplate {
             int pigmen = random.nextInt(4);
             for (int i = 0; i < pigmen; i++) {
 
-                ZombifiedPiglin piglin = EntityType.ZOMBIFIED_PIGLIN.create(level, EntitySpawnReason.TRIGGERED);
+                ZombifiedPiglin piglin = EntityType.ZOMBIFIED_PIGLIN.create(level);
                 if (piglin != null) {
-                    piglin.snapTo(pos.getBottomCenter());
+                    piglin.moveTo(pos.getBottomCenter());
                     level.addFreshEntity(piglin);
                     piglin.spawnAnim();
                 }

@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "kakkarite",
   "ingredients": [
-    "badores:kakkarite_block"
+    {
+      "item": "badores:kakkarite_block"
+    }
   ],
   "result": {
     "count": 9,

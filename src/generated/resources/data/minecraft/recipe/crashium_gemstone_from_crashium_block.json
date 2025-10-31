@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "crashium_gemstone",
   "ingredients": [
-    "badores:crashium_block"
+    {
+      "item": "badores:crashium_block"
+    }
   ],
   "result": {
     "count": 9,

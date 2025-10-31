@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": "#c:rods/wooden",
-    "X": "badores:enderite_ingot"
+    "#": {
+      "tag": "c:rods/wooden"
+    },
+    "X": {
+      "item": "badores:enderite_ingot"
+    }
   },
   "pattern": [
     "XX",

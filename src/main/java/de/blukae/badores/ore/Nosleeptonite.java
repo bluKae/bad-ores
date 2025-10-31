@@ -28,7 +28,6 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.player.Player;
@@ -42,6 +41,7 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.levelgen.placement.RarityFilter;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.Nullable;
 
@@ -50,11 +50,11 @@ import java.util.function.Supplier;
 public class Nosleeptonite implements OreTemplate {
 
     public static final Supplier<EntityType<NosleeptoniteEntity>> NOSLEEPTONITE_ENTITY_TYPE =
-            BadOres.ENTITY_TYPES.registerEntityType(
-            "nosleeptonite",
-            NosleeptoniteEntity::new,
-            MobCategory.MONSTER,
-            builder -> builder.sized(1.0f, 1.0f));
+            BadOres.ENTITY_TYPES.register(
+                    "nosleeptonite",
+                    () -> EntityType.Builder.of(NosleeptoniteEntity::new, MobCategory.MONSTER)
+                            .sized(1.0f, 1.0f)
+                            .build("nosleeptonite"));
 
     public static final Supplier<SoundEvent> NOSLEEPTONITE_AMBIENT = BadOres.SOUND_EVENTS.register(
             "entity" + ".nosleeptonite.ambient",
@@ -71,8 +71,11 @@ public class Nosleeptonite implements OreTemplate {
 
     public static final DeferredItem<SpawnEggItem> NOSLEEPTONITE_SPAWN_EGG = BadOres.ITEMS.registerItem(
             "nosleeptonite_spawn_egg",
-            SpawnEggItem::new,
-            properties -> properties.spawnEgg(NOSLEEPTONITE_ENTITY_TYPE.get()));
+            properties -> new DeferredSpawnEggItem(
+                    NOSLEEPTONITE_ENTITY_TYPE,
+                    0x7F7F7F,
+                    0xA33323,
+                    properties));
 
     @Override
     public boolean hasIngot() {
@@ -113,7 +116,7 @@ public class Nosleeptonite implements OreTemplate {
 
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (level instanceof ServerLevel && willHarvest) {
+        if (level.isClientSide() && willHarvest) {
             player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 400));
         }
     }
@@ -121,9 +124,9 @@ public class Nosleeptonite implements OreTemplate {
     @Override
     public void spawnAfterBreak(BlockState state, ServerLevel level, BlockPos pos, ItemStack stack,
                                 boolean dropExperience) {
-        NosleeptoniteEntity entity = NOSLEEPTONITE_ENTITY_TYPE.get().create(level, EntitySpawnReason.TRIGGERED);
+        NosleeptoniteEntity entity = NOSLEEPTONITE_ENTITY_TYPE.get().create(level);
         if (entity != null) {
-            entity.snapTo(pos.getBottomCenter());
+            entity.moveTo(pos.getBottomCenter());
             level.addFreshEntity(entity);
             entity.spawnAnim();
         }

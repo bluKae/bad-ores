@@ -22,9 +22,7 @@ import de.blukae.badores.ore.BadOre;
 import de.blukae.badores.ore.Marmite;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
@@ -34,15 +32,16 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class BadOresRecipes extends RecipeProvider {
-    public BadOresRecipes(HolderLookup.Provider registries, RecipeOutput output) {
-        super(registries, output);
+    public BadOresRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries);
     }
 
     @Override
-    public void buildRecipes() {
+    protected void buildRecipes(RecipeOutput output) {
         for (BadOre ore : BadOre.values()) {
             if (ore.rawIngot != null && ore.rawIngotBlock != null) {
                 nineBlockStorageRecipes(
+                        output,
                         RecipeCategory.MISC,
                         ore.rawIngot,
                         RecipeCategory.BUILDING_BLOCKS,
@@ -56,11 +55,12 @@ public class BadOresRecipes extends RecipeProvider {
                 if (ore.rawIngot != null)
                     smeltables.add(ore.rawIngot);
 
-                oreSmelting(smeltables, RecipeCategory.MISC, ore.ingot, 0.7f, 200, ore.ingot.getId().getPath());
-                oreBlasting(smeltables, RecipeCategory.MISC, ore.ingot, 0.7f, 100, ore.ingot.getId().getPath());
+                oreSmelting(output, smeltables, RecipeCategory.MISC, ore.ingot, 0.7f, 200, ore.ingot.getId().getPath());
+                oreBlasting(output, smeltables, RecipeCategory.MISC, ore.ingot, 0.7f, 100, ore.ingot.getId().getPath());
 
                 if (ore.ingotBlock != null) {
                     nineBlockStorageRecipesRecipesWithCustomUnpacking(
+                            output,
                             RecipeCategory.MISC,
                             ore.ingot,
                             RecipeCategory.BUILDING_BLOCKS,
@@ -70,24 +70,24 @@ public class BadOresRecipes extends RecipeProvider {
                 }
 
                 if (ore.armor != null) {
-                    shaped(RecipeCategory.COMBAT, ore.armor.helmet).define('X', ore.ingot)
+                    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ore.armor.helmet).define('X', ore.ingot)
                             .pattern("XXX")
                             .pattern("X " + "X")
                             .unlockedBy("has_" + ore.ingot.getId().getPath(), has(ore.ingot))
                             .save(output);
-                    shaped(RecipeCategory.COMBAT, ore.armor.chestplate).define('X', ore.ingot)
+                    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ore.armor.chestplate).define('X', ore.ingot)
                             .pattern("X X")
                             .pattern("XXX")
                             .pattern("XXX")
                             .unlockedBy("has_" + ore.ingot.getId().getPath(), has(ore.ingot))
                             .save(output);
-                    shaped(RecipeCategory.COMBAT, ore.armor.leggings).define('X', ore.ingot)
+                    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ore.armor.leggings).define('X', ore.ingot)
                             .pattern("XXX")
                             .pattern("X X")
                             .pattern("X X")
                             .unlockedBy("has_" + ore.ingot.getId().getPath(), has(ore.ingot))
                             .save(output);
-                    shaped(RecipeCategory.COMBAT, ore.armor.boots).define('X', ore.ingot)
+                    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ore.armor.boots).define('X', ore.ingot)
                             .pattern("X X")
                             .pattern("X " + "X")
                             .unlockedBy("has_" + ore.ingot.getId().getPath(), has(ore.ingot))
@@ -95,35 +95,38 @@ public class BadOresRecipes extends RecipeProvider {
                 }
 
                 if (ore.tools != null) {
-                    shaped(RecipeCategory.TOOLS, ore.tools.axe).define('#', Tags.Items.RODS_WOODEN)
+                    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ore.tools.axe).define('#', Tags.Items.RODS_WOODEN)
                             .define('X', ore.ingot)
                             .pattern("XX")
                             .pattern("X#")
                             .pattern(" #")
                             .unlockedBy("has_" + ore.ingot.getId().getPath(), has(ore.ingot))
                             .save(output);
-                    shaped(RecipeCategory.TOOLS, ore.tools.hoe).define('#', Tags.Items.RODS_WOODEN)
+                    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ore.tools.hoe).define('#', Tags.Items.RODS_WOODEN)
                             .define('X', ore.ingot)
                             .pattern("XX")
                             .pattern(" #")
                             .pattern(" #")
                             .unlockedBy("has_" + ore.ingot.getId().getPath(), has(ore.ingot))
                             .save(output);
-                    shaped(RecipeCategory.TOOLS, ore.tools.pickaxe).define('#', Tags.Items.RODS_WOODEN)
+                    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ore.tools.pickaxe)
+                            .define('#', Tags.Items.RODS_WOODEN)
                             .define('X', ore.ingot)
                             .pattern("XXX")
                             .pattern(" # ")
                             .pattern(" # ")
                             .unlockedBy("has_" + ore.ingot.getId().getPath(), has(ore.ingot))
                             .save(output);
-                    shaped(RecipeCategory.TOOLS, ore.tools.shovel).define('#', Tags.Items.RODS_WOODEN)
+                    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ore.tools.shovel)
+                            .define('#', Tags.Items.RODS_WOODEN)
                             .define('X', ore.ingot)
                             .pattern("X")
                             .pattern("#")
                             .pattern("#")
                             .unlockedBy("has_" + ore.ingot.getId().getPath(), has(ore.ingot))
                             .save(output);
-                    shaped(RecipeCategory.COMBAT, ore.tools.sword).define('#', Tags.Items.RODS_WOODEN)
+                    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ore.tools.sword)
+                            .define('#', Tags.Items.RODS_WOODEN)
                             .define('X', ore.ingot)
                             .pattern("X")
                             .pattern("X")
@@ -134,7 +137,7 @@ public class BadOresRecipes extends RecipeProvider {
             }
         }
 
-        shapeless(RecipeCategory.FOOD, Marmite.MARMITE_BREAD_ITEM).requires(Items.BREAD)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, Marmite.MARMITE_BREAD_ITEM).requires(Items.BREAD)
                 .requires(BadOre.MARMITE.ingot)
                 .unlockedBy("has_marmite", has(BadOre.MARMITE.ingot))
                 .save(output);
@@ -143,6 +146,7 @@ public class BadOresRecipes extends RecipeProvider {
                 BadOre.EXPLODEITMITE.oreBlock,
                 BadOre.EXPLODEITMITE.deepslateOreBlock);
         oreSmelting(
+                output,
                 explodeitmiteSmeltables,
                 RecipeCategory.MISC,
                 Items.GUNPOWDER,
@@ -150,6 +154,7 @@ public class BadOresRecipes extends RecipeProvider {
                 200,
                 "gunpowder_from_smelting_explodeitmite");
         oreBlasting(
+                output,
                 explodeitmiteSmeltables,
                 RecipeCategory.MISC,
                 Items.GUNPOWDER,
@@ -158,29 +163,27 @@ public class BadOresRecipes extends RecipeProvider {
                 "gunpowder_from_smelting_explodeitmite");
 
         List<ItemLike> liteSmeltables = List.of(BadOre.LITE.oreBlock, BadOre.LITE.deepslateOreBlock);
-        oreSmelting(liteSmeltables, RecipeCategory.MISC, Items.GLOWSTONE, 0.7f, 200, "glowstone_from_smelting_lite");
-        oreBlasting(liteSmeltables, RecipeCategory.MISC, Items.GLOWSTONE, 0.7f, 100, "glowstone_from_smelting_lite");
+        oreSmelting(
+                output,
+                liteSmeltables,
+                RecipeCategory.MISC,
+                Items.GLOWSTONE,
+                0.7f,
+                200,
+                "glowstone_from_smelting_lite");
+        oreBlasting(
+                output,
+                liteSmeltables,
+                RecipeCategory.MISC,
+                Items.GLOWSTONE,
+                0.7f,
+                100,
+                "glowstone_from_smelting_lite");
 
-        shapeless(RecipeCategory.MISC, BadOres.BAD_ORE_BOOK_ITEM).requires(Items.BOOK)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, BadOres.BAD_ORE_BOOK_ITEM).requires(Items.BOOK)
                 .requires(BadOres.ORE_BOOK_COMPONENTS)
                 .unlockedBy("mine_bad_ore", MineBadOreTrigger.TriggerInstance.minedAny())
                 .unlockedBy("has_ore_book_component", has(BadOres.ORE_BOOK_COMPONENTS))
                 .save(output);
-    }
-
-    public static class Runner extends RecipeProvider.Runner {
-        public Runner(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> registries) {
-            super(packOutput, registries);
-        }
-
-        @Override
-        public RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
-            return new BadOresRecipes(registries, output);
-        }
-
-        @Override
-        public String getName() {
-            return BadOres.MOD_ID;
-        }
     }
 }

@@ -1,5 +1,8 @@
 {
   "values": [
-    "badores:killium"
+    {
+      "id": "badores:killium",
+      "required": false
+    }
   ]
 }

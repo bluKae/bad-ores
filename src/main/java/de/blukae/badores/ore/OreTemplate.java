@@ -20,8 +20,6 @@ import de.blukae.badores.BadOres;
 import de.blukae.badores.block.BadOreBlockEntity;
 import de.blukae.badores.util.ArmorInfo;
 import de.blukae.badores.util.ToolInfo;
-import net.minecraft.client.data.models.BlockModelGenerators;
-import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
@@ -35,6 +33,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -64,6 +63,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 
 import javax.annotation.Nullable;
 
@@ -146,7 +147,10 @@ public interface OreTemplate {
         return false;
     }
 
-    default void buildCustomModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+    default void buildCustomBlockStates(BlockStateProvider provider) {
+    }
+
+    default void buildCustomItemModels(ItemModelProvider provider) {
     }
 
     @Nullable
@@ -196,10 +200,10 @@ public interface OreTemplate {
     default void onRandomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
     }
 
-    default void onInventoryTick(ItemStack stack, ServerLevel level, Entity entity, @Nullable EquipmentSlot slot) {
+    default void onInventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
     }
 
-    default void onArmorTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot) {
+    default void onArmorTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
     }
 
     default void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
@@ -209,7 +213,7 @@ public interface OreTemplate {
                                  boolean dropExperience) {
     }
 
-    default void onExploded(BlockState state, ServerLevel level, BlockPos pos, Explosion explosion) {
+    default void onExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
     }
 
     default void onEntityHurt(ItemStack stack, LivingEntity target, LivingEntity attacker) {
@@ -221,9 +225,10 @@ public interface OreTemplate {
     default void onArmorHurt(LivingEntity entity, ItemStack stack, EquipmentSlot slot) {
     }
 
-    default InteractionResult onUseItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player
-            , InteractionHand hand, BlockHitResult hitResult) {
-        return InteractionResult.TRY_WITH_EMPTY_HAND;
+    @Nullable
+    default ItemInteractionResult onUseItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
+                                              Player player, InteractionHand hand, BlockHitResult hitResult) {
+        return null;
     }
 
     default InteractionResult onUseWithoutItem(BlockState state, Level level, BlockPos pos, Player player,
