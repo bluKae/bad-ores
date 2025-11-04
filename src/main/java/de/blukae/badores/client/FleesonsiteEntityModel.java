@@ -153,7 +153,7 @@ public class FleesonsiteEntityModel extends EntityModel<FleesonsiteEntity> {
     @Override
     public void setupAnim(FleesonsiteEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks,
                           float netHeadYaw, float headPitch) {
-        block.yRot = 5f + Mth.cos(limbSwing * 1.4f) * 2.5f * limbSwingAmount;
+        block.yRot = Mth.cos(limbSwing * 0.7f) * 1.5f * limbSwingAmount;
         footright.xRot = Mth.cos(limbSwing * 0.6662f) * 1.4f * limbSwingAmount;
         toeright1.xRot = footright.xRot;
         toeright2.xRot = footright.xRot;

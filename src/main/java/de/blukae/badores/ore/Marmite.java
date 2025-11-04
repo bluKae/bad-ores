@@ -38,9 +38,9 @@ public class Marmite implements OreTemplate {
             "marmite_bread",
             new Item.Properties()
                     .food(new FoodProperties.Builder()
-                        .nutrition(6)
-                        .saturationModifier(0.8F)
-                        .build()));
+                            .nutrition(6)
+                            .saturationModifier(0.8F)
+                            .build()));
 
     @Override
     public boolean hasDeepslateVariant() {

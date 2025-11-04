@@ -72,7 +72,7 @@ public class Polite implements OreTemplate {
 
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (!level.isClientSide() && state.is(BadOre.POLITE.ores) && player instanceof ServerPlayer serverPlayer) {
+        if (!level.isClientSide() && willHarvest && state.is(BadOre.POLITE.ores) && player instanceof ServerPlayer serverPlayer) {
             new RandomTranslation("badores.polite.mined", "Polite ore mined")
                     .send(serverPlayer);
         }

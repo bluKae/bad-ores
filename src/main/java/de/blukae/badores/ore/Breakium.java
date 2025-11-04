@@ -27,7 +27,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class Breakium implements OreTemplate {
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (!level.isClientSide()) {
+        if (!level.isClientSide() && willHarvest) {
             ItemStack tool = player.getItemInHand(InteractionHand.MAIN_HAND);
             if (!tool.isEmpty()) {
                 tool.hurtAndBreak(tool.getMaxDamage() - tool.getDamageValue(), player, EquipmentSlot.MAINHAND);

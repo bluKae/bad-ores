@@ -17,7 +17,6 @@
 package de.blukae.badores.ore;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
@@ -73,7 +72,7 @@ public class Idlikeabite implements OreTemplate {
 
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (level.isClientSide() && willHarvest) {
+        if (!level.isClientSide() && willHarvest) {
             player.getFoodData().addExhaustion(level.getRandom().nextFloat() * 40.0f);
         }
     }

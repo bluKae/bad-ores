@@ -116,7 +116,7 @@ public class Nosleeptonite implements OreTemplate {
 
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (level.isClientSide() && willHarvest) {
+        if (!level.isClientSide() && willHarvest) {
             player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 400));
         }
     }
@@ -129,6 +129,7 @@ public class Nosleeptonite implements OreTemplate {
             entity.moveTo(pos.getBottomCenter());
             level.addFreshEntity(entity);
             entity.spawnAnim();
+            entity.playAmbientSound();
         }
     }
 }

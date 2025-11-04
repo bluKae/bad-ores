@@ -59,11 +59,11 @@ public class MineBadOreTrigger extends SimpleCriterionTrigger<MineBadOreTrigger.
                                   Optional<ContextAwarePredicate> location) implements SimpleInstance {
         public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create(
                 instance -> instance.group(
-                        EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player")
-                                .forGetter(TriggerInstance::player),
-                        ContextAwarePredicate.CODEC.optionalFieldOf("location")
-                                .forGetter(TriggerInstance::location))
-                .apply(instance, TriggerInstance::new));
+                                EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player")
+                                        .forGetter(TriggerInstance::player),
+                                ContextAwarePredicate.CODEC.optionalFieldOf("location")
+                                        .forGetter(TriggerInstance::location))
+                        .apply(instance, TriggerInstance::new));
 
         public static Criterion<TriggerInstance> minedAny() {
             return BadOres.MINE_BAD_ORE_TRIGGER.get()

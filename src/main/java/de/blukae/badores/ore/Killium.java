@@ -21,7 +21,6 @@ import de.blukae.badores.advancement.MineKilliumTrigger;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
@@ -57,7 +56,7 @@ public class Killium implements OreTemplate {
 
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (!level.isClientSide()) {
+        if (!level.isClientSide() && willHarvest) {
             if (level.random.nextInt(5) == 0 && player instanceof ServerPlayer serverPlayer) {
                 MINE_KILLIUM_TRIGGER.get().trigger(serverPlayer);
             } else {

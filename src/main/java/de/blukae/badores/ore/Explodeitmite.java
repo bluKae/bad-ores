@@ -42,7 +42,7 @@ public class Explodeitmite implements OreTemplate {
 
     @Override
     public void onRandomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (random.nextInt(4) == 0) {
+        if (random.nextInt(16) == 0) {
             level.removeBlock(pos, false);
             explode(level, pos);
         }
@@ -50,7 +50,7 @@ public class Explodeitmite implements OreTemplate {
 
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (!level.isClientSide() && level.getRandom().nextInt(4) == 0) {
+        if (!level.isClientSide() && level.getRandom().nextInt(4) == 0 && !player.isCreative()) {
             explode(level, pos);
         }
     }

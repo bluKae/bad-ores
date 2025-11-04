@@ -164,7 +164,7 @@ public class NosleeptoniteEntityModel extends EntityModel<NosleeptoniteEntity> {
     @Override
     public void setupAnim(NosleeptoniteEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks,
                           float netHeadYaw, float headPitch) {
-        mouthbottom.xRot = (Mth.cos(limbSwing * 0.04F) + 1) * 20.0F * limbSwingAmount;
+        mouthbottom.xRot = (Mth.cos(limbSwing) + 1.0F) * 0.7F * limbSwingAmount;
         mouthtop.xRot = -mouthbottom.xRot;
         bottom.xRot = mouthbottom.xRot;
         teethbottom1.xRot = mouthbottom.xRot;

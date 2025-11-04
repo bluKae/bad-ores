@@ -51,15 +51,15 @@ public record RandomTranslation(String key, String fallback, List<Object> args) 
     }
 
     public Component getRandomComponent(RandomSource random) {
-        String count = Language.getInstance().getOrDefault(key + ".count");
+        String count = Language.getInstance().getOrDefault(key + ".count", "");
         String randomKey = key;
-        if (!count.equals(key + ".count")) {
+        if (!count.isEmpty()) {
             try {
-                randomKey += "." + Integer.parseInt(count);
+                randomKey += "." + random.nextInt(Integer.parseInt(count));
             } catch (NumberFormatException ignored) {
             }
         }
-        return Component.translatableWithFallback(randomKey, fallback, args);
+        return Component.translatableWithFallback(randomKey, fallback, args.toArray());
     }
 
     public void send(ServerPlayer player) {

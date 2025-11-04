@@ -41,6 +41,7 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.util.DeferredSoundType;
 
@@ -49,7 +50,7 @@ import java.util.function.Supplier;
 public class Pandaemonium implements OreTemplate {
 
     public static final Supplier<SoundEvent> PANDAEMONIUM_BREAK_SOUND_EVENT = BadOres.SOUND_EVENTS.register(
-            "block" + ".pandaemonium.break",
+            "block.pandaemonium.break",
             SoundEvent::createVariableRangeEvent);
 
     @Override
@@ -61,13 +62,13 @@ public class Pandaemonium implements OreTemplate {
     public BlockBehaviour.Properties getOreBlockProperties(boolean isDeepslate) {
         return OreTemplate.super.getOreBlockProperties(isDeepslate)
                 .sound(new DeferredSoundType(
-                    1.0f,
-                    1.0f,
-                    PANDAEMONIUM_BREAK_SOUND_EVENT,
-                    () -> SoundEvents.STONE_STEP,
-                    () -> SoundEvents.STONE_PLACE,
-                    () -> SoundEvents.STONE_HIT,
-                    () -> SoundEvents.STONE_FALL));
+                        1.0f,
+                        1.0f,
+                        PANDAEMONIUM_BREAK_SOUND_EVENT,
+                        () -> SoundEvents.STONE_STEP,
+                        () -> SoundEvents.STONE_PLACE,
+                        () -> SoundEvents.STONE_HIT,
+                        () -> SoundEvents.STONE_FALL));
     }
 
     @Override
@@ -100,23 +101,13 @@ public class Pandaemonium implements OreTemplate {
                                 boolean dropExperience) {
         if (!level.isClientSide()) {
             RandomSource random = level.random;
-            int pigmen = random.nextInt(4);
-            for (int i = 0; i < pigmen; i++) {
-
-                ZombifiedPiglin piglin = EntityType.ZOMBIFIED_PIGLIN.create(level);
-                if (piglin != null) {
-                    piglin.moveTo(pos.getBottomCenter());
-                    level.addFreshEntity(piglin);
-                    piglin.spawnAnim();
-                }
-            }
-
             int veins = random.nextInt(12) + 3;
             for (int i = 0; i < veins; i++) {
                 Vec3 direction = new Vec3(
                         random.nextDouble() - random.nextDouble(),
                         random.nextDouble() - random.nextDouble(),
-                        random.nextDouble() - random.nextDouble());
+                        random.nextDouble() - random.nextDouble())
+                        .normalize();
                 int length = random.nextInt(3, 12);
 
                 for (int iteration = 0; iteration < length; iteration++) {
@@ -125,15 +116,20 @@ public class Pandaemonium implements OreTemplate {
                             (int) (pos.getCenter().y + direction.y * iteration),
                             (int) (pos.getCenter().z + direction.z * iteration));
                     setBlock(level, blockPos, Blocks.NETHERRACK.defaultBlockState());
-                }
-
-                int fireRange = random.nextInt(8);
-                float fireChance = random.nextFloat() * random.nextFloat();
-                for (int x = -fireRange; x <= fireRange; x++) {
-                    for (int y = -fireRange; y <= fireRange; y++) {
-                        for (int z = -fireRange; z <= fireRange; z++) {
-                            if (random.nextFloat() < fireChance) {
-                                setBlock(level, new BlockPos(x, y, z), Blocks.FIRE.defaultBlockState());
+                    BlockPos above = blockPos.above();
+                    if (random.nextFloat() < 0.2F) {
+                        setBlock(level, above, Blocks.FIRE.defaultBlockState());
+                    }
+                    if (random.nextFloat() < 0.05F) {
+                        Vec3 piglinPos = above.getBottomCenter();
+                        AABB aabb = EntityType.ZOMBIFIED_PIGLIN.getDimensions()
+                                .makeBoundingBox(piglinPos);
+                        if (level.noBlockCollision(null, aabb)) {
+                            ZombifiedPiglin piglin = EntityType.ZOMBIFIED_PIGLIN.create(level);
+                            if (piglin != null) {
+                                piglin.moveTo(piglinPos);
+                                level.addFreshEntity(piglin);
+                                piglin.spawnAnim();
                             }
                         }
                     }

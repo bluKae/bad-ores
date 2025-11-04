@@ -69,7 +69,7 @@ public class Appetite implements OreTemplate {
 
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (!level.isClientSide()) {
+        if (!level.isClientSide() && willHarvest) {
             player.getFoodData().eat(4, 0.2F);
         }
     }
