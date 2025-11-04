@@ -43,8 +43,6 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
-import javax.annotation.Nullable;
-
 public enum BadOre implements OreBookPage {
     AMADEUM(new Amadeum()),
     APPETITE(new Appetite()),

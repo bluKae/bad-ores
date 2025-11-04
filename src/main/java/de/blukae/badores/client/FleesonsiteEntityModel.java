@@ -142,7 +142,7 @@ public class FleesonsiteEntityModel extends EntityModel<FleesonsiteEntityRendere
         float pos = renderState.walkAnimationPos;
         float speed = renderState.walkAnimationSpeed;
 
-        block.yRot = 5f + Mth.cos(pos * 1.4f) * 2.5f * speed;
+        block.yRot = Mth.cos(pos * 0.7f) * 1.5f * speed;
         footright.xRot = Mth.cos(pos * 0.6662f) * 1.4f * speed;
         toeright1.xRot = footright.xRot;
         toeright2.xRot = footright.xRot;
