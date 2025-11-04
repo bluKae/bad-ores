@@ -73,28 +73,32 @@ public class Polite implements OreTemplate {
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
         if (!level.isClientSide() && willHarvest && state.is(BadOre.POLITE.ores) && player instanceof ServerPlayer serverPlayer) {
-            new RandomTranslation("badores.polite.mined", "Polite ore mined").send(serverPlayer);
+            new RandomTranslation("badores.polite.mined", "Polite ore mined")
+                    .send(serverPlayer);
         }
     }
 
     @Override
     public void onEntityHurt(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (!attacker.level().isClientSide() && attacker instanceof ServerPlayer serverPlayer) {
-            new RandomTranslation("badores.polite.attack", "Politely attacked").send(serverPlayer);
+            new RandomTranslation("badores.polite.attack", "Politely attacked")
+                    .send(serverPlayer);
         }
     }
 
     @Override
     public void onMine(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity miningEntity) {
         if (!level.isClientSide() && miningEntity instanceof ServerPlayer serverPlayer) {
-            new RandomTranslation("badores.polite.tool", "Politely mined").send(serverPlayer);
+            new RandomTranslation("badores.polite.tool", "Politely mined")
+                    .send(serverPlayer);
         }
     }
 
     @Override
     public void onArmorHurt(LivingEntity entity, ItemStack stack, EquipmentSlot slot) {
         if (!entity.level().isClientSide() && entity instanceof ServerPlayer serverPlayer) {
-            new RandomTranslation("badores.polite.defend", "Politely defended").send(serverPlayer);
+            new RandomTranslation("badores.polite.defend", "Politely defended")
+                    .send(serverPlayer);
         }
     }
 }

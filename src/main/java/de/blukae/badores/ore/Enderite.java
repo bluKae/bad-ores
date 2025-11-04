@@ -65,8 +65,8 @@ public class Enderite implements OreTemplate {
 
     @Override
     public void onArmorTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot) {
-        if (entity instanceof LivingEntity && level.random.nextInt(1000) == 0) {
-            teleportEffect(level, entity.blockPosition(), (LivingEntity) entity);
+        if (entity instanceof LivingEntity livingEntity && level.random.nextInt(1000) == 0) {
+            teleportEffect(level, entity.blockPosition(), livingEntity);
         }
     }
 

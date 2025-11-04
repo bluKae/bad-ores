@@ -79,7 +79,11 @@ public class BadOreBlock extends Block implements EntityBlock {
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player
             , InteractionHand hand, BlockHitResult hitResult) {
-        return template.onUseItemOn(stack, state, level, pos, player, hand, hitResult);
+        InteractionResult result = template.onUseItemOn(stack, state, level, pos, player, hand, hitResult);
+        if (result != null) {
+            return result;
+        }
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
     @Override
