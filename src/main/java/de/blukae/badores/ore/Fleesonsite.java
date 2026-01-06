@@ -53,10 +53,10 @@ public class Fleesonsite implements OreTemplate {
 
     public static final Supplier<EntityType<FleesonsiteEntity>> FLEESONSITE_ENTITY_TYPE =
             BadOres.ENTITY_TYPES.registerEntityType(
-            "fleesonsite",
-            FleesonsiteEntity::new,
-            MobCategory.CREATURE,
-            builder -> builder.sized(1.0f, 1.0f));
+                    "fleesonsite",
+                    FleesonsiteEntity::new,
+                    MobCategory.CREATURE,
+                    builder -> builder.sized(1.0f, 1.0f));
 
     public static final Supplier<SoundEvent> FLEESONSITE_AMBIENT = BadOres.SOUND_EVENTS.register(
             "entity.fleesonsite" + ".ambient",

@@ -88,8 +88,8 @@ public class BadOresTranslations extends LanguageProvider {
         addItem(Fleesonsite.DEEPSLATE_FLEESONSITE_SPAWN_EGG, "Deepslate Fleesonsite Spawn Egg");
         addItem(Nosleeptonite.NOSLEEPTONITE_SPAWN_EGG, "Nosleeptonite Spawn Egg");
 
-        add("death.attack.badores.wannafite", "%1$s wants to fite!");
-        add("death.attack.badores.killium", "%1$s mined the wrong ore!");
+        add("death.attack.wannafite", "%1$s wants to fite!");
+        add("death.attack.killium", "%1$s mined the wrong ore!");
 
         addRandom(
                 "badores.polite.mined",
@@ -179,11 +179,11 @@ public class BadOresTranslations extends LanguageProvider {
         addRandom(
                 "badores.misleadium.baseMessage",
                 "There is some %s at %sx, %sy, %sz!",
-                "Go to %2$sx, %3$sy, %4$sz " + "and you will find %1$s!",
+                "Go to %2$sx, %3$sy, %4$sz and you will find %1$s!",
                 "I heard there's %s at %sx, %sy, %sz!",
-                "Shh... I'll have you know I hid " + "%s at %sx, %sy, %sz...",
+                "Shh... I'll have you know I hid %s at %sx, %sy, %sz...",
                 "There is %s at %sx, %sy, %sz!",
-                "Please don't smelt me! Get the %s at %sx," + " %sy, %sz instead!",
+                "Please don't smelt me! Get the %s at %sx, %sy, %sz instead!",
                 "How about you go to %2$sx, %3$sy, %4$sz? There is %1$s there!!");
 
         add("badores.website.fail", "Oops, failed to open a website!");
@@ -197,7 +197,7 @@ public class BadOresTranslations extends LanguageProvider {
         add("advancements.badores.badores.craft_barely_generite_block.title", "Spent too much time");
         add(
                 "advancements.badores.badores.craft_barely_generite_block.description",
-                "Find enough Barely Generite to " + "make a full block");
+                "Find enough Barely Generite to make a full block");
         add("advancements.badores.badores.deal_iwontfite_damage.title", "Patience or Luck?");
         add("advancements.badores.badores.deal_iwontfite_damage.description", "Deal damage while holding Iwontfite");
         add("advancements.badores.badores.kill_nosleeptonite.title", "Conquer your fears");

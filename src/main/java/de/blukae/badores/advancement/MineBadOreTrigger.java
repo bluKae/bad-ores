@@ -20,7 +20,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.blukae.badores.BadOres;
 import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.critereon.*;
+import net.minecraft.advancements.criterion.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.server.level.ServerLevel;
@@ -59,11 +59,11 @@ public class MineBadOreTrigger extends SimpleCriterionTrigger<MineBadOreTrigger.
                                   Optional<ContextAwarePredicate> location) implements SimpleInstance {
         public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create(
                 instance -> instance.group(
-                        EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player")
-                                .forGetter(TriggerInstance::player),
-                        ContextAwarePredicate.CODEC.optionalFieldOf("location")
-                                .forGetter(TriggerInstance::location))
-                .apply(instance, TriggerInstance::new));
+                                EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player")
+                                        .forGetter(TriggerInstance::player),
+                                ContextAwarePredicate.CODEC.optionalFieldOf("location")
+                                        .forGetter(TriggerInstance::location))
+                        .apply(instance, TriggerInstance::new));
 
         public static Criterion<TriggerInstance> minedAny() {
             return BadOres.MINE_BAD_ORE_TRIGGER.get()

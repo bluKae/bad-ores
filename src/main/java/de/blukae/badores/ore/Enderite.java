@@ -24,6 +24,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -31,12 +32,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import org.jetbrains.annotations.Nullable;
 
 public class Enderite implements OreTemplate {
     private static final int RADIUS = 40;
+    private static final int PARTICLE_COUNT = 128;
 
     @Override
     public boolean hasIngot() {
@@ -61,51 +66,77 @@ public class Enderite implements OreTemplate {
     @Override
     public void onArmorTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot) {
         if (entity instanceof LivingEntity && level.random.nextInt(1000) == 0) {
-            teleportEntity(level, entity.blockPosition(), (LivingEntity) entity);
+            teleportEffect(level, entity.blockPosition(), (LivingEntity) entity);
         }
     }
 
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
         if (!level.isClientSide() && willHarvest) {
-            teleportEntity(level, pos, player);
+            teleportEffect(level, pos, player);
         }
     }
 
     @Override
     public void onMine(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity miningEntity) {
         if (!level.isClientSide() && level.random.nextInt(5) == 0) {
-            teleportEntity(level, miningEntity.blockPosition(), miningEntity);
+            teleportEffect(level, miningEntity.blockPosition(), miningEntity);
         }
     }
 
     private void teleportEntity(Level level, BlockPos origin, LivingEntity entity) {
-        BlockPos pos = new BlockPos(
-                level.random.nextIntBetweenInclusive(origin.getX() - RADIUS, origin.getX() + RADIUS),
-                level.random.nextIntBetweenInclusive(level.getMinY() + 10, level.getMaxY() - 10),
-                level.random.nextIntBetweenInclusive(origin.getZ() - RADIUS, origin.getZ() + RADIUS));
+        RandomSource random = entity.getRandom();
+        int targetX = (int) entity.getX() + random.nextInt(RADIUS * 2) - RADIUS;
+        int targetZ = (int) entity.getZ() + random.nextInt(RADIUS * 2) - RADIUS;
+        int height = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, targetX, targetZ);
 
-        for (int i = 0; i < 128; i++) {
-            double factor = i / 128.0;
-            Vec3 particlePos = pos.getCenter().add(pos.subtract(origin).getCenter().multiply(factor, factor, factor));
+        if (random.nextFloat() < 0.6F) {
+            if (random.nextFloat() < 0.5F) {
+                int targetHeight = height - 1;
+                while (targetHeight > level.getMinY()) {
+                    BlockPos below = new BlockPos(targetX, targetHeight - 1, targetZ);
+                    boolean isEmptyBelow = level.getBlockState(below)
+                            .getCollisionShape(level, below, CollisionContext.of(entity))
+                            .isEmpty();
+                    AABB aabb = entity.getDimensions(entity.getPose()).makeBoundingBox(targetX, targetHeight, targetZ);
+                    if (!isEmptyBelow && level.noBlockCollision(entity, aabb)) {
+                        entity.teleportTo(targetX, targetHeight, targetZ);
+                        return;
+                    }
 
-
-            if (level instanceof ServerLevel serverLevel) {
-                serverLevel.sendParticles(
-                        ParticleTypes.PORTAL,
-                        particlePos.x,
-                        particlePos.y,
-                        particlePos.z,
-                        1,
-                        0.0,
-                        0.0,
-                        0.0,
-                        1.0);
+                    targetHeight--;
+                }
             }
+            entity.teleportTo(targetX, height, targetZ);
+        } else {
+            entity.teleportTo(targetX, height + level.random.nextInt(10, 200), targetZ);
+        }
+    }
+
+    private void teleportEffect(Level level, BlockPos origin, LivingEntity entity) {
+        teleportEntity(level, origin, entity);
+
+        for (int i = 0; i < PARTICLE_COUNT; i++) {
+            Vec3 particlePos = origin.getCenter().lerp(entity.position(), (double) i / PARTICLE_COUNT);
+
+            ((ServerLevel) level).sendParticles(
+                    ParticleTypes.PORTAL,
+                    particlePos.x,
+                    particlePos.y,
+                    particlePos.z,
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0);
         }
 
-        Vec3 teleportPos = pos.getBottomCenter();
-        entity.teleportTo(teleportPos.x, teleportPos.y, teleportPos.z);
-        level.playSound(null, pos, SoundEvents.ENDERMAN_TELEPORT, SoundSource.BLOCKS);
+        level.playSound(
+                null,
+                entity.getX(),
+                entity.getY(),
+                entity.getZ(),
+                SoundEvents.ENDERMAN_TELEPORT,
+                SoundSource.BLOCKS);
     }
 }

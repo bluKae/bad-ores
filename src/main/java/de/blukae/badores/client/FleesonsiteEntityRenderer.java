@@ -21,7 +21,7 @@ import de.blukae.badores.entity.FleesonsiteEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class FleesonsiteEntityRenderer extends MobRenderer<FleesonsiteEntity, FleesonsiteEntityRenderer.State,
         FleesonsiteEntityModel> {
@@ -30,7 +30,7 @@ public class FleesonsiteEntityRenderer extends MobRenderer<FleesonsiteEntity, Fl
     }
 
     @Override
-    public ResourceLocation getTextureLocation(State renderState) {
+    public Identifier getTextureLocation(State renderState) {
         return renderState.isDeepslate ?
                 BadOres.rl("textures/entity/deepslate_fleesonsite.png") :
                 BadOres.rl("textures/entity/fleesonsite.png");

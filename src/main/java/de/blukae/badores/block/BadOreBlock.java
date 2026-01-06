@@ -122,8 +122,9 @@ public class BadOreBlock extends Block implements EntityBlock {
     @Override
     public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player,
                                        ItemStack toolStack, boolean willHarvest, FluidState fluid) {
+        boolean removed = super.onDestroyedByPlayer(state, level, pos, player, toolStack, willHarvest, fluid);
         template.onDestroyedByPlayer(state, level, pos, player, willHarvest);
-        return super.onDestroyedByPlayer(state, level, pos, player, toolStack, willHarvest, fluid);
+        return removed;
     }
 
     @Override

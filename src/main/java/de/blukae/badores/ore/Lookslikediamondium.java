@@ -26,7 +26,7 @@ import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TexturedModel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -59,24 +59,7 @@ public class Lookslikediamondium implements OreTemplate {
 
     @Override
     public void buildCustomModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
-        final class CustomModelsHelper {
-            void block(Block block, String parent) {
-                blockModels.createTrivialBlock(
-                        block,
-                        TexturedModel.createDefault(
-                                textureMapping -> new TextureMapping(),
-                                ModelTemplates.create(parent)));
-            }
-
-            void item(Item item, String parent) {
-                itemModels.itemModelOutput.accept(
-                        item,
-                        ItemModelUtils.plainModel(ModelTemplates.createItem(parent)
-                                .create(item, new TextureMapping(), itemModels.modelOutput)));
-            }
-        }
-
-        CustomModelsHelper helper = new CustomModelsHelper();
+        CustomModelsHelper helper = new CustomModelsHelper(blockModels, itemModels);
 
         helper.block(BadOre.LOOKSLIKEDIAMONDIUM.oreBlock.get(), "diamond_ore");
 
@@ -100,12 +83,30 @@ public class Lookslikediamondium implements OreTemplate {
     }
 
     @Override
-    public ResourceLocation getEquipmentTextureLocation(String name) {
-        return ResourceLocation.withDefaultNamespace("diamond");
+    public Identifier getEquipmentTextureLocation(String name) {
+        return Identifier.withDefaultNamespace("diamond");
     }
 
     @Override
     public String getTranslation(String translation) {
         return "Diamond";
+    }
+
+    private record CustomModelsHelper(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+
+        public void block(Block block, String parent) {
+            blockModels.createTrivialBlock(
+                    block,
+                    TexturedModel.createDefault(
+                            textureMapping -> new TextureMapping(),
+                            ModelTemplates.create(parent)));
+        }
+
+        public void item(Item item, String parent) {
+            itemModels.itemModelOutput.accept(
+                    item,
+                    ItemModelUtils.plainModel(ModelTemplates.createItem(parent)
+                            .create(item, new TextureMapping(), itemModels.modelOutput)));
+        }
     }
 }

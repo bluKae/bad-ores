@@ -153,7 +153,7 @@ public class NosleeptoniteEntityModel extends EntityModel<LivingEntityRenderStat
         float pos = renderState.walkAnimationPos;
         float speed = renderState.walkAnimationSpeed;
 
-        mouthbottom.xRot = (Mth.cos(pos * 0.04F) + 1) * 20.0F * speed;
+        mouthbottom.xRot = (Mth.cos(pos) + 1.0F) * 0.7F * speed;
         mouthtop.xRot = -mouthbottom.xRot;
         bottom.xRot = mouthbottom.xRot;
         teethbottom1.xRot = mouthbottom.xRot;

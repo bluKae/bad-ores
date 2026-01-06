@@ -29,7 +29,7 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.monster.ZombifiedPiglin;
+import net.minecraft.world.entity.monster.zombie.ZombifiedPiglin;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -50,7 +50,7 @@ import java.util.function.Supplier;
 public class Pandaemonium implements OreTemplate {
 
     public static final Supplier<SoundEvent> PANDAEMONIUM_BREAK_SOUND_EVENT = BadOres.SOUND_EVENTS.register(
-            "block" + ".pandaemonium.break",
+            "block.pandaemonium.break",
             SoundEvent::createVariableRangeEvent);
 
     @Override
@@ -62,13 +62,13 @@ public class Pandaemonium implements OreTemplate {
     public BlockBehaviour.Properties getOreBlockProperties(boolean isDeepslate) {
         return OreTemplate.super.getOreBlockProperties(isDeepslate)
                 .sound(new DeferredSoundType(
-                    1.0f,
-                    1.0f,
-                    PANDAEMONIUM_BREAK_SOUND_EVENT,
-                    () -> SoundEvents.STONE_STEP,
-                    () -> SoundEvents.STONE_PLACE,
-                    () -> SoundEvents.STONE_HIT,
-                    () -> SoundEvents.STONE_FALL));
+                        1.0f,
+                        1.0f,
+                        PANDAEMONIUM_BREAK_SOUND_EVENT,
+                        () -> SoundEvents.STONE_STEP,
+                        () -> SoundEvents.STONE_PLACE,
+                        () -> SoundEvents.STONE_HIT,
+                        () -> SoundEvents.STONE_FALL));
     }
 
     @Override
@@ -91,7 +91,7 @@ public class Pandaemonium implements OreTemplate {
 
     @Override
     public void onTick(Level level, BlockPos pos, BlockState state, BadOreBlockEntity blockEntity) {
-    if (!level.isClientSide() && level.random.nextInt(10) == 0) {
+        if (!level.isClientSide() && level.random.nextInt(10) == 0) {
             level.playSound(null, pos, PANDAEMONIUM_BREAK_SOUND_EVENT.get(), SoundSource.BLOCKS);
         }
     }

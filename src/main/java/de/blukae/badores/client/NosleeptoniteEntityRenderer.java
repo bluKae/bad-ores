@@ -21,7 +21,7 @@ import de.blukae.badores.entity.NosleeptoniteEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class NosleeptoniteEntityRenderer extends MobRenderer<NosleeptoniteEntity, LivingEntityRenderState,
         NosleeptoniteEntityModel> {
@@ -30,7 +30,7 @@ public class NosleeptoniteEntityRenderer extends MobRenderer<NosleeptoniteEntity
     }
 
     @Override
-    public ResourceLocation getTextureLocation(LivingEntityRenderState renderState) {
+    public Identifier getTextureLocation(LivingEntityRenderState renderState) {
         return BadOres.rl("textures/entity/nosleeptonite.png");
     }
 

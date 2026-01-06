@@ -26,7 +26,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.BlockTags;
@@ -154,7 +154,7 @@ public interface OreTemplate {
         return null;
     }
 
-    default ResourceLocation getEquipmentTextureLocation(String name) {
+    default Identifier getEquipmentTextureLocation(String name) {
         return BadOres.rl(name);
     }
 

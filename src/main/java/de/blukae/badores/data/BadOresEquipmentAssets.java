@@ -23,7 +23,7 @@ import net.minecraft.client.resources.model.EquipmentClientInfo;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -41,7 +41,7 @@ public class BadOresEquipmentAssets extends EquipmentAssetProvider {
 
     @Override
     public CompletableFuture<?> run(CachedOutput cache) {
-        Map<ResourceLocation, EquipmentClientInfo> map = Arrays.stream(BadOre.values())
+        Map<Identifier, EquipmentClientInfo> map = Arrays.stream(BadOre.values())
                 .filter(ore -> ore.armor != null)
                 .collect(Collectors.toMap(
                         ore -> BadOres.rl(ore.name),

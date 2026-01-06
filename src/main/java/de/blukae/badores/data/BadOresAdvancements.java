@@ -27,17 +27,17 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.KilledTrigger;
-import net.minecraft.advancements.critereon.RecipeCraftedTrigger;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.criterion.InventoryChangeTrigger;
+import net.minecraft.advancements.criterion.KilledTrigger;
+import net.minecraft.advancements.criterion.RecipeCraftedTrigger;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Block;
 
@@ -54,7 +54,7 @@ public class BadOresAdvancements implements AdvancementSubProvider {
                         BadOre.AMADEUM.oreBlock,
                         Component.translatable("advancements.badores.badores.root.title"),
                         Component.translatable("advancements.badores.badores.root.description"),
-                        ResourceLocation.withDefaultNamespace("gui" + "/advancements/backgrounds/stone"),
+                        Identifier.withDefaultNamespace("gui" + "/advancements/backgrounds/stone"),
                         AdvancementType.TASK,
                         false,
                         false,
@@ -97,7 +97,7 @@ public class BadOresAdvancements implements AdvancementSubProvider {
                         "craft_barely_generite_block",
                         RecipeCraftedTrigger.TriggerInstance.craftedItem(ResourceKey.create(
                                 Registries.RECIPE,
-                                ResourceLocation.withDefaultNamespace("barely_generite_block"))))
+                                Identifier.withDefaultNamespace("barely_generite_block"))))
                 .save(writer, BadOres.rl("badores/craft_barely_generite_block"));
 
         Advancement.Builder.advancement()

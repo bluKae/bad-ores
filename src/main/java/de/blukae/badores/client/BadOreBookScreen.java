@@ -20,6 +20,7 @@ import de.blukae.badores.ore.BadOre;
 import de.blukae.badores.ore.Doesntevenexistium;
 import de.blukae.badores.ore.OreBookPage;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.ActiveTextCollector;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.BookViewScreen;
@@ -27,13 +28,17 @@ import net.minecraft.client.gui.screens.inventory.PageButton;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class BadOreBookScreen extends Screen {
+    private static final Style PAGE_STYLE = Style.EMPTY.withoutShadow().withColor(-16777216);
 
     private static final OreBookPage[] PAGES = Stream.concat(
                     Arrays.stream(BadOre.values()),
@@ -45,6 +50,10 @@ public class BadOreBookScreen extends Screen {
     private PageButton forwardButton;
 
     private int currentPage = 0;
+
+    private boolean pageValid = false;
+    private FormattedCharSequence pageName;
+    private List<FormattedCharSequence> pageDescription;
 
     public BadOreBookScreen() {
         super(Component.translatable("item.badores.bad_ore_book"));
@@ -65,14 +74,20 @@ public class BadOreBookScreen extends Screen {
             guiGraphics.renderFakeItem(stack, i + 40, 14);
         }
 
-        guiGraphics.drawString(
-                font,
-                page.getName().withStyle(ChatFormatting.UNDERLINE),
-                i + 40 + 4 + 16,
-                17,
-                0,
-                false);
-        guiGraphics.drawWordWrap(font, page.getDescription(), i + 40, 17 + 15, 115, 0, false);
+        if (!pageValid) {
+            pageName = page.getName()
+                    .setStyle(PAGE_STYLE)
+                    .withStyle(ChatFormatting.UNDERLINE)
+                    .getVisualOrderText();
+            pageDescription = font.split(page.getDescription().setStyle(PAGE_STYLE), 114);
+            pageValid = true;
+        }
+
+        ActiveTextCollector textRenderer = guiGraphics.textRenderer();
+        textRenderer.accept(i + 40 + 4 + 16, 17, pageName);
+        for (int k = 0; k < pageDescription.size(); k++) {
+            textRenderer.accept(i + 40, 17 + 15 + k * 9, pageDescription.get(k));
+        }
 
         super.render(guiGraphics, mouseX, mouseY, partialFrames);
     }
@@ -107,6 +122,7 @@ public class BadOreBookScreen extends Screen {
                     if (backButton.visible) {
                         currentPage--;
                     }
+                    pageValid = false;
                     updateButtonVisibility();
                 },
                 true));
@@ -118,6 +134,7 @@ public class BadOreBookScreen extends Screen {
                     if (forwardButton.visible) {
                         currentPage++;
                     }
+                    pageValid = false;
                     updateButtonVisibility();
                 },
                 true));

@@ -62,8 +62,12 @@ public class Tauntum implements OreTemplate {
     }
 
     private SoundEvent getRandomMobSound(Level level) {
+        if (level.random.nextFloat() < 0.1) {
+            return SoundEvents.CREEPER_PRIMED;
+        }
+
         if (mobSounds == null) {
-            List<SoundEvent> sounds = BuiltInRegistries.ENTITY_TYPE.stream()
+            mobSounds = BuiltInRegistries.ENTITY_TYPE.stream()
                     .map(entity -> {
                         if (entity.create(level, EntitySpawnReason.MOB_SUMMONED) instanceof Mob mob) {
                             return ((MobMixin) mob).invokeGetAmbientSound();
@@ -72,8 +76,6 @@ public class Tauntum implements OreTemplate {
                     })
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
-            sounds.add(SoundEvents.CREEPER_PRIMED);
-            mobSounds = sounds;
         }
 
         return mobSounds.get(level.random.nextInt(mobSounds.size()));

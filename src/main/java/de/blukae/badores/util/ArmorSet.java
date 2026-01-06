@@ -42,7 +42,8 @@ public class ArmorSet {
     public ArmorSet(String name, OreTemplate template, ArmorInfo info) {
         material = new ArmorMaterial(
                 info.durability(),
-                new EnumMap<>(Map.of(ArmorType.HELMET,
+                new EnumMap<>(Map.of(
+                        ArmorType.HELMET,
                         info.reductions()[0],
                         ArmorType.CHESTPLATE,
                         info.reductions()[1],

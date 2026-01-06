@@ -58,7 +58,7 @@ public class Killium implements OreTemplate {
 
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (!level.isClientSide()) {
+        if (!level.isClientSide() && willHarvest) {
             if (level.random.nextInt(5) == 0 && player instanceof ServerPlayer serverPlayer) {
                 MINE_KILLIUM_TRIGGER.get().trigger(serverPlayer);
             } else if (level instanceof ServerLevel serverLevel) {
