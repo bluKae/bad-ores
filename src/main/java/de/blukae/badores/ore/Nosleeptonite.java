@@ -51,10 +51,10 @@ public class Nosleeptonite implements OreTemplate {
 
     public static final Supplier<EntityType<NosleeptoniteEntity>> NOSLEEPTONITE_ENTITY_TYPE =
             BadOres.ENTITY_TYPES.registerEntityType(
-            "nosleeptonite",
-            NosleeptoniteEntity::new,
-            MobCategory.MONSTER,
-            builder -> builder.sized(1.0f, 1.0f));
+                    "nosleeptonite",
+                    NosleeptoniteEntity::new,
+                    MobCategory.MONSTER,
+                    builder -> builder.sized(1.0f, 1.0f));
 
     public static final Supplier<SoundEvent> NOSLEEPTONITE_AMBIENT = BadOres.SOUND_EVENTS.register(
             "entity" + ".nosleeptonite.ambient",

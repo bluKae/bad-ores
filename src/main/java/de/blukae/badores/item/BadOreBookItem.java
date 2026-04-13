@@ -16,9 +16,7 @@
 
 package de.blukae.badores.item;
 
-import de.blukae.badores.client.BadOreBookScreen;
 import de.blukae.badores.client.BadOresClient;
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;

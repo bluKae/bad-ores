@@ -24,7 +24,8 @@ import de.blukae.badores.item.BadOreShovelItem;
 import de.blukae.badores.ore.OreTemplate;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ToolMaterial;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public class ToolSet {
