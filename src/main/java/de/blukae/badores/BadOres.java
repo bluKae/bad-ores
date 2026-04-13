@@ -143,7 +143,7 @@ public class BadOres {
         TRIGGER_TYPES.register(modEventBus);
         FEATURES.register(modEventBus);
 
-        modContainer.registerConfig(ModConfig.Type.COMMON, BadOresConfig.SPEC);
+        modContainer.registerConfig(ModConfig.Type.CLIENT, BadOresClientConfig.SPEC);
     }
 
     public static Identifier rl(String path) {
