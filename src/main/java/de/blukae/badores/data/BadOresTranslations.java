@@ -355,6 +355,8 @@ public class BadOresTranslations extends LanguageProvider {
                 "website",
                 "This ore has discovered a way to break the 4th wall and found a tunnel out of the " + "box. It " +
                         "slowly discoveres the infinite possibilities outside of Minecraft.");
+
+        add("badores.configuration.websiteAllowOpen", "Allow Website opening");
     }
 
     public void addRandom(String key, String... values) {
