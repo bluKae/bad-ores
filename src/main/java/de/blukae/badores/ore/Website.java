@@ -16,7 +16,7 @@
 
 package de.blukae.badores.ore;
 
-import de.blukae.badores.BadOresConfig;
+import de.blukae.badores.BadOresClientConfig;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -53,7 +53,7 @@ public class Website implements OreTemplate {
 
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        if (level.isClientSide() && !player.preventsBlockDrops() && BadOresConfig.WEBSITE_ALLOW_OPEN.isTrue()) {
+        if (level.isClientSide() && !player.preventsBlockDrops() && BadOresClientConfig.WEBSITE_ALLOW_OPEN.isTrue()) {
             String url = URLS[level.random.nextInt(URLS.length)];
 
             try {
