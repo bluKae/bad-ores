@@ -50,8 +50,8 @@ public class Amadeum implements OreTemplate {
             .toList();
 
     private static void playRandomSound(Level level, Vec3 pos) {
-        float pitch = NoteBlock.getPitchFromNote(level.random.nextInt(25));
-        Holder<SoundEvent> sound = SOUNDS.get(level.random.nextInt(SOUNDS.size()));
+        float pitch = NoteBlock.getPitchFromNote(level.getRandom().nextInt(25));
+        Holder<SoundEvent> sound = SOUNDS.get(level.getRandom().nextInt(SOUNDS.size()));
         level.playSound(null, pos.x(), pos.y(), pos.z(), sound, SoundSource.BLOCKS, 3.0F, pitch);
     }
 
@@ -94,7 +94,7 @@ public class Amadeum implements OreTemplate {
 
     @Override
     public void onInventoryTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot) {
-        if (level.random.nextInt(200) == 0) {
+        if (level.getRandom().nextInt(200) == 0) {
             playRandomSound(level, entity.position());
         }
     }

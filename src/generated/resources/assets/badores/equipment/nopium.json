@@ -5,6 +5,11 @@
         "texture": "badores:nopium"
       }
     ],
+    "humanoid_baby": [
+      {
+        "texture": "badores:nopium"
+      }
+    ],
     "humanoid_leggings": [
       {
         "texture": "badores:nopium"

@@ -92,7 +92,7 @@ public class Pandaemonium implements OreTemplate {
 
     @Override
     public void onTick(Level level, BlockPos pos, BlockState state, BadOreBlockEntity blockEntity) {
-        if (!level.isClientSide() && level.random.nextInt(10) == 0) {
+        if (!level.isClientSide() && level.getRandom().nextInt(10) == 0) {
             level.playSound(null, pos, PANDAEMONIUM_BREAK_SOUND_EVENT.get(), SoundSource.BLOCKS);
         }
     }
@@ -101,7 +101,7 @@ public class Pandaemonium implements OreTemplate {
     public void spawnAfterBreak(BlockState state, ServerLevel level, BlockPos pos, ItemStack stack,
                                 boolean dropExperience) {
         if (!level.isClientSide()) {
-            RandomSource random = level.random;
+            RandomSource random = level.getRandom();
             int veins = random.nextInt(12) + 3;
             for (int i = 0; i < veins; i++) {
                 Vec3 direction = new Vec3(

@@ -6,7 +6,6 @@
   "group": "lookslikediamondium",
   "ingredient": "badores:lookslikediamondium_ore",
   "result": {
-    "count": 1,
     "id": "badores:lookslikediamondium"
   }
 }

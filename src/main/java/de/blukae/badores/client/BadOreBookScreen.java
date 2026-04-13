@@ -21,7 +21,7 @@ import de.blukae.badores.ore.Doesntevenexistium;
 import de.blukae.badores.ore.OreBookPage;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.ActiveTextCollector;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.BookViewScreen;
 import net.minecraft.client.gui.screens.inventory.PageButton;
@@ -65,13 +65,13 @@ public class BadOreBookScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialFrames) {
+    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialFrames) {
         int i = (this.width - 192) / 2;
         OreBookPage page = PAGES[currentPage];
 
         ItemStack stack = page.getOreStack();
         if (stack != null) {
-            guiGraphics.renderFakeItem(stack, i + 40, 14);
+            graphics.fakeItem(stack, i + 40, 14);
         }
 
         if (!pageValid) {
@@ -83,13 +83,13 @@ public class BadOreBookScreen extends Screen {
             pageValid = true;
         }
 
-        ActiveTextCollector textRenderer = guiGraphics.textRenderer();
+        ActiveTextCollector textRenderer = graphics.textRenderer();
         textRenderer.accept(i + 40 + 4 + 16, 17, pageName);
         for (int k = 0; k < pageDescription.size(); k++) {
             textRenderer.accept(i + 40, 17 + 15 + k * 9, pageDescription.get(k));
         }
 
-        super.render(guiGraphics, mouseX, mouseY, partialFrames);
+        super.extractRenderState(graphics, mouseX, mouseY, partialFrames);
     }
 
     @Override
@@ -143,9 +143,9 @@ public class BadOreBookScreen extends Screen {
     }
 
     @Override
-    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        this.renderTransparentBackground(guiGraphics);
-        guiGraphics.blit(
+    public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+        super.extractBackground(graphics, mouseX, mouseY, a);
+        graphics.blit(
                 RenderPipelines.GUI_TEXTURED,
                 BookViewScreen.BOOK_LOCATION,
                 (this.width - 192) / 2,

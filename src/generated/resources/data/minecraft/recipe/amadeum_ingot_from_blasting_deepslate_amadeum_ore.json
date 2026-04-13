@@ -6,7 +6,6 @@
   "group": "amadeum_ingot",
   "ingredient": "badores:deepslate_amadeum_ore",
   "result": {
-    "count": 1,
     "id": "badores:amadeum_ingot"
   }
 }

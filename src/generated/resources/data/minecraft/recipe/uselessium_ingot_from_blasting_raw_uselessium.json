@@ -6,7 +6,6 @@
   "group": "uselessium_ingot",
   "ingredient": "badores:raw_uselessium",
   "result": {
-    "count": 1,
     "id": "badores:uselessium_ingot"
   }
 }

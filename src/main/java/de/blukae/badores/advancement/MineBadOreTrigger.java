@@ -31,6 +31,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.Validatable;
+import net.minecraft.world.level.storage.loot.ValidationContextSource;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
@@ -81,11 +83,12 @@ public class MineBadOreTrigger extends SimpleCriterionTrigger<MineBadOreTrigger.
                     .createCriterion(new TriggerInstance(Optional.empty(), Optional.of(location)));
         }
 
-        @Override
-        public void validate(CriterionValidator validator) {
+        public void validate(ValidationContextSource validator) {
             SimpleInstance.super.validate(validator);
-            location.ifPresent(l ->
-                    validator.validate(l, LootContextParamSets.ADVANCEMENT_LOCATION, "location"));
+            Validatable.validate(
+                    validator.context(LootContextParamSets.ADVANCEMENT_LOCATION),
+                    "location",
+                    this.location);
         }
 
         public boolean matches(LootContext context) {

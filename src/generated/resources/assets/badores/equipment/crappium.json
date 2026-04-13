@@ -5,6 +5,11 @@
         "texture": "badores:crappium"
       }
     ],
+    "humanoid_baby": [
+      {
+        "texture": "badores:crappium"
+      }
+    ],
     "humanoid_leggings": [
       {
         "texture": "badores:crappium"

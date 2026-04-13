@@ -6,7 +6,6 @@
   "group": "crashium_gemstone",
   "ingredient": "badores:raw_crashium",
   "result": {
-    "count": 1,
     "id": "badores:crashium_gemstone"
   }
 }

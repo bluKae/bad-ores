@@ -37,7 +37,7 @@ public class Meteorite implements OreTemplate {
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
         if (!level.isClientSide() && willHarvest) {
-            RandomSource random = level.random;
+            RandomSource random = level.getRandom();
             int number = random.nextInt(20) + 3;
             BlockState spawnState = random.nextBoolean() ?
                     Blocks.STONE.defaultBlockState() :

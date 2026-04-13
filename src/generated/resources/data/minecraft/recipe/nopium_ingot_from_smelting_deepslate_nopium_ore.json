@@ -6,7 +6,6 @@
   "group": "nopium_ingot",
   "ingredient": "badores:deepslate_nopium_ore",
   "result": {
-    "count": 1,
     "id": "badores:nopium_ingot"
   }
 }

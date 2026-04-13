@@ -6,7 +6,6 @@
   "group": "nopium_ingot",
   "ingredient": "badores:raw_nopium",
   "result": {
-    "count": 1,
     "id": "badores:nopium_ingot"
   }
 }

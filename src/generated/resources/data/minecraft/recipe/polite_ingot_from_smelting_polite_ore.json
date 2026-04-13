@@ -6,7 +6,6 @@
   "group": "polite_ingot",
   "ingredient": "badores:polite_ore",
   "result": {
-    "count": 1,
     "id": "badores:polite_ingot"
   }
 }

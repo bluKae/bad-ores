@@ -6,7 +6,6 @@
   "group": "crappium_ingot",
   "ingredient": "badores:deepslate_crappium_ore",
   "result": {
-    "count": 1,
     "id": "badores:crappium_ingot"
   }
 }

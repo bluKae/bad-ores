@@ -11,7 +11,6 @@
       "translate": "advancements.badores.badores.root.description"
     },
     "icon": {
-      "count": 1,
       "id": "badores:amadeum_ore"
     },
     "show_toast": false,

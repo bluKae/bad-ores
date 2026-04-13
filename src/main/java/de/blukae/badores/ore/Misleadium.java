@@ -48,7 +48,7 @@ public class Misleadium implements OreTemplate {
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
         if (!level.isClientSide() && willHarvest && player instanceof ServerPlayer serverPlayer) {
-            RandomSource random = level.random;
+            RandomSource random = level.getRandom();
             ItemStack stack = getRandomCreativeTabItem(level, random);
             int x = pos.getX() + random.nextInt(SIDE_RANGE) - random.nextInt(SIDE_RANGE);
             int y = random.nextInt(level.getMinY(), level.getMaxY());

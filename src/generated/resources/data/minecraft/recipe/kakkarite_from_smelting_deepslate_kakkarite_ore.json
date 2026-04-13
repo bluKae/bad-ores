@@ -6,7 +6,6 @@
   "group": "kakkarite",
   "ingredient": "badores:deepslate_kakkarite_ore",
   "result": {
-    "count": 1,
     "id": "badores:kakkarite"
   }
 }

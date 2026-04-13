@@ -6,7 +6,6 @@
   "group": "marmite",
   "ingredient": "badores:raw_marmite",
   "result": {
-    "count": 1,
     "id": "badores:marmite"
   }
 }

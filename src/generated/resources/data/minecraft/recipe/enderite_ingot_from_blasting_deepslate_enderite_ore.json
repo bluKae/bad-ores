@@ -6,7 +6,6 @@
   "group": "enderite_ingot",
   "ingredient": "badores:deepslate_enderite_ore",
   "result": {
-    "count": 1,
     "id": "badores:enderite_ingot"
   }
 }

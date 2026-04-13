@@ -26,6 +26,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
 
@@ -56,8 +57,22 @@ public class BadOresRecipes extends RecipeProvider {
                 if (ore.rawIngot != null)
                     smeltables.add(ore.rawIngot);
 
-                oreSmelting(smeltables, RecipeCategory.MISC, ore.ingot, 0.7f, 200, ore.ingot.getId().getPath());
-                oreBlasting(smeltables, RecipeCategory.MISC, ore.ingot, 0.7f, 100, ore.ingot.getId().getPath());
+                oreSmelting(
+                        smeltables,
+                        RecipeCategory.MISC,
+                        CookingBookCategory.MISC,
+                        ore.ingot,
+                        0.7f,
+                        200,
+                        ore.ingot.getId().getPath());
+                oreBlasting(
+                        smeltables,
+                        RecipeCategory.MISC,
+                        CookingBookCategory.MISC,
+                        ore.ingot,
+                        0.7f,
+                        100,
+                        ore.ingot.getId().getPath());
 
                 if (ore.ingotBlock != null) {
                     nineBlockStorageRecipesRecipesWithCustomUnpacking(
@@ -145,6 +160,7 @@ public class BadOresRecipes extends RecipeProvider {
         oreSmelting(
                 explodeitmiteSmeltables,
                 RecipeCategory.MISC,
+                CookingBookCategory.MISC,
                 Items.GUNPOWDER,
                 0.7f,
                 200,
@@ -152,14 +168,29 @@ public class BadOresRecipes extends RecipeProvider {
         oreBlasting(
                 explodeitmiteSmeltables,
                 RecipeCategory.MISC,
+                CookingBookCategory.MISC,
                 Items.GUNPOWDER,
                 0.7f,
                 100,
                 "gunpowder_from_smelting_explodeitmite");
 
         List<ItemLike> liteSmeltables = List.of(BadOre.LITE.oreBlock, BadOre.LITE.deepslateOreBlock);
-        oreSmelting(liteSmeltables, RecipeCategory.MISC, Items.GLOWSTONE, 0.7f, 200, "glowstone_from_smelting_lite");
-        oreBlasting(liteSmeltables, RecipeCategory.MISC, Items.GLOWSTONE, 0.7f, 100, "glowstone_from_smelting_lite");
+        oreSmelting(
+                liteSmeltables,
+                RecipeCategory.MISC,
+                CookingBookCategory.MISC,
+                Items.GLOWSTONE,
+                0.7f,
+                200,
+                "glowstone_from_smelting_lite");
+        oreBlasting(
+                liteSmeltables,
+                RecipeCategory.MISC,
+                CookingBookCategory.MISC,
+                Items.GLOWSTONE,
+                0.7f,
+                100,
+                "glowstone_from_smelting_lite");
 
         shapeless(RecipeCategory.MISC, BadOres.BAD_ORE_BOOK_ITEM).requires(Items.BOOK)
                 .requires(BadOres.ORE_BOOK_COMPONENTS)

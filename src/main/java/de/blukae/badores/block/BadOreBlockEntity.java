@@ -35,7 +35,7 @@ public class BadOreBlockEntity extends BlockEntity {
         if (tickTime > 0) {
             tickTime--;
         } else {
-            tickTime = tickRate.sample(level.random);
+            tickTime = tickRate.sample(level.getRandom());
             template.onTick(level, pos, state, this);
         }
     }

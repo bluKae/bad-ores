@@ -51,7 +51,7 @@ public class Killium implements OreTemplate {
 
     @Override
     public void onInventoryTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot) {
-        if (entity instanceof LivingEntity livingEntity && level.random.nextInt(1000) == 0) {
+        if (entity instanceof LivingEntity livingEntity && level.getRandom().nextInt(1000) == 0) {
             killPlayer(level, livingEntity);
         }
     }
@@ -59,7 +59,7 @@ public class Killium implements OreTemplate {
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
         if (!level.isClientSide() && willHarvest) {
-            if (level.random.nextInt(5) == 0 && player instanceof ServerPlayer serverPlayer) {
+            if (level.getRandom().nextInt(5) == 0 && player instanceof ServerPlayer serverPlayer) {
                 MINE_KILLIUM_TRIGGER.get().trigger(serverPlayer);
             } else if (level instanceof ServerLevel serverLevel) {
                 killPlayer(serverLevel, player);

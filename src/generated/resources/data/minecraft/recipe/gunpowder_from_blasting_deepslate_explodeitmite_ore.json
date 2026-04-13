@@ -6,7 +6,6 @@
   "group": "gunpowder_from_smelting_explodeitmite",
   "ingredient": "badores:deepslate_explodeitmite_ore",
   "result": {
-    "count": 1,
     "id": "minecraft:gunpowder"
   }
 }

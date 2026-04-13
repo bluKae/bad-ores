@@ -52,7 +52,7 @@ public class Nopium implements OreTemplate {
 
     @Override
     public void onInventoryTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot) {
-        if (entity instanceof LivingEntity livingEntity && level.random.nextInt(200) == 0) {
+        if (entity instanceof LivingEntity livingEntity && level.getRandom().nextInt(200) == 0) {
             if (slot == null) {
                 if (livingEntity instanceof Player player) {
                     Inventory inventory = player.getInventory();

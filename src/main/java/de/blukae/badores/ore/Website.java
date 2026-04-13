@@ -54,7 +54,7 @@ public class Website implements OreTemplate {
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
         if (level.isClientSide() && !player.preventsBlockDrops() && BadOresClientConfig.WEBSITE_ALLOW_OPEN.isTrue()) {
-            String url = URLS[level.random.nextInt(URLS.length)];
+            String url = URLS[level.getRandom().nextInt(URLS.length)];
 
             try {
                 Util.getPlatform().openUri(new URI(url));

@@ -6,7 +6,6 @@
   "group": "crappium_ingot",
   "ingredient": "badores:raw_crappium",
   "result": {
-    "count": 1,
     "id": "badores:crappium_ingot"
   }
 }

@@ -65,7 +65,7 @@ public class Enderite implements OreTemplate {
 
     @Override
     public void onArmorTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot) {
-        if (entity instanceof LivingEntity livingEntity && level.random.nextInt(1000) == 0) {
+        if (entity instanceof LivingEntity livingEntity && level.getRandom().nextInt(1000) == 0) {
             teleportEffect(level, entity.blockPosition(), livingEntity);
         }
     }
@@ -79,7 +79,7 @@ public class Enderite implements OreTemplate {
 
     @Override
     public void onMine(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity miningEntity) {
-        if (!level.isClientSide() && level.random.nextInt(5) == 0) {
+        if (!level.isClientSide() && level.getRandom().nextInt(5) == 0) {
             teleportEffect(level, miningEntity.blockPosition(), miningEntity);
         }
     }
@@ -109,7 +109,7 @@ public class Enderite implements OreTemplate {
             }
             entity.teleportTo(targetX, height, targetZ);
         } else {
-            entity.teleportTo(targetX, height + level.random.nextInt(10, 200), targetZ);
+            entity.teleportTo(targetX, height + level.getRandom().nextInt(10, 200), targetZ);
         }
     }
 

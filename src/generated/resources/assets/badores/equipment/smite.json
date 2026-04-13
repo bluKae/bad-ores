@@ -5,6 +5,11 @@
         "texture": "badores:smite"
       }
     ],
+    "humanoid_baby": [
+      {
+        "texture": "badores:smite"
+      }
+    ],
     "humanoid_leggings": [
       {
         "texture": "badores:smite"

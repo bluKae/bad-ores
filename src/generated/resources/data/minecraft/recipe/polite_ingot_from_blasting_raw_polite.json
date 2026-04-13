@@ -6,7 +6,6 @@
   "group": "polite_ingot",
   "ingredient": "badores:raw_polite",
   "result": {
-    "count": 1,
     "id": "badores:polite_ingot"
   }
 }

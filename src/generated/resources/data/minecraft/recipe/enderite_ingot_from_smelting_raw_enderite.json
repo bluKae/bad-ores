@@ -6,7 +6,6 @@
   "group": "enderite_ingot",
   "ingredient": "badores:raw_enderite",
   "result": {
-    "count": 1,
     "id": "badores:enderite_ingot"
   }
 }

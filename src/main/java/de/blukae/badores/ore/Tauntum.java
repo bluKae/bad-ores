@@ -62,7 +62,7 @@ public class Tauntum implements OreTemplate {
     }
 
     private SoundEvent getRandomMobSound(Level level) {
-        if (level.random.nextFloat() < 0.1) {
+        if (level.getRandom().nextFloat() < 0.1) {
             return SoundEvents.CREEPER_PRIMED;
         }
 
@@ -78,6 +78,6 @@ public class Tauntum implements OreTemplate {
                     .collect(Collectors.toList());
         }
 
-        return mobSounds.get(level.random.nextInt(mobSounds.size()));
+        return mobSounds.get(level.getRandom().nextInt(mobSounds.size()));
     }
 }

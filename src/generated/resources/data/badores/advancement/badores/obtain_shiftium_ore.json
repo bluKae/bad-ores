@@ -27,7 +27,6 @@
       "translate": "advancements.badores.badores.obtain_shiftium_ore.description"
     },
     "icon": {
-      "count": 1,
       "id": "badores:shiftium_ore"
     },
     "title": {

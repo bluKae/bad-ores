@@ -65,7 +65,7 @@ public class Smite implements OreTemplate {
 
     @Override
     public void onArmorTick(ItemStack stack, ServerLevel level, Entity entity, EquipmentSlot slot) {
-        if (level.random.nextInt(200) == 0) {
+        if (level.getRandom().nextInt(200) == 0) {
             spawnLightning(level, entity.position());
         }
     }
@@ -73,7 +73,7 @@ public class Smite implements OreTemplate {
     @Override
     public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
         if (!level.isClientSide() && !player.preventsBlockDrops()) {
-            if (level.random.nextInt(3) == 0) {
+            if (level.getRandom().nextInt(3) == 0) {
                 spawnLightning(level, player.position());
             } else {
                 spawnLightning(level, pos.getBottomCenter());
@@ -90,8 +90,8 @@ public class Smite implements OreTemplate {
     public void onEntityHurt(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         Level level = attacker.level();
 
-        if (!level.isClientSide() && level.random.nextInt(2) == 0) {
-            spawnLightning(level, level.random.nextBoolean() ? attacker.position() : target.position());
+        if (!level.isClientSide() && level.getRandom().nextInt(2) == 0) {
+            spawnLightning(level, level.getRandom().nextBoolean() ? attacker.position() : target.position());
         }
     }
 
