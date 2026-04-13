@@ -18,7 +18,7 @@ package de.blukae.badores;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-public class BadOresConfig {
+public class BadOresClientConfig {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
     public static final ModConfigSpec.BooleanValue WEBSITE_ALLOW_OPEN = BUILDER.comment(

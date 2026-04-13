@@ -144,7 +144,7 @@ public class BadOres {
         FEATURES.register(modEventBus);
         ARMOR_MATERIALS.register(modEventBus);
 
-        modContainer.registerConfig(ModConfig.Type.COMMON, BadOresConfig.SPEC);
+        modContainer.registerConfig(ModConfig.Type.CLIENT, BadOresClientConfig.SPEC);
     }
 
     public static ResourceLocation rl(String path) {
