@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
+<defs>
+    <image id="texture" width="16" height="16" href="https://raw.githubusercontent.com/bluKae/bad-ores/main/src/main/resources/assets/badores/textures/block/iwontfite_ore.png" image-rendering="pixelated"/>
+</defs>
+<use transform="matrix(0.433012702 0.25 0 0.5 1.071796768 4)" href="#texture"/>
+<use transform="matrix(0.433012702 -0.25 0 0.5 8 8)" href="#texture"/>
+<use transform="matrix(0.433012702 0.25 -0.433012702 0.25 8 0)" href="#texture"/>
+</svg>
