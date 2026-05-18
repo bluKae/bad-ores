@@ -1,4 +1,11 @@
-![Bad Ores Banner](https://raw.githubusercontent.com/bluKae/bad-ores/main/images/bad-ores-banner.webp)
+<div align="center">
+<img alt="Bad Ores Banner" src="https://raw.githubusercontent.com/bluKae/bad-ores/main/images/bad-ores-banner.webp"></img>
+
+<a href="https://www.curseforge.com/minecraft/mc-mods/bad-ores-remined"><img alt="curseforge" height="28" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@2/assets/compact/available/curseforge_vector.svg"></a>
+<a href="https://modrinth.com/mod/bad-ores"><img alt="modrinth" height="28" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@2/assets/compact/available/modrinth_vector.svg"></a>
+<a href="https://github.com/bluKae/bad-ores"><img alt="github" height="28" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@2/assets/compact/available/github_vector.svg"></a>
+
+</div>
 
 Just when you thought there were no good mods left in the world of Minecraft, Bad Ores comes along and conclusively confirms your views.
 
