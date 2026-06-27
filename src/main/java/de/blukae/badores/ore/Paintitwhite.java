@@ -74,6 +74,6 @@ public class Paintitwhite implements OreTemplate {
     public LootTable.Builder getCustomLootTable(BlockLootSubProvider provider) {
         return LootTable.lootTable()
                 .withPool(LootPool.lootPool()
-                        .add(LootItem.lootTableItem(Items.WHITE_DYE)));
+                        .add(LootItem.lootTableItem(Items.DYE.white())));
     }
 }

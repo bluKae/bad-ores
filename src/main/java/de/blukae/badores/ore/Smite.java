@@ -76,14 +76,14 @@ public class Smite implements OreTemplate {
             if (level.getRandom().nextInt(3) == 0) {
                 spawnLightning(level, player.position());
             } else {
-                spawnLightning(level, pos.getBottomCenter());
+                spawnLightning(level, Vec3.atBottomCenterOf(pos));
             }
         }
     }
 
     @Override
     public void onExploded(BlockState state, ServerLevel level, BlockPos pos, Explosion explosion) {
-        spawnLightning(level, pos.getBottomCenter());
+        spawnLightning(level, Vec3.atBottomCenterOf(pos));
     }
 
     @Override
@@ -96,7 +96,7 @@ public class Smite implements OreTemplate {
     }
 
     private void spawnLightning(Level level, Vec3 pos) {
-        LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level, EntitySpawnReason.MOB_SUMMONED);
+        LightningBolt lightningBolt = EntityTypes.LIGHTNING_BOLT.create(level, EntitySpawnReason.MOB_SUMMONED);
         if (lightningBolt != null) {
             lightningBolt.snapTo(pos);
             level.addFreshEntity(lightningBolt);

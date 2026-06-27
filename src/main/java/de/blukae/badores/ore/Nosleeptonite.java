@@ -42,6 +42,7 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.levelgen.placement.RarityFilter;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.Nullable;
 
@@ -123,7 +124,7 @@ public class Nosleeptonite implements OreTemplate {
                                 boolean dropExperience) {
         NosleeptoniteEntity entity = NOSLEEPTONITE_ENTITY_TYPE.get().create(level, EntitySpawnReason.TRIGGERED);
         if (entity != null) {
-            entity.snapTo(pos.getBottomCenter());
+            entity.snapTo(Vec3.atBottomCenterOf(pos));
             level.addFreshEntity(entity);
             entity.spawnAnim();
             entity.playAmbientSound();

@@ -57,7 +57,7 @@ public class Explodeitmite implements OreTemplate {
     }
 
     private void explode(Level level, BlockPos pos) {
-        Vec3 p = pos.getCenter().add(Direction.UP.getUnitVec3());
+        Vec3 p = Vec3.atCenterOf(pos).add(Direction.UP.getUnitVec3());
         level.explode(
                 null,
                 p.x,

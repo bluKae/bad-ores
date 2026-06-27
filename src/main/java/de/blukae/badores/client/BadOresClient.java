@@ -36,7 +36,7 @@ import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlers
 @EventBusSubscriber(value = Dist.CLIENT)
 public class BadOresClient {
     public static void openBadOreBook() {
-        Minecraft.getInstance().setScreen(new BadOreBookScreen());
+        Minecraft.getInstance().setScreenAndShow(new BadOreBookScreen());
     }
 
     public BadOresClient(ModContainer container) {
@@ -61,8 +61,8 @@ public class BadOresClient {
                 RandomTranslation.TYPE, (data, context) -> {
                     Player player = Minecraft.getInstance().player;
                     if (player != null) {
-                        Minecraft.getInstance()
-                                .getChatListener()
+                        Minecraft.getInstance().gui
+                                .chatListener()
                                 .handleSystemMessage(data.getRandomComponent(player.getRandom()), false);
                     }
                 });

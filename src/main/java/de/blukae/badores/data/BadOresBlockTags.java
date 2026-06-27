@@ -34,24 +34,24 @@ public class BadOresBlockTags extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        TagAppender<Block, Block> allOres = tag(BadOres.BAD_ORES_TAG);
+        TagAppender<Block> allOres = tag(BadOres.BAD_ORES_TAG);
 
         for (BadOre ore : BadOre.values()) {
-            allOres.add(ore.oreBlock.get());
-            TagAppender<Block, Block> ores = tag(ore.ores).add(ore.oreBlock.get());
-            TagAppender<Block, Block> toolNeeded = tag(ore.template.toolTag()).add(ore.oreBlock.get());
+            allOres.add(ore.oreBlock.getKey());
+            TagAppender<Block> ores = tag(ore.ores).add(ore.oreBlock.getKey());
+            TagAppender<Block> toolNeeded = tag(ore.template.toolTag()).add(ore.oreBlock.getKey());
 
             if (ore.deepslateOreBlock != null) {
-                allOres.add(ore.deepslateOreBlock.get());
-                ores.add(ore.deepslateOreBlock.get());
-                toolNeeded.add(ore.deepslateOreBlock.get());
+                allOres.add(ore.deepslateOreBlock.getKey());
+                ores.add(ore.deepslateOreBlock.getKey());
+                toolNeeded.add(ore.deepslateOreBlock.getKey());
             }
 
             TagKey<Block> levelTag = ore.template.levelTag();
             if (levelTag != null) {
-                TagAppender<Block, Block> mineableWith = tag(levelTag).add(ore.oreBlock.get());
+                TagAppender<Block> mineableWith = tag(levelTag).add(ore.oreBlock.getKey());
                 if (ore.deepslateOreBlock != null) {
-                    mineableWith.add(ore.deepslateOreBlock.get());
+                    mineableWith.add(ore.deepslateOreBlock.getKey());
                 }
             }
 

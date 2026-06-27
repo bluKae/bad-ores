@@ -25,7 +25,7 @@ import de.blukae.badores.ore.BadOre;
 import de.blukae.badores.ore.Fleesonsite;
 import de.blukae.badores.ore.Iwontfite;
 import de.blukae.badores.ore.Nosleeptonite;
-import net.minecraft.advancements.CriterionTrigger;
+import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;

@@ -27,6 +27,7 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.EventHooks;
 
 public class Zombieunite implements OreTemplate {
@@ -40,7 +41,7 @@ public class Zombieunite implements OreTemplate {
     @Override
     public float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
         int numZombies = player.level()
-                .getEntitiesOfClass(Zombie.class, AABB.ofSize(pos.getCenter(), 20.0, 20.0, 20.0))
+                .getEntitiesOfClass(Zombie.class, AABB.ofSize(Vec3.atCenterOf(pos), 20.0, 20.0, 20.0))
                 .size();
         if (numZombies < 10) {
             return 0.0f;

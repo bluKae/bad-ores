@@ -44,6 +44,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.Nullable;
 
@@ -108,9 +109,9 @@ public class Fleesonsite implements OreTemplate {
     public void onTick(Level level, BlockPos pos, BlockState state, BadOreBlockEntity blockEntity) {
         if (!level.isClientSide()) {
             if (level.getNearestPlayer(
-                    pos.getCenter().x(),
-                    pos.getCenter().y(),
-                    pos.getCenter().z(),
+                    pos.getX() + 0.5,
+                    pos.getY() + 0.5,
+                    pos.getZ() + 0.5,
                     10.0,
                     true) != null) {
                 level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
@@ -150,7 +151,7 @@ public class Fleesonsite implements OreTemplate {
     private void flee(Level level, BlockPos pos, BlockState state) {
         FleesonsiteEntity entity = FLEESONSITE_ENTITY_TYPE.get().create(level, EntitySpawnReason.TRIGGERED);
         if (entity != null) {
-            entity.snapTo(pos.getBottomCenter());
+            entity.snapTo(Vec3.atBottomCenterOf(pos));
             entity.setDeepslate(state.is(BadOre.FLEESONSITE.deepslateOreBlock));
             level.addFreshEntity(entity);
             entity.spawnAnim();

@@ -29,6 +29,7 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.monster.zombie.ZombifiedPiglin;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -113,20 +114,20 @@ public class Pandaemonium implements OreTemplate {
 
                 for (int iteration = 0; iteration < length; iteration++) {
                     BlockPos blockPos = new BlockPos(
-                            (int) (pos.getCenter().x + direction.x * iteration),
-                            (int) (pos.getCenter().y + direction.y * iteration),
-                            (int) (pos.getCenter().z + direction.z * iteration));
+                            (int) (pos.getX() + 0.5 + direction.x * iteration),
+                            (int) (pos.getY() + 0.5 + direction.y * iteration),
+                            (int) (pos.getZ() + 0.5 + direction.z * iteration));
                     setBlock(level, blockPos, Blocks.NETHERRACK.defaultBlockState());
                     BlockPos above = blockPos.above();
                     if (random.nextFloat() < 0.2F) {
                         setBlock(level, above, Blocks.FIRE.defaultBlockState());
                     }
                     if (random.nextFloat() < 0.05F) {
-                        Vec3 piglinPos = above.getBottomCenter();
-                        AABB aabb = EntityType.ZOMBIFIED_PIGLIN.getDimensions()
+                        Vec3 piglinPos = Vec3.atBottomCenterOf(above);
+                        AABB aabb = EntityTypes.ZOMBIFIED_PIGLIN.getDimensions()
                                 .makeBoundingBox(piglinPos);
                         if (level.noBlockCollision(null, aabb)) {
-                            ZombifiedPiglin piglin = EntityType.ZOMBIFIED_PIGLIN.create(
+                            ZombifiedPiglin piglin = EntityTypes.ZOMBIFIED_PIGLIN.create(
                                     level,
                                     EntitySpawnReason.TRIGGERED);
                             if (piglin != null) {

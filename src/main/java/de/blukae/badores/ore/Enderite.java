@@ -117,7 +117,7 @@ public class Enderite implements OreTemplate {
         teleportEntity(level, origin, entity);
 
         for (int i = 0; i < PARTICLE_COUNT; i++) {
-            Vec3 particlePos = origin.getCenter().lerp(entity.position(), (double) i / PARTICLE_COUNT);
+            Vec3 particlePos = Vec3.atCenterOf(origin).lerp(entity.position(), (double) i / PARTICLE_COUNT);
 
             ((ServerLevel) level).sendParticles(
                     ParticleTypes.PORTAL,

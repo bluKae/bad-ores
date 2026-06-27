@@ -88,7 +88,7 @@ public class Amadeum implements OreTemplate {
     @Override
     public void onTick(Level level, BlockPos pos, BlockState state, BadOreBlockEntity blockEntity) {
         if (!level.isClientSide()) {
-            playRandomSound(level, pos.getCenter());
+            playRandomSound(level, Vec3.atCenterOf(pos));
         }
     }
 

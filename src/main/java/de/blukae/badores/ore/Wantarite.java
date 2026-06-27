@@ -21,6 +21,7 @@ import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.animal.pig.Pig;
 import net.minecraft.world.item.ItemStack;
@@ -29,6 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.phys.Vec3;
 
 public class Wantarite implements OreTemplate {
     @Override
@@ -41,9 +43,9 @@ public class Wantarite implements OreTemplate {
     @Override
     public void spawnAfterBreak(BlockState state, ServerLevel level, BlockPos pos, ItemStack stack,
                                 boolean dropExperience) {
-        Pig pig = EntityType.PIG.create(level, EntitySpawnReason.MOB_SUMMONED);
+        Pig pig = EntityTypes.PIG.create(level, EntitySpawnReason.MOB_SUMMONED);
         if (pig != null) {
-            pig.snapTo(pos.getBottomCenter());
+            pig.snapTo(Vec3.atBottomCenterOf(pos));
             pig.setItemSlot(EquipmentSlot.SADDLE, Items.SADDLE.getDefaultInstance());
             level.addFreshEntity(pig);
             pig.spawnAnim();
